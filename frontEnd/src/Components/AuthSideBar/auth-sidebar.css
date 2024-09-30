@@ -1,0 +1,12 @@
+#auth-sidebar{
+    
+    flex-basis: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 800px) {
+    #auth-sidebar {
+      display: none;  /* This will hide the div */
+    }
+}

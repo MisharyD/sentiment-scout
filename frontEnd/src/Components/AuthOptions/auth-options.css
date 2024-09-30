@@ -1,0 +1,26 @@
+#auth-options{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;           
+}
+
+#or{
+color:#B0BAC3;
+font-size: 26px;
+text-align: center;
+margin-top: 0;
+margin-bottom: 3.7%;
+
+}
+
+#cta-prompt{
+    color:#4A4A4A;
+    font-size: 18px;
+    text-align: center
+}
+#prompt{
+    color:#6EBAFF;
+    font-size: 18px;
+    font-weight: bold;
+}

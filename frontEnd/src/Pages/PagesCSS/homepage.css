@@ -1,0 +1,10 @@
+#homepage{
+    background-color:#E5EFF8 ;
+    height: 100vh;
+    width: 100vw;
+}
+.svges{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

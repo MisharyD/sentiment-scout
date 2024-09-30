@@ -1,0 +1,51 @@
+.input-container {
+  width: 79%;
+  height: 11.01%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.77%;
+  margin-top: 0;
+
+  justify-content: center;
+}
+
+.auth-label {
+  text-indent: 9px;
+  font-size: 15px;
+  margin-bottom: 0.892%;
+  margin-top: 0;
+  color: rgba(0, 0, 0, 1);
+}
+.auth-input:not(:placeholder-shown) {
+  background-color: rgba(70, 90, 126, 0.4); /* Change background when input is not empty */
+  border-color: rgba(70, 90, 126, 0.4);     /* Optional: change border color */
+}
+.auth-input:focus {
+  background-color: rgba(176, 186, 195, 0.4);; 
+}
+.auth-input {
+  text-indent: 9px;
+  width: 100%;
+  height: 63.35%;
+  border-radius: 20px;
+  background-color: rgba(176, 186, 195, 0.4);
+  color:rgba(0, 0, 0, 0.5);
+  padding: 12px;
+  border: none;
+  
+
+  margin: 0;
+}
+.auth-input-error{
+  border: 1px solid red;
+}
+.auth-input-error-message{
+  text-indent: 9px;
+
+  color: red;
+  font-size: 9px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+
+}
+
