@@ -1,14 +1,96 @@
 import Header from "../../Components/Header/Header.jsx";
+import { NavLink } from "react-router-dom";
+import heroImage from "../../assets/images/hero-mock.webp"
 import '../PagesCSS/homepage.css'
 function HomePage() {
   
 
   return (
-  <div id='homepage'>
+  <div className='homepage'>
     <Header/>
 
+    <div className="hero">
+        <img className = "hero-image" src={heroImage} alt="hero-section"/>
+    </div>
 
+    <div className="overview">
+        <div className="introduction">
+            <h2>
+                Empoworing you with instant sentiment insights
+            </h2>
+            <p>
+                Sentiment Scout delivers real-time insights from youtube, twitter and Google maps.
+                Whether you are a content creater, buisness owner, or someone curiuos about public opinions. 
+                See how we can provide the data you need.
+            </p>
+        </div>
+
+        <div className="user-types">
+            <div className="user-card">
+                <div className="user-card-logo">
+                    Logo
+                </div>
+                <div className="user-name">
+                    Content creator
+                </div>
+                <div className="user-description">
+                    Understand your
+                </div>
+            </div>
+
+            <div className="user-card">
+                <div className="user-card-logo">
+                    Logo
+                </div>
+                <div className="user-name">
+                    Buisness Owner
+                </div>
+                <div className="user-description">
+                    Curious about
+                </div>
+            </div>
+
+            <div className="user-card">
+                <div className="user-card-logo">
+                        Logo
+                </div>
+                <div className="user-name">
+                    Regular User
+                </div>
+                <div className="user-description">
+                    Empower your
+                </div>
+            </div>
+        </div>
+
+        <div className="report-introduction">
+            <div className="report-introduction-title">
+                What you will uncover with Sentiment Scout
+            </div>
+            <div className="report-info"></div>
+        </div>
+
+        <div className="platform-selection">
+            <div className="platform-selection-title">
+                Select a platform
+            </div>
+            <div className="platforms">
+                <NavLink className="nav-item" to='/'>Home page</NavLink>
+            </div>
+        </div>
+    </div>
     
+    <div className="footer">
+        <div className="footer-title">
+            Sentiment Scout
+        </div>
+
+        <div className="socials-container">
+            <div className="social">
+
+            </div>
+        </div>
+    </div>
   </div>
   
   ) 
