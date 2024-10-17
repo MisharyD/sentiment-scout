@@ -1,4 +1,3 @@
-import React  from 'react'
 import '../PagesCSS/AuthPage.css'
 import Form from "../../Components/AuthForm/AuthForm.jsx";
 import AuthSideBar from "../../Components/AuthSideBar/AuthSideBar.jsx";

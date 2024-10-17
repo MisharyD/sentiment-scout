@@ -1,0 +1,78 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color:#B0C7E0 ;
+  }
+
+  .logo-container {
+    font-size: 24px;
+  }
+
+  .logo-container img {
+    height: 85px;
+  }
+
+  .nav-bar{
+    display: flex;
+    gap: 1rem;
+  }
+
+  .nav-item{
+    color:white
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .signup-button {
+    background-color:#6EBAFF;
+    border: none;
+  }
+
+  .signup-button:hover {
+    background-color: #4A91CC;
+  }
+
+  .signup-button:active {
+    background-color: #4A91CC;
+  }
+
+  .login-button {
+    background-color: transparent;
+    border: 2px solid #6EBAFF;
+  }
+
+  .login-button:hover {
+    background-color: #4A91CC;
+    border-color: #4A91CC;
+  }
+
+  .login-button:active {
+    border-color: rgba(136, 106, 166, 0.6);
+  }
+
+  .signout-button {
+    background-color: #B3CDE4;
+    border: none;
+  }
+
+  .signout-button:hover {
+    background-color: #4A91CC;
+  }
+
+  .signout-button:active {
+    background-color: #4A91CC;
+  }
