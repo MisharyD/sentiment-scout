@@ -1,4 +1,3 @@
-import  React from 'react'
 import SignUpPage from './Pages/PagesJSX/SignUpPage.jsx'
 import LoginPage from './Pages/PagesJSX/LoginPage.jsx'
 import HomePage from './Pages/PagesJSX/HomePage.jsx'
@@ -22,7 +21,6 @@ function App() {
 
   }else{
     routes=(<Router>
-   
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
