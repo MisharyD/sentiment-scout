@@ -1,7 +1,10 @@
 .homepage{
     background-color:#E5EFF8 ;
     height: 100vh;
-    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .svges{
     display: flex;
@@ -10,12 +13,32 @@
 }
 
 .hero-image{
-    width: 100dvw;
+    
     height:500px;/*temp */
+}
+
+.overview{
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+}
+
+.introduction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.introduction-title{
+    
+}
+
+.introduction-description{
 }
 
 .user-types{
     display: flex;
+    justify-content: center;
     gap: 2rem;
 }
 
@@ -23,6 +46,23 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.report-introduction{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.platform-selection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
 }
 
 /* temp */
