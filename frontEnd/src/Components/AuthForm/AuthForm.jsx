@@ -100,7 +100,6 @@ function Form({formType}) {
             "Content-Type": "application/json",
           }
         );
-        console.log("DDD");
         auth.login(responseData.userId, responseData.token);
       } catch (err) {
         console.log(err.message || "Something went wrong");
