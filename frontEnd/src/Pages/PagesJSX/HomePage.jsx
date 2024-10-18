@@ -1,7 +1,7 @@
 import Header from "../../Components/Header/Header.jsx";
 import { NavLink } from "react-router-dom";
-import heroImage from "../../assets/images/hero-mock.webp"
 import '../PagesCSS/homepage.css'
+import heroImage from "../../assets/images/hero-image.png"
 import "../../index.css"
 function HomePage() {
   
@@ -12,9 +12,11 @@ function HomePage() {
     <Header page="home"/>
     <div className='homepage'>  
         <div className="hero">
-            <img className = "hero-image" src={heroImage} alt="hero-section"/>
+            <img className ="hero-image" src={heroImage} alt="hero image" />
+            <div className="hero-title">
+                Discover what people really think in a glance
+            </div>
         </div>
-
         <div className="overview">
             <div className="introduction">
                 <div className="introduction-title">

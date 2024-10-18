@@ -12,9 +12,21 @@
     align-items: center;
 }
 
+.hero{
+}
+
+.hero-title{
+    font-size: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .hero-image{
-    
-    height:500px;/*temp */
+    width: 100dvw;
+    height:700px;
+    opacity: 0.7;
 }
 
 .overview{
