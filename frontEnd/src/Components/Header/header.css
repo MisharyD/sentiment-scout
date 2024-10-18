@@ -3,15 +3,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color:#B0C7E0 ;
+    background-color:var(--main-background-color);
   }
 
-  .logo-container {
+  .header-title {
     font-size: 24px;
-  }
-
-  .logo-container img {
-    height: 85px;
+    color:var(--main-title-color);
   }
 
   .nav-bar{
@@ -20,12 +17,22 @@
   }
 
   .nav-item{
-    color:white
+    color:white;
+    padding:4px 8px;
+  }
+
+  .nav-item:hover{
+    color:var(--hover-text-color)
+  }
+
+  .selected {
+    background-color: rgba(217, 217, 217, 0.4);
   }
 
   .button-container {
     display: flex;
-    gap: 10px;
+    align-items: center;
+    gap: 1rem;
   }
 
   .button {
@@ -38,41 +45,42 @@
   }
 
   .signup-button {
-    background-color:#6EBAFF;
+    background-color:#5F96BD;
     border: none;
   }
 
   .signup-button:hover {
-    background-color: #4A91CC;
-  }
-
-  .signup-button:active {
-    background-color: #4A91CC;
+    color:var(--hover-text-color)
   }
 
   .login-button {
-    background-color: transparent;
-    border: 2px solid #6EBAFF;
+    background-color:var(--main-background-color);
+    border: none;
   }
 
   .login-button:hover {
-    background-color: #4A91CC;
-    border-color: #4A91CC;
+    background-color: var(--hover-background-color);
+    color:white
   }
 
   .login-button:active {
     border-color: rgba(136, 106, 166, 0.6);
   }
 
-  .signout-button {
-    background-color: #B3CDE4;
+  .user-button{
+    padding:8px;
+  }
+
+  .user-button:hover{
+    background-color: var(--hover-background-color);
+  }
+
+  .logout-button {
+    background-color: var(--main-background-color);
+    padding:4px;
     border: none;
   }
 
-  .signout-button:hover {
-    background-color: #4A91CC;
-  }
-
-  .signout-button:active {
-    background-color: #4A91CC;
+  .logout-button:hover {
+    background-color: var(--hover-background-color);
   }

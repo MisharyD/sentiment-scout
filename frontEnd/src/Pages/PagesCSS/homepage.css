@@ -1,5 +1,5 @@
 .homepage{
-    background-color:#E5EFF8 ;
+    background-color:var(--home-backgorund-color) ;
     height: 100vh;
 
     display: flex;

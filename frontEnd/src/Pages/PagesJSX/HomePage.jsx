@@ -2,13 +2,14 @@ import Header from "../../Components/Header/Header.jsx";
 import { NavLink } from "react-router-dom";
 import heroImage from "../../assets/images/hero-mock.webp"
 import '../PagesCSS/homepage.css'
+import "../../index.css"
 function HomePage() {
   
 
   return (
 
     <>
-    <Header/>
+    <Header page="home"/>
     <div className='homepage'>  
         <div className="hero">
             <img className = "hero-image" src={heroImage} alt="hero-section"/>

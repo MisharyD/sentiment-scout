@@ -5,12 +5,18 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  /* background-color: #A5A692; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /*Mishary code*/
+  --main-background-color:#212830;
+  --main-title-color: #53B7FF;
+  --hover-background-color:#1c2229;
+  --hover-text-color:#B0B0B0
+  /* end Mishary code */
 
 }
 *{
