@@ -16,6 +16,7 @@ const signup = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   let existingUser;
+
   try {
     existingUser = await User.findOne({ email: email });
   } catch (err) {
@@ -62,11 +63,9 @@ const signup = async (req, res, next) => {
   // Generating a token for the user
   let token;
   try {
-    token = jwt.sign(
-      { userId: createdUser.id, email: createdUser.email },
-      "supersecret_dont_share",
-      { expiresIn: "1h" }
-    );
+    token = jwt.sign({ userId: createdUser.id }, "supersecret_dont_share", {
+      expiresIn: "1h",
+    });
   } catch (err) {
     const error = new HttpError(
       "Signing up failed, please try again later.",
@@ -84,9 +83,10 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   let existingUser;
-
+  // Normalize the email by converting it to lowercase
+  const normalizedEmail = email.toLowerCase();
   try {
-    existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({ email: normalizedEmail });
   } catch (err) {
     const error = new HttpError(
       "Logging in failed, please try again later.",
@@ -125,11 +125,9 @@ const login = async (req, res, next) => {
   // Generating a token for the user
   let token;
   try {
-    token = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email },
-      "supersecret_dont_share",
-      { expiresIn: "1h" }
-    );
+    token = jwt.sign({ userId: existingUser.id }, "supersecret_dont_share", {
+      expiresIn: "1h",
+    });
   } catch (err) {
     const error = new HttpError(
       "Logging in failed, please try again later.",
@@ -146,11 +144,6 @@ const login = async (req, res, next) => {
 };
 
 const userInfo = async (req, res, next) => {
-  // take the dynamic ID from URL
-  // search for it in DB
-  // retrieve username, email
-  // send username, email
-
   const uid = req.params.uid;
 
   let user;
@@ -177,12 +170,129 @@ const userInfo = async (req, res, next) => {
 };
 
 const updateUserInfo = async (req, res, next) => {
-  // take the new info after validating it in terms of number of ch and etc..
-  // check if email doesn't exists in DB
-  // update info if unique
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  const { name, email, userId } = req.body;
+
+  let existingUser;
+  try {
+    existingUser = await User.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError(
+      "Updating failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+
+  // Check if user's email already exists
+  if (existingUser && existingUser.id !== userId) {
+    const error = new HttpError("Email exists already.", 422);
+    return next(error);
+  }
+
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      "Updating failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+
+  user.name = name;
+  user.email = email;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Updating failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({
+    message: "User info updated successfully!",
+    name: user.name,
+    email: user.email,
+  });
+};
+
+const updatePassword = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  const { oldPassword, newPassword, userId } = req.body;
+
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, please try again later.",
+      500
+    );
+    return next(error);
+  }
+
+  let isPasswordValid;
+  try {
+    isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+  } catch (err) {
+    const error = new HttpError(
+      "Could not verify password, please try again.",
+      500
+    );
+    return next(error);
+  }
+
+  // Check if the old password is correct
+  if (!isPasswordValid) {
+    return next(new HttpError("Old password is incorrect.", 401));
+  }
+
+  // Hash the new password
+  let hashedPassword;
+  try {
+    hashedPassword = await bcrypt.hash(newPassword, 10); // 10 is the salt rounds
+  } catch (err) {
+    return next(
+      new HttpError("Could not update password, please try again.", 500)
+    );
+  }
+
+  user.password = hashedPassword;
+
+  try {
+    await user.save();
+  } catch (err) {
+    return next(
+      new HttpError("Saving new password failed, please try again later.", 500)
+    );
+  }
+
+  res.status(200).json({
+    message: "Password updated successfully!",
+    name: user.name,
+    email: user.email,
+  });
 };
 
 exports.signup = signup;
 exports.login = login;
 exports.userInfo = userInfo;
 exports.updateUserInfo = updateUserInfo;
+exports.updatePassword = updatePassword;
