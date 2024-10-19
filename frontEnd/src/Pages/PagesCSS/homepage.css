@@ -46,10 +46,10 @@
 .overview{
     display: flex;
     flex-direction: column;
-    gap:3rem;
+    gap:6rem;
 }
 
-.introduction-container{
+.introduction-section{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,7 +93,7 @@
     font-size: 20px;
 }
 
-.report-introduction-container{
+.report-introduction-section{
     display: grid;
     flex-direction: column;
     align-items: center;
@@ -113,8 +113,8 @@
 }
 
 .report-info-logo{
-    width:150px;
-    height:150px;
+    width:100px;
+    height:100px;
 }
 
 .happy-logo{
@@ -137,15 +137,41 @@
     font-size: 30px;
 }
 
-.platform-selection{
+.platform-selection-section{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap:2rem;
+}
+
+.platform-selection-title{
+    font-size: 64px;
+}
+
+.platforms-container{
+    display: flex;
+    gap:8rem;
 }
 
 .footer{
     display: flex;
     justify-content: space-between;
+    background-color: var(--footer-background-color);
+    padding:10px 20px;
+}
+
+.footer-title{
+    font-size: 40px;
+}
+
+.socials-container{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+}
+
+.social-logo{
+    width: 40px;
 }
 
 /* temp */
