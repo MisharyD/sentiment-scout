@@ -2,7 +2,7 @@ const express = require("express");
 const { check } = require("express-validator");
 
 const usersController = require("../controllers/users-controllers");
-const checkAuth = require("../middleware/check-auth");
+// const checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
@@ -27,6 +27,17 @@ router.post("/login", usersController.login);
 router.get("/:uid", usersController.userInfo);
 
 // Routes to the updateUserInfo controller
-router.patch("/update", usersController.updateUserInfo);
+router.patch(
+  "/updateUserInfo",
+  [check("name").not().isEmpty(), check("email").normalizeEmail().isEmail()],
+  usersController.updateUserInfo
+);
+
+// Routes to the updateUserInfo controller
+router.patch(
+  "/updatePassword",
+  [check("newPassword").isLength({ min: 6 })],
+  usersController.updatePassword
+);
 
 module.exports = router;
