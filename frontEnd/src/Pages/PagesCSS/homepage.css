@@ -154,27 +154,6 @@
     gap:8rem;
 }
 
-.footer{
-    display: flex;
-    justify-content: space-between;
-    background-color: var(--footer-background-color);
-    padding:10px 20px;
-}
-
-.footer-title{
-    font-size: 40px;
-}
-
-.socials-container{
-    display: flex;
-    align-items: center;
-    gap:1rem;
-}
-
-.social-logo{
-    width: 40px;
-}
-
 /* temp */
 *{
     color:white
