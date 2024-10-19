@@ -13,8 +13,9 @@ function HomePage() {
     <div className='homepage'>  
         <div className="hero">
             <img className ="hero-image" src={heroImage} alt="hero image" />
-            <div className="hero-title">
-                Discover what people really think in a glance
+            <div className="hero-title-container">
+                <div className="title-part1">Discover What People Really</div>
+                <div className="title-part2">Think in a Glance</div>
             </div>
         </div>
         <div className="overview">
