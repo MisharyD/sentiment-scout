@@ -2,8 +2,8 @@ import {useContext} from "react";
 import PropTypes from 'prop-types';
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import { NavLink } from "react-router-dom";
-import userLogo from "../../assets/images/user-logo.svg"
-import logoutLogo from "../../assets/images/logout-logo.svg"
+import userLogo from "../../assets/images/user.svg"
+import logoutLogo from "../../assets/images/logout.svg"
 import "./header.css"
 
 const Header = ({page}) => {
