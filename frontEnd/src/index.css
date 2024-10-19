@@ -12,7 +12,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   /*Mishary code*/
-  --main-background-color:#212830;
+  --main-background-color:#1B1B1B;
   --main-title-color: #53B7FF;
   --hover-background-color:#1c2229;
   --hover-text-color:#B0B0B0
@@ -34,10 +34,9 @@ a:hover {
 
  body {
   margin: 0;
-  /* display: flex;
-  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1 {

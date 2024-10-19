@@ -45,7 +45,7 @@
   }
 
   .signup-button {
-    background-color:#5F96BD;
+    background-color:var(--main-title-color);
     border: none;
   }
 
