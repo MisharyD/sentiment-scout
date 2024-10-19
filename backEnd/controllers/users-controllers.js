@@ -145,5 +145,44 @@ const login = async (req, res, next) => {
   });
 };
 
+const userInfo = async (req, res, next) => {
+  // take the dynamic ID from URL
+  // search for it in DB
+  // retrieve username, email
+  // send username, email
+
+  const uid = req.params.uid;
+
+  let user;
+
+  try {
+    user = await User.findById(uid);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not find a user.",
+      500
+    );
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError(
+      "Could not find place for the provided id.",
+      404
+    );
+    return next(error);
+  }
+
+  res.json({ username: user.name, email: user.email });
+};
+
+const updateUserInfo = async (req, res, next) => {
+  // take the new info after validating it in terms of number of ch and etc..
+  // check if email doesn't exists in DB
+  // update info if unique
+};
+
 exports.signup = signup;
 exports.login = login;
+exports.userInfo = userInfo;
+exports.updateUserInfo = updateUserInfo;
