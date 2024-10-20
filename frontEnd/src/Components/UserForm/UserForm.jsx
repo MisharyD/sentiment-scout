@@ -21,6 +21,7 @@ export default function UserForm({userInfo}){
         confirmPassword: "",
     });
     const [errMessage, setErrMessage] = useState("");
+    const [passwordErr, setpasswordErr] = useState([]);
     
     // update formData when userInfo is updated (when parent finishes fetching the data)
     useEffect(() => {
@@ -79,6 +80,25 @@ export default function UserForm({userInfo}){
 
     const handlePasswordSubmit = (e) => {
         e.preventDefault();
+
+        // Clear previous errors
+        const errors = [];
+
+        // Check if the new password is less than 8 characters
+        if (passwordData.newPassword.length < 8) {
+            errors.push("password must be at least 8 characters");
+        }
+
+        // Check if new password matches confirm password
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            errors.push("new password and confirm password do not match");
+        }
+
+        // If there are any errors, set them and prevent form submission
+        if (errors.length > 0) {
+            setpasswordErr(errors);
+            return; // Prevent form submission if there are validation errors
+        }
         const submitUserData = async () => {
             try 
             {
@@ -124,6 +144,7 @@ export default function UserForm({userInfo}){
           newPassword: "",
           confirmPassword: "",
         });
+        setpasswordErr(""); // Clear the password error when canceling
       };
     
   return (
@@ -265,6 +286,13 @@ export default function UserForm({userInfo}){
                                 onChange={handlePasswordChange}
                             />
                         </div>
+                        {passwordErr.length > 0 && (
+                            <div className="password-error-message-container">
+                                {passwordErr.map((error, index) => (
+                                    <div className="password-error-message" key={index}>{error}</div>
+                                ))}
+                            </div>
+                        )}
                     </form>
                 )}
             </div>

@@ -118,3 +118,7 @@
     padding: 4px 8px;
 }
 
+.password-error-message{
+    color:red;
+}
+
