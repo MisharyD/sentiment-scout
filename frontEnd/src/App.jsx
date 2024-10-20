@@ -1,6 +1,7 @@
 import SignUpPage from './Pages/PagesJSX/SignUpPage.jsx'
 import LoginPage from './Pages/PagesJSX/LoginPage.jsx'
 import HomePage from './Pages/PagesJSX/HomePage.jsx'
+import UserPage from './Pages/PagesJSX/UserPage.jsx'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthContext } from "./Components/shared/context/auth-context.jsx";
 import { useAuth } from "./Components/shared/hooks/auth-hook.jsx";
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/user" element={<UserPage />} />
       </Routes>
     
   </Router>)
@@ -25,6 +27,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/user" element={<UserPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     
