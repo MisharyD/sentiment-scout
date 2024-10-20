@@ -58,7 +58,6 @@ function Form({formType}) {
     setErrors(newError);
 
     setCanSubmit(Object.values(newError).every(value => value === false)&&Object.values(updatedFormState).every(value => value.length>0));
-
   }
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -77,9 +76,7 @@ function Form({formType}) {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData.token)
         auth.login(responseData.userId, responseData.token);
-        console.log(responseData.token)
       } catch (err) {
         console.log(err.message || "Something went wrong");
       }
