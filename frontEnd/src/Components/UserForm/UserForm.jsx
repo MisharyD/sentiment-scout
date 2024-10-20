@@ -1,3 +1,6 @@
+import {useContext} from "react";
+import PropTypes from 'prop-types';
+import { AuthContext } from "../shared/context/auth-context.jsx";
 import { useState } from "react";
 import userLogo from "../../assets/images/user.svg"
 import "./userForm.css"
@@ -6,7 +9,7 @@ export default function UserForm({userInfo}){
     const [isEditing, setIsEditing] = useState(false);
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [formData, setFormData] = useState({
-        username: userInfo.username,
+        username: userInfo.name,
         email: userInfo.email,
     });
 

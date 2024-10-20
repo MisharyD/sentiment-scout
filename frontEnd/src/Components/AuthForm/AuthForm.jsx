@@ -62,10 +62,6 @@ function Form({formType}) {
   }
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formState.username);
-    console.log(formState.email);
-    console.log(formState.password);
-    console.log(formState.confirmPassword);
 
     if (formType === "signup") {
       try {
