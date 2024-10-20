@@ -1,0 +1,42 @@
+.user-container{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding:20px 80px;
+}
+
+.user-logo{
+    width: 200px;
+    height: 200px;
+}
+
+.username{
+    font-size: 28px;
+}
+
+
+.reports-info-container{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+}
+
+.nb-of-reports{
+    font-size:33px ;
+}
+
+.reports-title{
+    font-size: 16px;
+    color: #6C6C6C;
+}
+
+.my-reports-container, .scheduled-reports.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.my-reports-container{
+    border-right:1px solid #6C6C6C;
+    padding-right: 10px;
+}
+
+

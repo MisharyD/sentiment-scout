@@ -4,10 +4,16 @@ import "./userForm.css"
 
 export default function UserForm({userInfo}){
     const [isEditing, setIsEditing] = useState(false);
+    const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [formData, setFormData] = useState({
         username: userInfo.username,
         email: userInfo.email,
-        password: userInfo.password,
+    });
+
+    const [passwordData, setPasswordData] = useState({
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
     });
 
     const handleChange = (e) => {
@@ -18,12 +24,27 @@ export default function UserForm({userInfo}){
         });
     };
 
+    const handlePasswordChange = (e) => {
+        const { name, value } = e.target;
+        setPasswordData({
+          ...passwordData,
+          [name]: value,
+        });
+      };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // Send post request with formData (dummy logic for now)
         console.log("Submitting form data: ", formData);
         setIsEditing(false);
     };
+
+    const handlePasswordSubmit = (e) => {
+        e.preventDefault();
+        // Logic for submitting the password change form (dummy logic for now)
+        console.log("Submitting password data: ", passwordData);
+        setIsChangingPassword(false);
+      };
 
     const handleCancel = () => {
         setIsEditing(false);
@@ -35,19 +56,29 @@ export default function UserForm({userInfo}){
         });
     };
 
+    const handlePasswordCancel = () => {
+        setIsChangingPassword(false);
+        setPasswordData({
+          oldPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+      };
+    
+
   return (
     <div className="user-container">
         <div className="reports-username-section">
             <img className="user-logo" src={userLogo} alt="" />
             <div className="username">{`${userInfo.username}`}</div>
             <div className="reports-info-container">
-                <div>
-                    <div>25</div>
-                    <div>My Reports</div>
+                <div className="my-reports-container">
+                    <div className="nb-of-reports">25</div>
+                    <div className="reports-title">My Reports</div>
                 </div>
-                <div>
-                    <div>10</div>
-                    <div>Scheduled Reports</div>
+                <div className="scheduled-reports-container">
+                    <div className="nb-of-reports">10</div>
+                    <div className="reports-title">Scheduled Reports</div>
                 </div>
             </div>
         </div>
@@ -83,15 +114,6 @@ export default function UserForm({userInfo}){
                     />
                 </div>
 
-                <div className="input-group">
-                    <label>Password</label>
-                    <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    />
-                </div>
             </form>
         ) : 
         (
@@ -100,8 +122,7 @@ export default function UserForm({userInfo}){
                     Edit
                 </button>
                 <div className="user-info">{`${userInfo.username}`}</div>
-                <p className="user-info">Email: {userInfo.email}</p>
-                <p className="user-info">Password: *******</p>
+                <div className="user-info">Email: {userInfo.email}</div>
             </div>
         )}
     </div>
