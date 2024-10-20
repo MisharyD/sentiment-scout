@@ -5,7 +5,7 @@ function AuthButton(props) {
     <Button
       variant="contained"
       disabled={!props.canSubmit}
-      type='submit'
+      type="submit"
       sx={{
         width: "79%", // Set the width of the input field
         height: "6.34%",
@@ -16,15 +16,16 @@ function AuthButton(props) {
         marginBottom: "3.7%",
         marginTop: props.marginTop,
         fontSize: "20px", // Set the text size
-        color: "#1D1D1F", // Set text color
+        color: "white", // Set text color
         textTransform: "none",
-        backgroundColor: "#D8E9F8", // Set button background color
+        backgroundColor: "#2d75cdfc", // Set button background color
         fontSize: "22px", // Set the text size to 22px
         fontWeight: 600,
-        
+
         "&:hover": {
           // Change background color on hover
-          backgroundColor: "#6EBAFF",
+          backgroundColor: "#6792c7fc",
+          color: "white",
         },
 
         "&:focus": {
@@ -34,6 +35,11 @@ function AuthButton(props) {
         "&:active": {
           outline: "none", // Remove the default active outline
           boxShadow: "none", // Remove box-shadow on active
+        },
+
+        "&.Mui-disabled": {
+          backgroundColor: "#0072ff1f", // Custom disabled background color
+          color: "black", // Custom disabled text color
         },
       }}
     >

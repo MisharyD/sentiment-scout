@@ -118,9 +118,9 @@ function Form({formType}) {
       {formType === 'signup' ? ( <AuthButton marginTop='3%' canSubmit={canSubmit} text='Create Account' />) : (<AuthButton marginTop='4.62%' canSubmit={canSubmit} text='Login' />)}
     
   
-      {formType === 'signup' ? ( <AuthOption path='/login' ctaPrompt='Already have an account?' prompt='Login' /> ) : (<AuthOption path='/signup' ctaPrompt="Don't have an account?" prompt='Sign-Up' />)}
-    
+      {formType === 'signup' ? ( <AuthOption path='/login' ctaPrompt='Already have an account ? ' prompt='Log in' /> ) : (<AuthOption path='/signup' ctaPrompt="Don't have an account ? " prompt='Sign-Up' />)}
   
+
       </form>
       
   );

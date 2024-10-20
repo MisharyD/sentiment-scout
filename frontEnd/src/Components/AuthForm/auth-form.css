@@ -10,7 +10,7 @@
 
 } */
 #form{
-    background-color: #FCFEFF;
+    background-color:var(--main-background-color);
     flex-basis: 50%; 
     /* border-top-right-radius: 15px;  
     border-bottom-right-radius: 15px;  */
