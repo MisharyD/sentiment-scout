@@ -1,7 +1,7 @@
 #auth-page{
     display: flex;
     flex-direction: row;
-    background-color: #E5EFF8;
+    background-color:var(--main-background-color);
     height: 100dvh;     /* 100% of the viewport height */
     width: 100vw;      /* 100% of the viewport width */
     overflow: hidden;
