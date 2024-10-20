@@ -20,7 +20,7 @@ export default function UserForm({userInfo}){
         newPassword: "",
         confirmPassword: "",
     });
-    const [errMessage, setErrMessage] = useState("");
+    const [errorMessages, setErrorMessages] = useState([]);
     const [passwordErr, setpasswordErr] = useState([]);
     
     // update formData when userInfo is updated (when parent finishes fetching the data)
@@ -51,6 +51,13 @@ export default function UserForm({userInfo}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Check if email is valid
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            setErrorMessages([...errorMessages, "Invalid email format."]);
+            return;
+        }
         
         const submitUserData = async () => {
             try {
@@ -66,13 +73,14 @@ export default function UserForm({userInfo}){
               );
               console.log(responseData);
               setIsEditing(false);
+              setErrorMessages([]); 
             } catch (err) {
                 console.error(err);
-                setErrMessage("Failed to update password. Please try again.");
-                // Clear the error message after 5 seconds
+                setErrorMessages([...errorMessages, err.message]);
+                // Clear the error message after 10 seconds
                 setTimeout(() => {
-                    setErrMessage("");
-                }, 5000);  // 5000 ms = 5 seconds
+                    setErrorMessages([]);
+                }, 10000); 
             }
         };
         submitUserData();
@@ -97,8 +105,13 @@ export default function UserForm({userInfo}){
         // If there are any errors, set them and prevent form submission
         if (errors.length > 0) {
             setpasswordErr(errors);
+            // Clear the error message after 10 seconds
+            setTimeout(() => {
+                setpasswordErr("");
+            }, 10000); 
             return; // Prevent form submission if there are validation errors
         }
+
         const submitUserData = async () => {
             try 
             {
@@ -117,12 +130,12 @@ export default function UserForm({userInfo}){
               setIsChangingPassword(false);
             } catch (err) 
             {
-                console.error(err);
-                setErrMessage("Failed to update user info. Please try again.");
-                // Clear the error message after 5 seconds
+                console.log(err);
+                setErrorMessages([...errorMessages, err.message]);
+                // Clear the error message after 10 seconds
                 setTimeout(() => {
-                    setErrMessage("");
-                }, 5000);
+                    setErrorMessages([]);
+                }, 10000); 
             }
         };
         submitUserData();
@@ -135,6 +148,7 @@ export default function UserForm({userInfo}){
         name: formData.name,
         email: formData.email,
         });
+        setErrorMessages([]);
     };
 
     const handlePasswordCancel = () => {
@@ -145,6 +159,7 @@ export default function UserForm({userInfo}){
           confirmPassword: "",
         });
         setpasswordErr(""); // Clear the password error when canceling
+        setErrorMessages([]);
       };
     
   return (
@@ -168,7 +183,13 @@ export default function UserForm({userInfo}){
         //contains form for email and username and another form for password
         }
         <div className="forms-container">
-            <div className="err-message">{errMessage}</div>
+            {errorMessages.length > 0 && (
+                <div className="err-message-container">
+                    {errorMessages.map((error, index) => (
+                        <div className="err-message" key={index}>{error}</div>
+                    ))}
+                </div>
+            )}
             <div className="forms-title">User Information</div>
             {/*form for email and username */}
 
