@@ -1,6 +1,6 @@
-// This is the token validation logic for accessing the protected paths
+// // This is the token validation logic for accessing the protected paths
 
-// Note: this logic is not needed for Sprint 1
+// // Note: Later we use this when the frontEnd will send the token (1- better way, 2- for protecting the paths, 3- no need for dynamic userID in URL since the userID is already token's payload )
 
 // const jwt = require("jsonwebtoken");
 
