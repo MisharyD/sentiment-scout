@@ -1,30 +1,43 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import PropTypes from 'prop-types';
 import { AuthContext } from "../shared/context/auth-context.jsx";
+import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { useState } from "react";
 import userLogo from "../../assets/images/user.svg"
 import "./userForm.css"
 
 export default function UserForm({userInfo}){
+    const auth = useContext(AuthContext);
+    const { sendRequest } = useHttpClient();
     const [isEditing, setIsEditing] = useState(false);
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [formData, setFormData] = useState({
-        username: userInfo.name,
+        name: userInfo.name,
         email: userInfo.email,
     });
-
     const [passwordData, setPasswordData] = useState({
         oldPassword: "",
         newPassword: "",
         confirmPassword: "",
     });
-
+    const [errMessage, setErrMessage] = useState("");
+    
+    // update formData when userInfo is updated (when parent finishes fetching the data)
+    useEffect(() => {
+        if (userInfo) {
+        setFormData({
+            name: userInfo.name,
+            email: userInfo.email,
+        });
+        }
+    },[userInfo]);
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-        ...formData,
-        [name]: value,
-        });
+        setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,  // Use the name attribute to update the corresponding key
+          }));
     };
 
     const handlePasswordChange = (e) => {
@@ -38,25 +51,69 @@ export default function UserForm({userInfo}){
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        // Send post request with formData (dummy logic for now)
-        console.log("Submitting form data: ", formData);
-        setIsEditing(false);
+        const submitUserData = async () => {
+            try {
+              const responseData = await sendRequest(
+                `http://localhost:5000/api/users/updateUserInfo`,
+                "PATCH",
+                JSON.stringify({name:formData.name,
+                email:formData.email,
+                userId:auth.userId}),
+                {
+                  "Content-Type": "application/json",
+                }
+              );
+              console.log(responseData);
+              setIsEditing(false);
+            } catch (err) {
+                console.error(err);
+                setErrMessage("Failed to update password. Please try again.");
+                // Clear the error message after 5 seconds
+                setTimeout(() => {
+                    setErrMessage("");
+                }, 5000);  // 5000 ms = 5 seconds
+            }
+        };
+        submitUserData();
     };
 
     const handlePasswordSubmit = (e) => {
         e.preventDefault();
-        // Logic for submitting the password change form (dummy logic for now)
-        console.log("Submitting password data: ", passwordData);
-        setIsChangingPassword(false);
+        const submitUserData = async () => {
+            try 
+            {
+              const responseData = await sendRequest(
+                `http://localhost:5000/api/users/updatePassword`,
+                "PATCH",
+                JSON.stringify({
+                oldPassword:passwordData.oldPassword,   
+                newPassword:passwordData.newPassword,
+                userId:auth.userId}),
+                {
+                  "Content-Type": "application/json",
+                }
+              );
+              console.log(responseData);
+              setIsChangingPassword(false);
+            } catch (err) 
+            {
+                console.error(err);
+                setErrMessage("Failed to update user info. Please try again.");
+                // Clear the error message after 5 seconds
+                setTimeout(() => {
+                    setErrMessage("");
+                }, 5000);
+            }
+        };
+        submitUserData();
       };
 
     const handleCancel = () => {
         setIsEditing(false);
         // Optionally reset form data to original user info
         setFormData({
-        username: userInfo.username,
-        email: userInfo.email,
-        password: userInfo.password,
+        name: formData.name,
+        email: formData.email,
         });
     };
 
@@ -69,12 +126,11 @@ export default function UserForm({userInfo}){
         });
       };
     
-
   return (
     <div className="user-container">
         <div className="reports-username-section">
             <img className="user-logo" src={userLogo} alt="" />
-            <div className="username">{`${userInfo.username}`}</div>
+            <div className="username">{`${userInfo.name}`}</div>
             <div className="reports-info-container">
                 <div className="my-reports-container">
                     <div className="nb-of-reports">25</div>
@@ -91,9 +147,9 @@ export default function UserForm({userInfo}){
         //contains form for email and username and another form for password
         }
         <div className="forms-container">
+            <div className="err-message">{errMessage}</div>
             <div className="forms-title">User Information</div>
             {/*form for email and username */}
-            
 
             {
             /* if edit button is true then display form*/
@@ -112,9 +168,9 @@ export default function UserForm({userInfo}){
                         <label className="input-group-title">Username</label>
                         <input
                         type="text"
-                        name="username"
+                        name="name"
                         className="user-input"
-                        value={formData.username}
+                        value={formData.name}
                         onChange={handleChange}
                         />
                     </div>
@@ -141,7 +197,7 @@ export default function UserForm({userInfo}){
                     </button>
                     <div className="info-group">
                         <div className="info-group-title">Username</div>
-                        <div className="user-info">{`${formData.username}`}</div>
+                        <div className="user-info">{`${formData.name}`}</div>
                     </div>
                     <div className="info-group">
                         <div className="info-group-title" >Email</div>

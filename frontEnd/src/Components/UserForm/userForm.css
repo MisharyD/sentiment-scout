@@ -14,7 +14,6 @@
     font-size: 28px;
 }
 
-
 .reports-info-container{
     display: flex;
     align-items: center;
@@ -45,7 +44,11 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
 
+.err-message{
+    color:red;
+    font-size: 20px;
 }
 
 .forms-title{
@@ -68,6 +71,10 @@
     border:0px;
 }
 
+.edit-btn:hover{
+    background-color: #313131;
+}
+
 .save-btn{
     background-color: #1D5C88;
     padding:10px 25px;
@@ -84,6 +91,10 @@
 .edit-btn, .change-password-btn{
     align-self: flex-start;
     font-size: 20px;
+}
+
+.change-password-btn:hover{
+    background-color: #313131;
 }
 
 .info-group, .input-group{

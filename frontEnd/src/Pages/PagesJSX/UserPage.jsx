@@ -11,6 +11,7 @@ export default function UserPage(){
     const auth = useContext(AuthContext);
     const { sendRequest } = useHttpClient();
     const [userInfo, setUserInfo] = useState({name: "", email: ""});
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -27,10 +28,10 @@ export default function UserPage(){
               console.error(err);
             }
         };
-        
         fetchUserData();
-        
-    }, [sendRequest, auth.userId]) 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[auth.userId, sendRequest]) 
+
     return(
         <div className="user-page">
             <Header />
