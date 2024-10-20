@@ -1,0 +1,109 @@
+.user-container{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding:20px 80px;
+}
+
+/* reports styling (left section)*/
+.user-logo{
+    width: 200px;
+    height: 200px;
+}
+
+.username{
+    font-size: 28px;
+}
+
+
+.reports-info-container{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+}
+
+.nb-of-reports{
+    font-size:33px ;
+}
+
+.reports-title{
+    font-size: 16px;
+    color: #6C6C6C;
+}
+
+.my-reports-container, .scheduled-reports.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.my-reports-container{
+    border-right:1px solid #6C6C6C;
+    padding-right: 10px;
+}
+
+/* forms styling (right section) */
+.forms-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+
+.forms-title{
+    font-size: 32px;
+    border-bottom: 1px solid #6C6C6C;
+}
+
+.user-info-container, .user-form, .password-form{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+
+.form-buttons-container{
+    display: flex;
+    gap:0.5rem;
+}
+
+.save-btn, .edit-btn, .cancel-btn, .change-password-btn{
+    border:0px;
+}
+
+.save-btn{
+    background-color: #1D5C88;
+    padding:10px 25px;
+}
+
+.cancel-btn:hover{
+    background-color: #313131;
+}
+
+.save-btn:hover{
+    background-color: #52adee;;
+}
+
+.edit-btn, .change-password-btn{
+    align-self: flex-start;
+    font-size: 20px;
+}
+
+.info-group, .input-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-group-title, .input-group-title{
+    font-size: 18px;
+}
+
+.user-info, .user-input{
+    font-size: 28px;
+    width: 50%;
+    min-width: 300px;
+}
+
+.user-input{
+    border-radius: 8px;
+    border: 1px solid white;
+    padding: 4px 8px;
+}
+
