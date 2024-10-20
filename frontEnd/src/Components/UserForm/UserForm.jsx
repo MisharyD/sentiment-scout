@@ -1,27 +1,44 @@
+import {useContext, useEffect} from "react";
+import PropTypes from 'prop-types';
+import { AuthContext } from "../shared/context/auth-context.jsx";
+import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { useState } from "react";
 import userLogo from "../../assets/images/user.svg"
 import "./userForm.css"
 
 export default function UserForm({userInfo}){
+    const auth = useContext(AuthContext);
+    const { sendRequest } = useHttpClient();
     const [isEditing, setIsEditing] = useState(false);
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [formData, setFormData] = useState({
-        username: userInfo.username,
+        name: userInfo.name,
         email: userInfo.email,
     });
-
     const [passwordData, setPasswordData] = useState({
         oldPassword: "",
         newPassword: "",
         confirmPassword: "",
     });
-
+    const [errorMessages, setErrorMessages] = useState([]);
+    const [passwordErr, setpasswordErr] = useState([]);
+    
+    // update formData when userInfo is updated (when parent finishes fetching the data)
+    useEffect(() => {
+        if (userInfo) {
+        setFormData({
+            name: userInfo.name,
+            email: userInfo.email,
+        });
+        }
+    },[userInfo]);
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-        ...formData,
-        [name]: value,
-        });
+        setFormData((prevState) => ({
+        ...prevState,
+        [name]: value,  // Use the name attribute to update the corresponding key
+          }));
     };
 
     const handlePasswordChange = (e) => {
@@ -34,27 +51,104 @@ export default function UserForm({userInfo}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Check if email is valid
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            setErrorMessages([...errorMessages, "Invalid email format."]);
+            return;
+        }
         
-        // Send post request with formData (dummy logic for now)
-        console.log("Submitting form data: ", formData);
-        setIsEditing(false);
+        const submitUserData = async () => {
+            try {
+              const responseData = await sendRequest(
+                `http://localhost:5000/api/users/updateUserInfo`,
+                "PATCH",
+                JSON.stringify({name:formData.name,
+                email:formData.email,
+                userId:auth.userId}),
+                {
+                  "Content-Type": "application/json",
+                }
+              );
+              console.log(responseData);
+              setIsEditing(false);
+              setErrorMessages([]); 
+            } catch (err) {
+                console.error(err);
+                setErrorMessages([...errorMessages, err.message]);
+                // Clear the error message after 10 seconds
+                setTimeout(() => {
+                    setErrorMessages([]);
+                }, 10000); 
+            }
+        };
+        submitUserData();
     };
 
     const handlePasswordSubmit = (e) => {
         e.preventDefault();
-        // Logic for submitting the password change form (dummy logic for now)
-        console.log("Submitting password data: ", passwordData);
-        setIsChangingPassword(false);
+
+        // Clear previous errors
+        const errors = [];
+
+        // Check if the new password is less than 8 characters
+        if (passwordData.newPassword.length < 8) {
+            errors.push("password must be at least 8 characters");
+        }
+
+        // Check if new password matches confirm password
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            errors.push("new password and confirm password do not match");
+        }
+
+        // If there are any errors, set them and prevent form submission
+        if (errors.length > 0) {
+            setpasswordErr(errors);
+            // Clear the error message after 10 seconds
+            setTimeout(() => {
+                setpasswordErr("");
+            }, 10000); 
+            return; // Prevent form submission if there are validation errors
+        }
+
+        const submitUserData = async () => {
+            try 
+            {
+              const responseData = await sendRequest(
+                `http://localhost:5000/api/users/updatePassword`,
+                "PATCH",
+                JSON.stringify({
+                oldPassword:passwordData.oldPassword,   
+                newPassword:passwordData.newPassword,
+                userId:auth.userId}),
+                {
+                  "Content-Type": "application/json",
+                }
+              );
+              console.log(responseData);
+              setIsChangingPassword(false);
+            } catch (err) 
+            {
+                console.log(err);
+                setErrorMessages([...errorMessages, err.message]);
+                // Clear the error message after 10 seconds
+                setTimeout(() => {
+                    setErrorMessages([]);
+                }, 10000); 
+            }
+        };
+        submitUserData();
       };
 
     const handleCancel = () => {
         setIsEditing(false);
         // Optionally reset form data to original user info
         setFormData({
-        username: userInfo.username,
-        email: userInfo.email,
-        password: userInfo.password,
+        name: formData.name,
+        email: formData.email,
         });
+        setErrorMessages([]);
     };
 
     const handlePasswordCancel = () => {
@@ -64,14 +158,15 @@ export default function UserForm({userInfo}){
           newPassword: "",
           confirmPassword: "",
         });
+        setpasswordErr(""); // Clear the password error when canceling
+        setErrorMessages([]);
       };
     
-
   return (
     <div className="user-container">
         <div className="reports-username-section">
             <img className="user-logo" src={userLogo} alt="" />
-            <div className="username">{`${userInfo.username}`}</div>
+            <div className="username">{`${userInfo.name}`}</div>
             <div className="reports-info-container">
                 <div className="my-reports-container">
                     <div className="nb-of-reports">25</div>
@@ -88,9 +183,15 @@ export default function UserForm({userInfo}){
         //contains form for email and username and another form for password
         }
         <div className="forms-container">
+            {errorMessages.length > 0 && (
+                <div className="err-message-container">
+                    {errorMessages.map((error, index) => (
+                        <div className="err-message" key={index}>{error}</div>
+                    ))}
+                </div>
+            )}
             <div className="forms-title">User Information</div>
             {/*form for email and username */}
-            
 
             {
             /* if edit button is true then display form*/
@@ -109,9 +210,9 @@ export default function UserForm({userInfo}){
                         <label className="input-group-title">Username</label>
                         <input
                         type="text"
-                        name="username"
+                        name="name"
                         className="user-input"
-                        value={formData.username}
+                        value={formData.name}
                         onChange={handleChange}
                         />
                     </div>
@@ -138,7 +239,7 @@ export default function UserForm({userInfo}){
                     </button>
                     <div className="info-group">
                         <div className="info-group-title">Username</div>
-                        <div className="user-info">{`${formData.username}`}</div>
+                        <div className="user-info">{`${formData.name}`}</div>
                     </div>
                     <div className="info-group">
                         <div className="info-group-title" >Email</div>
@@ -206,6 +307,13 @@ export default function UserForm({userInfo}){
                                 onChange={handlePasswordChange}
                             />
                         </div>
+                        {passwordErr.length > 0 && (
+                            <div className="password-error-message-container">
+                                {passwordErr.map((error, index) => (
+                                    <div className="password-error-message" key={index}>{error}</div>
+                                ))}
+                            </div>
+                        )}
                     </form>
                 )}
             </div>

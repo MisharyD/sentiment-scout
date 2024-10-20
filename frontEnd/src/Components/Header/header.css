@@ -66,6 +66,7 @@
 
   .user-button{
     padding:8px;
+    border-radius: 4px;
   }
 
   .user-button:hover{
@@ -74,7 +75,7 @@
 
   .logout-button {
     background-color: var(--main-background-color);
-    padding:4px;
+    padding:8px;
     border: none;
   }
 
