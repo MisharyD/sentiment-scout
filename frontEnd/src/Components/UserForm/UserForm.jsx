@@ -82,49 +82,119 @@ export default function UserForm({userInfo}){
                 </div>
             </div>
         </div>
-      {
-        isEditing ? 
-        (
-            <form onSubmit={handleSubmit} className="user-form">
-                <div className="form-buttons">
-                <button type="submit" className="save-btn">
-                Save
-                </button>
-                <button type="button" className="cancel-btn" onClick={handleCancel}>
-                Cancel
-                </button>
-                </div>
-                <div className="input-group">
-                    <label>Username</label>
-                    <input
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    />
-                </div>
 
-                <div className="input-group">
-                    <label>Email</label>
-                    <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    />
-                </div>
+        {
+        //contains form for email and username and another form for password
+        }
+        <div className="forms-container">
 
-            </form>
-        ) : 
-        (
-            <div className="user-info-container">
-                <button className="edit-btn" onClick={() => setIsEditing(true)}>
-                    Edit
+            {
+            //form for email and username
+            }
+            {
+            isEditing ? 
+            (
+                <form onSubmit={handleSubmit} className="user-form">
+                    <div className="form-buttons">
+                    <button type="submit" className="save-btn">
+                    Save
+                    </button>
+                    <button type="button" className="cancel-btn" onClick={handleCancel}>
+                    Cancel
+                    </button>
+                    </div>
+                    <div className="input-group">
+                        <label>Username</label>
+                        <input
+                        type="text"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <label>Email</label>
+                        <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        />
+                    </div>
+
+                </form>
+            ) : 
+            (
+                <div className="user-info-container">
+                    <button className="edit-btn" onClick={() => setIsEditing(true)}>
+                        Edit
+                    </button>
+                    <div className="user-info">{`${userInfo.username}`}</div>
+                    <div className="user-info">Email: {userInfo.email}</div>
+                </div>
+            )}
+            
+            {//password form, includes trigger button for the form
+            }
+            <div className="password-form">
+                <button
+                className="change-password-btn"
+                onClick={() => setIsChangingPassword(!isChangingPassword)}
+                >
+                {isChangingPassword ? "Close Change Password" : "Change Password"}
                 </button>
-                <div className="user-info">{`${userInfo.username}`}</div>
-                <div className="user-info">Email: {userInfo.email}</div>
+
+                {
+                isChangingPassword && 
+                (
+                    <form onSubmit={handlePasswordSubmit} className="password-form">
+                        <div className="form-buttons">
+                            <button type="submit" className="save-btn">
+                                Save
+                            </button>
+                            <button
+                                type="button"
+                                className="cancel-btn"
+                                onClick={handlePasswordCancel}
+                            >
+                                Cancel
+                            </button>
+                        </div>  
+                        <div className="input-group">
+                            <label>Old Password</label>
+                            <input
+                                type="password"
+                                name="oldPassword"
+                                value={passwordData.oldPassword}
+                                onChange={handlePasswordChange}
+                            />
+                        </div>
+
+                        <div className="input-group">
+                            <label>New Password</label>
+                            <input
+                                type="password"
+                                name="newPassword"
+                                value={passwordData.newPassword}
+                                onChange={handlePasswordChange}
+                            />
+                        </div>
+
+                        <div className="input-group">
+                            <label>Confirm Password</label>
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                value={passwordData.confirmPassword}
+                                onChange={handlePasswordChange}
+                            />
+                        </div>
+                    </form>
+                )}
             </div>
-        )}
+        </div>
     </div>
+
   );
 }
