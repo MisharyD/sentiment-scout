@@ -166,7 +166,7 @@ const userInfo = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ username: user.name, email: user.email });
+  res.json({ name: user.name, email: user.email });
 };
 
 const updateUserInfo = async (req, res, next) => {
