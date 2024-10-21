@@ -29,7 +29,7 @@ function HomePage() {
             <div className="overview">
                 <div className="introduction-section">
                     <div className="introduction-title">
-                        Empoworing you with instant sentiment insights
+                        Empowering you with instant sentiment insights
                     </div>
                     <div className="introduction-description">
                         Sentiment Scout delivers real-time insights from youtube, twitter and Google maps. <br />
