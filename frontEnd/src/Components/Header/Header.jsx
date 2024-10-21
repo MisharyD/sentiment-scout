@@ -21,11 +21,26 @@ const Header = ({page}) => {
            to='/'>
             Home page
           </NavLink>
-          <NavLink 
-          className={`nav-item ${page === 'report' ? 'selected' : ''}`} 
-          to='/report'>
-            Generate report
+          
+          {auth.isLoggedIn && (
+      <>
+            <NavLink 
+              className={`nav-item ${page === 'report' ? 'selected' : ''}`} 
+              to='/myReport'>
+              My Reports
             </NavLink>
+
+            <NavLink 
+              className={`nav-item ${page === 'report' ? 'selected' : ''}`} 
+              to='/youtubeReport'>
+              Generate report
+            </NavLink>
+      </>
+           )}
+          
+
+            
+
         </div>
 
         <div className="button-container">

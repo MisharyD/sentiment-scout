@@ -1,84 +1,89 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: var(--main-background-color);
-  }
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  padding: 5px 20px;
+  background-color: var(--main-background-color);
+}
 
-  .header-title {
-    font-size: 40px;
-    color:var(--main-title-color);
-  }
+.header-title {
+  font-size: 40px;
+  color: var(--main-title-color);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
 
-  .nav-bar{
-    display: flex;
-    gap: 1rem;
-  }
+.nav-bar {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
 
-  .nav-item{
-    color:white;
-    padding:4px 8px;
-  }
+.nav-item {
+  color: white;
+  padding: 4px 8px;
+}
 
-  .nav-item:hover{
-    color:var(--hover-text-color)
-  }
+.nav-item:hover {
+  color: var(--hover-text-color)
+}
 
-  .selected {
-    background-color: rgba(217, 217, 217, 0.4);
-  }
+.selected {
+  background-color: rgba(217, 217, 217, 0.4);
+}
 
-  .button-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: right;
+}
 
-  .button {
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: bold;
-    color: #fff;
-  }
+.button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+  color: #fff;
+}
 
-  .signup-button {
-    background-color:white;
-    color:black;
-    border: none;
-  }
+.signup-button {
+  background-color: white;
+  color: black;
+  border: none;
+}
 
-  .signup-button:hover {
-    color:black;
-    background-color: rgb(207, 205, 205)
-  }
+.signup-button:hover {
+  color: black;
+  background-color: rgb(207, 205, 205)
+}
 
-  .login-button {
-    background-color:var(--footer-background-color);
-  }
+.login-button {
+  background-color: var(--footer-background-color);
+}
 
-  .login-button:hover {
-    background-color: #404040;
-    color:white
-  }
+.login-button:hover {
+  background-color: #404040;
+  color: white
+}
 
-  .user-button{
-    padding:8px;
-    border-radius: 4px;
-  }
+.user-button {
+  padding: 8px;
+  border-radius: 4px;
+}
 
-  .user-button:hover{
-    background-color: var(--hover-background-color);
-  }
+.user-button:hover {
+  background-color: var(--hover-background-color);
+}
 
-  .logout-button {
-    background-color: var(--main-background-color);
-    padding:8px;
-    border: none;
-  }
+.logout-button {
+  background-color: var(--main-background-color);
+  padding: 8px;
+  border: none;
+}
 
-  .logout-button:hover {
-    background-color: var(--hover-background-color);
-  }
+.logout-button:hover {
+  background-color: var(--hover-background-color);
+}
