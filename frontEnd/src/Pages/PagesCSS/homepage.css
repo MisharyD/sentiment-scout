@@ -1,160 +1,186 @@
-.homepage{
-    background-color:var(--main-background-color);
+.homepage {
+    background-color: var(--main-background-color);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.svges{
+
+.svges {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.hero{
-    height: fit-content;
+.hero {
+    position: relative;
+    width: 100%;
+    height: 54vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-.hero-title-container{
-    font-size: 90px;
+.hero-title-container {
     font-size: 90px;
     min-width: 1200px;
     position: absolute;
-    top: 40%;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     display: flex;
     flex-direction: column;
     color: white;
+    align-items: center;
 }
 
-.title-part1{
+.title-part1 {
     color: white;
 }
 
-.title-part2{
+.title-part2 {
     color: white;
     align-self: center;
 }
 
-.hero-image{
-    height:700px;
+.hero-image {
+    height: 54vh;
     width: 100dvw;
     min-width: 1400px;
     opacity: 0.4;
 }
 
-.overview{
+.overview {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:6rem;
+    gap: 6rem;
 }
 
-.introduction-section{
+.introduction-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     gap: 1rem;
+    margin-top: 90px;
 }
 
-.introduction-title{
+.introduction-title {
     font-size: 52px;
 }
 
-.introduction-description{
+.introduction-description {
     font-size: 20px;
+    padding: 0px 10px;
 }
 
-.user-types{
+.user-types {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 2rem;
+    /* align-items: center; */
+    gap: 7rem;
+    margin-top: 90px;
 }
 
-.user-card{
+.user-card {
     display: flex;
     flex-direction: column;
-    width:400px;
+    width: 400px;
     gap: 0.5rem;
+    align-items: center;
+    /* justify-content: center; */
+
 }
 
-.user-type-logo{
+.user-type-logo {
     width: 200px;
     height: 200px;
 }
 
-.user-name{
+.user-name {
     font-size: 40px;
-    color:#53B7FF;
+    color: #53B7FF;
 }
 
-.user-description{
+.user-description {
     font-size: 20px;
+    text-align: center;
 }
 
-.report-introduction-section{
+.report-introduction-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-.report-introduction-title{
+.report-introduction-title {
     font-size: 48px;
+    margin-top: 90px;
 }
 
-.report-info-container{
+.report-info-container {
     display: grid;
-    grid-template-columns: repeat(4, 150px);
-    justify-content: center;   
-    gap:3rem;
+    grid-template-columns: repeat(4, 160px);
+    justify-content: center;
+    gap: 5rem;
     width: 100%;
+    margin-top: 30px;
 }
 
-.report-info-logo{
-    width:100px;
-    height:100px;
+.report-info-logo {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.happy-logo{
-    fill:green;
+.happy-logo {
+    fill: #5bff0070;
 }
 
-.neutral-logo{
-    fill:yellow;
+.neutral-logo {
+    fill: #ffb700;
 }
 
-.sad-logo{
-    fill:red
+.sad-logo {
+    fill: #ff000080;
 }
 
-.eye-logo{
+.eye-logo {}
 
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 1rem;
 }
 
-.report-info-section{
+.report-info-section {
     font-size: 30px;
 }
 
-.platform-selection-section{
+.platform-selection-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:2rem;
+    gap: 4rem;
+    margin: 90px 0px;
 }
 
-.platform-selection-title{
+.platform-selection-title {
     font-size: 64px;
 }
 
-.platforms-container{
+.platforms-container {
     display: flex;
-    gap:8rem;
+    gap: 10rem;
 }
 
 /* temp */
-*{
-    color:white
+* {
+    color: white
 }

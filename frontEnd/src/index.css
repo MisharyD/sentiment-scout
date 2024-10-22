@@ -17,7 +17,9 @@
   --footer-background-color:#000000;
   --main-title-color: white;
   --hover-background-color:#272626;
-  --hover-text-color:#B0B0B0
+  --hover-text-color:#B0B0B0;
+  --user-page-button-colors:#4e4e4e;
+  --header-title-font-size: calc(30px + 0.5vw);
   /* end Mishary code */
 
 }
