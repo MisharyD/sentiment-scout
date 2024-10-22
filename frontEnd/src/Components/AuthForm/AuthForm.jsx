@@ -61,11 +61,13 @@ function Form({formType}) {
   }
   const submitHandler = async (event) => {
     event.preventDefault();
+    console.log("here");
+    console.log(import.meta.env.VITE_BACKEND_URL);
 
     if (formType === "signup") {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/users/signup",
+          import.meta.env.VITE_BACKEND_URL+"users/signup",
           "POST",
           JSON.stringify({
             name: formState.username,
@@ -83,7 +85,7 @@ function Form({formType}) {
     } else {
       try {
         const responseData = await sendRequest(
-          "http://localhost:5000/api/users/login",
+          import.meta.env.VITE_BACKEND_URL+"users/login",
           "POST",
           JSON.stringify({
             email: formState.email,
