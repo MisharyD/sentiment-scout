@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     padding: 20px 80px;
-    align-items: center;
+    
     gap: 5rem;
 }
 
@@ -87,6 +87,7 @@
 .cancel-btn,
 .change-password-btn {
     border: 0px;
+    background-color: var(--user-page-button-colors);
 }
 
 .edit-btn:hover {
@@ -102,20 +103,14 @@
     background-color: #313131;
 }
 
-.cancel-btn {
-    color:black;
-}
-
 .save-btn:hover {
-    background-color: #52adee;
-    ;
+    background-color: #52adee;;
 }
 
 .edit-btn,
 .change-password-btn {
     align-self: flex-start;
     font-size: 20px;
-    background-color: #1b1b1b;
 }
 
 .change-password-btn:hover {
@@ -144,7 +139,7 @@
     border-radius: 8px;
     border: 1px solid white;
     padding: 4px 8px;
-    color: black;
+    color:white;
 }
 
 .password-error-message {
@@ -152,8 +147,7 @@
 }
 
 /* media queries */
-
-@media(max-width:700px) {
+@media(max-width:850px) {
     .user-container {
         display: grid;
         grid-template-columns: 1fr;

@@ -14,7 +14,7 @@ export default function UserPage(){
 
     useEffect(() => {
         const fetchUserData = async () => {
-            try {
+            try { 
               const responseData = await sendRequest(
                 `http://localhost:5000/api/users/${auth.userId}`,
                 "GET",
