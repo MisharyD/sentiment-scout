@@ -47,7 +47,7 @@ mongoose
     `mongodb+srv://Tsugair27:10qpalzmTTDB@cluster0.djdmo.mongodb.net/SentimentScout?retryWrites=true&w=majority&appName=Cluster0`
   )
   .then(() => {
-    app.listen(5000);
+    app.listen( process.env.PORT || 5000);
   })
   .catch((err) => {
     console.log(err);
