@@ -62,7 +62,7 @@ export default function UserForm({userInfo}){
         const submitUserData = async () => {
             try {
               const responseData = await sendRequest(
-                `http://localhost:5000/api/users/updateUserInfo`,
+                import.meta.env.VITE_BACKEND_URL+`users/updateUserInfo`,
                 "PATCH",
                 JSON.stringify({name:formData.name,
                 email:formData.email,
@@ -116,7 +116,7 @@ export default function UserForm({userInfo}){
             try 
             {
               const responseData = await sendRequest(
-                `http://localhost:5000/api/users/updatePassword`,
+                import.meta.env.VITE_BACKEND_URL+`users/updatePassword`,
                 "PATCH",
                 JSON.stringify({
                 oldPassword:passwordData.oldPassword,   
