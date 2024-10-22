@@ -1,18 +1,20 @@
 .user-container {
-    /* display: grid;
-    grid-template-columns: 1fr 2fr; */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     padding: 20px 80px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
     gap: 5rem;
-    margin-top: 85px;
-
 }
 
 /* reports styling (left section)*/
+
+.reports-username-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:0.5rem;
+}
+
 .user-logo {
     width: 200px;
     height: 200px;
@@ -20,8 +22,8 @@
 
 .username {
     font-size: 28px;
-    margin-top: 25px;
 }
+
 
 .reports-info-container {
     display: flex;
@@ -147,4 +149,16 @@
 
 .password-error-message {
     color: red;
+}
+
+/* media queries */
+
+@media(max-width:700px) {
+    .user-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 20px 10vw;
+        align-items: center;
+        gap: 5rem;
+    }
 }
