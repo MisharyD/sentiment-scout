@@ -12,20 +12,24 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  white-space: nowrap; /* Prevent text from breaking into a new line */
+  white-space: nowrap; 
 }
 
 .menu-content{
-  display:flex;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
+  align-items: center;
 }
 
 .nav-bar {
   display: flex;
   gap: 3rem;
+  justify-self: center;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
+  margin-left: 10%;
 }
 
 .nav-item {
@@ -44,6 +48,7 @@
 .user-buttons-container {
   display: flex;
   gap: 1rem;
+  justify-self: right;
 }
 
 .menu-toggle {
@@ -101,7 +106,7 @@
   background-color: var(--hover-background-color);
 }
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
   .menu-content{
     display: none;
   }
