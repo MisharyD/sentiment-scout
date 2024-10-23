@@ -44,10 +44,11 @@
 }
 
 .hero-image {
-    height: 54vh;
+    height: 700px;
     width: 100dvw;
     min-width: 1400px;
     opacity: 0.4;
+    background-size: cover;
 }
 
 .overview {
