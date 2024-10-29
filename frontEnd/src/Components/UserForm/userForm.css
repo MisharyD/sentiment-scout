@@ -41,14 +41,20 @@
 }
 
 .my-reports-container,
-.scheduled-reports.container {
+.scheduled-reports-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .my-reports-container {
-    border-right: 1px solid #6C6C6C;
     padding-right: 10px;
+    margin-left: 25px;
+}
+
+.scheduled-reports-container{
+    border-left: 1px solid #6C6C6C;
+    padding-left: 20px;
 }
 
 /* forms styling (right section) */
