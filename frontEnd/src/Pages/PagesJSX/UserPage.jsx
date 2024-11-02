@@ -1,5 +1,4 @@
 import {useContext, useEffect, useState} from "react";
-import PropTypes from 'prop-types';
 import { AuthContext } from "../../Components/shared/context/auth-context.jsx";
 import { useHttpClient } from "../../Components/shared/hooks/http-hook.jsx";
 import Header from "../../Components/Header/Header.jsx";

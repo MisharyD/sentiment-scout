@@ -44,7 +44,7 @@
 }
 
 .hero-image {
-    height: 700px;
+    min-height: 400px;
     width: 100dvw;
     min-width: 1400px;
     opacity: 0.4;
