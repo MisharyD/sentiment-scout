@@ -4,6 +4,7 @@
   padding: 5px 20px;
   background-color: var(--main-background-color);
   gap: 1rem;
+  max-height: 80px;
 }
 
 .header-title {
