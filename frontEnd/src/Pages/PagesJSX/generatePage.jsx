@@ -8,7 +8,7 @@ import "../PagesCSS/generatePage.css"
 
 export default function GeneratePage(){
     const { platform } = useParams();
-    
+
     const [url, setUrl] = useState("");
     const [scheduledDate, setScheduledDate] = useState("");
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -86,7 +86,7 @@ export default function GeneratePage(){
     }
     return (
         <div className="generate-page">
-            <Header pagee = "generate" />
+            <Header page = "generate" />
 
             <div className="main">
                 {renderTitle()}

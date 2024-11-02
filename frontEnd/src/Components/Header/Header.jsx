@@ -11,11 +11,16 @@ import "./header.css"
 const Header = ({page}) => {
   const auth = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [reportDropdownOpen, setReportDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const toggleReportDropdown = () => {
+    setReportDropdownOpen(!reportDropdownOpen);
+  };
+  
   return (
     <>
       <header className="header">
@@ -36,9 +41,28 @@ const Header = ({page}) => {
                 <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/myReport'>
                   My Reports
                 </NavLink>
-                <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/generate/youtube'>
-                  Generate report
-                </NavLink>
+                <div className="generate-report-container">
+                  <button 
+                    className={`nav-item generate-report-button ${page === 'generate' ? 'selected' : ''}`}
+                    onClick={toggleReportDropdown}
+                  >
+                    Generate report  <span className="dropdown-arrow">▼</span>
+                  </button>
+
+                  {reportDropdownOpen && (
+                    <div className="report-dropdown">
+                      <NavLink to="/generate/youtube" onClick={() => setReportDropdownOpen(false)}>
+                        YouTube
+                      </NavLink>
+                      <NavLink to="/generate/x" onClick={() => setReportDropdownOpen(false)}>
+                        X
+                      </NavLink>
+                      <NavLink to="/generate/googlemaps" onClick={() => setReportDropdownOpen(false)}>
+                        Google Maps
+                      </NavLink>
+                    </div>
+                  )}
+                </div>
               </>
             )}
           </nav>
