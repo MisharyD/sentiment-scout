@@ -36,7 +36,7 @@ const Header = ({page}) => {
                 <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/myReport'>
                   My Reports
                 </NavLink>
-                <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/youtubeReport'>
+                <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/generate/youtube'>
                   Generate report
                 </NavLink>
               </>
