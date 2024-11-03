@@ -5,6 +5,9 @@ const jwt = require("jsonwebtoken");
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 
+const sendMail = require('../middleware/mailer');
+
+
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -291,8 +294,47 @@ const updatePassword = async (req, res, next) => {
   });
 };
 
+
+const sendEmailforGenerateNow = async (req, res, next) => {
+  const userId = req.body.userId 
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError('User lookup failed', 500);
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError('User not found', 404);
+    return next(error);
+  }
+
+
+// Send email to the user
+try {
+  await sendMail(
+    user.email,
+    user.name,
+    'Your Report is Ready',
+    `Hello ${user.name}, your report has been generated. Thanks for using Sentiment Scout. Waiting for your next report !!`,
+    `<h2>Hello ${user.name}!</h2>
+      <h3>Your report has been generated.</h3>
+      <p>Thanks for using Sentiment Scout. Waiting for your next report !!</p>
+      `
+  );
+  res.status(200).json({ message: 'Email sent successfully!' });
+} catch (err) {
+  const error = new HttpError('Failed to send email', 500);
+  return next(error);
+}
+};
+
+
+
 exports.signup = signup;
 exports.login = login;
 exports.userInfo = userInfo;
 exports.updateUserInfo = updateUserInfo;
 exports.updatePassword = updatePassword;
+exports.sendEmailforGenerateNow = sendEmailforGenerateNow;

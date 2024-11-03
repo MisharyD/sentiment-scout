@@ -33,11 +33,16 @@ router.patch(
   usersController.updateUserInfo
 );
 
-// Routes to the updateUserInfo controller
+// Routes to the updatePassword controller
 router.patch(
   "/updatePassword",
   [check("newPassword").isLength({ min: 6 })],
   usersController.updatePassword
 );
+
+
+// Routes for sending notifications
+
+router.post("/notifications/generateNow", usersController.sendEmailforGenerateNow);
 
 module.exports = router;
