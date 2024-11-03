@@ -39,7 +39,6 @@ export default function UserPage(){
             </div>
             
             <Footer /> 
-
         </div>
     )
 }
