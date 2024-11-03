@@ -1,19 +1,11 @@
-import {useContext, useEffect, useState} from "react";
-import { AuthContext } from "../../Components/shared/context/auth-context.jsx";
-import { useHttpClient } from "../../Components/shared/hooks/http-hook.jsx";
 import { useParams } from 'react-router-dom';
 import Header from "../../Components/Header/Header.jsx";
+import GenerateForm from "../../Components/GenerateForm/GenerateForm.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
 import "../PagesCSS/generatePage.css"
 
 export default function GeneratePage(){
     const { platform } = useParams();
-
-    const [url, setUrl] = useState("");
-    const [scheduledDate, setScheduledDate] = useState("");
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [generateLater, setGenerateLater] = useState(false);
-
     const renderTitle = () => {
         switch (platform) {
             case "youtube":
@@ -37,113 +29,16 @@ export default function GeneratePage(){
         }
     }
 
-    const handleGenerateNow = (e) => {
-        e.preventDefault();
-        
-        if (!url) {
-            alert("Please enter a URL.");
-            return;
-        }
-
-        let apiEndpoint;
-        switch (platform) {
-            case "youtube":
-                apiEndpoint = "youtube";
-                break;
-            case "google maps":
-                apiEndpoint = "googleMaps";
-                break;
-            case "x":
-                apiEndpoint = "X";
-                break;
-        }
-
-        //Send request 
-        console.log("sending request to generate report NOW")
-    }
-
-    const handleScheduleGenerate = () => {
-        if (!url || !scheduledDate) {
-            alert("Please enter both a URL and a scheduled date.");
-            return;
-        }
-
-        let apiEndpoint;
-        switch (platform) {
-            case "youtube":
-                apiEndpoint = "https://api.example.com/youtube/schedule";
-                break;
-            case "google maps":
-                apiEndpoint = "https://api.example.com/googlemaps/schedule";
-                break;
-            case "x":
-                apiEndpoint = "https://api.example.com/x/schedule";
-                break;
-        }
-
-        //Send request 
-        console.log("sending request to generate report LATER")
-    }
     return (
         <div className="generate-page">
             <Header page = "generate" />
 
             <div className="main">
                 {renderTitle()}
-                <form className = "generate-form" onSubmit={(e) => e.preventDefault()}>
-                    <input
-                        type="text"
-                        placeholder="Paste the URL here"
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
-                        required
-                        className="url-input"
-                    />
-                    <button
-                        type="button"
-                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                        className="generate-report-button"
-                    >
-                        Generate Report
-                    </button>
-                    {dropdownOpen && (
-                        <div className="dropdown-menu">
-                            <button
-                                type="button"
-                                onClick={handleGenerateNow}
-                                className="dropdown-item"
-                            >
-                                Generate Now
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setGenerateLater(true)}
-                                className="dropdown-item"
-                            >
-                                Generate Later
-                            </button>
-                            {generateLater && (
-                                <>
-                                    <label>Schedule Date:</label>
-                                    <input
-                                        type="date"
-                                        value={scheduledDate}
-                                        onChange={(e) => setScheduledDate(e.target.value)}
-                                        className="date-input"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={handleScheduleGenerate}
-                                        className="schedule-button"
-                                    >
-                                        Confirm Schedule
-                                    </button>
-                                </>
-                            )}
-                        </div>
-                    )}
-                </form>
+                <GenerateForm platform={platform} />
             </div>
+
+            <Footer />
         </div>
     )
 }
