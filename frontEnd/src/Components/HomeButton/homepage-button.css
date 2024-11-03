@@ -8,8 +8,6 @@
     background-color: transparent; /* Makes the background transparent */
     border: 1px solid #ffffff; /* White border with 2px thickness */
     margin-left: 19.91%;
-  
-    
   }
   
   .button {
@@ -21,8 +19,7 @@
     text-align: center;
     padding: 10px 0px;
     height: 50%;
-  
-   
+    white-space: nowrap; 
     border-radius: 10px;
   }
   

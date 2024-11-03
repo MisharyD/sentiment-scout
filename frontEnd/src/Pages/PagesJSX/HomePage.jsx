@@ -1,5 +1,3 @@
-import React  from 'react'
-
 import Header from "../../Components/Header/Header.jsx";
 import '../PagesCSS/homepage.css'
 // import Blocker  from "../../assets/block-1.svg"
@@ -13,7 +11,6 @@ function HomePage() {
    <GreetingBlock title="See what people think in a glance" description="Sentiment Scout delivers real-time insights from youtube, twitter and Google maps. <br />
                         Whether you are a content creater, buisness owner, or someone curiuos about public opinions."/>
    <FeatureCards />
-    
 
   </div>
 
