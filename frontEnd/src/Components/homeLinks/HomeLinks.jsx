@@ -41,7 +41,7 @@ function HomeLinks({page}) {
         </div>
       {auth.isLoggedIn && (
         <>
-          <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/myReport'>
+          <NavLink className={`nav-item ${page === 'reports' ? 'selected' : ''}`} to={'/myReports'} >
             My Reports
           </NavLink>
         </>
