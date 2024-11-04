@@ -4,7 +4,7 @@
     flex-direction: column;
     flex: 1;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 
   }
   
@@ -18,5 +18,10 @@
     max-width: 1090px;
     width: 100%;
     position: relative;
-    background-color: red;
+    background-color: blue;
+    align-self: center;
  } 
+
+ .youtube{
+    color: red;
+ }
