@@ -19,7 +19,7 @@ function HomeLinks({page}) {
       </NavLink>
       <div className="generate-report-container">
           <button 
-            className={`nav-item generate-report-button ${page === 'generate' ? 'selected' : ''}`}
+            className={`nav-item toggle-report-button ${page === 'generate' ? 'selected' : ''}`}
             onClick={toggleReportDropdown}
           >
             Generate report  <span className="dropdown-arrow">▼</span>
@@ -33,7 +33,7 @@ function HomeLinks({page}) {
               <NavLink to="/generate/x" onClick={() => setReportDropdownOpen(false)}>
                 X
               </NavLink>
-              <NavLink to="/generate/googlemaps" onClick={() => setReportDropdownOpen(false)}>
+              <NavLink to="/generate/maps" onClick={() => setReportDropdownOpen(false)}>
                 Google Maps
               </NavLink>
             </div>
