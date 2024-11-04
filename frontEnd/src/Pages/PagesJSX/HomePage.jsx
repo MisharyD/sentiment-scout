@@ -1,5 +1,3 @@
-import React  from 'react'
-
 import Header from "../../Components/Header/Header.jsx";
 import '../PagesCSS/homepage.css'
 // import Blocker  from "../../assets/block-1.svg"

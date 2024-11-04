@@ -1,7 +1,68 @@
-a,
-a:visited {
+.nav-bar {
+  display: flex;
+  gap: 3rem;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  margin-left: 5%;
+}
+
+.nav-item,
+.nav-item:visited {
   text-decoration: none;
   color: white;
-  font-size: 12px;
-  margin-left: 2.22%;
+  font-size: var(--header-buttons-font-size);
+  font-family: "Lato", sans-serif;
+  padding:4px;
+}
+
+.nav-item:hover{
+  color:var(--hover-text-color)
+}
+
+.generate-report-container {
+  position: relative;
+}
+
+.toggle-report-button {
+  cursor: pointer;
+  background-color: var(--main-background-color)
+}
+
+.toggle-report-button:focus{
+  outline:0px;
+  border:0px;
+  padding:4px;
+}
+
+.report-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 100;
+}
+
+.report-dropdown a {
+  display: block;
+  padding: 5px 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.report-dropdown a:hover {
+  background-color: #f0f0f0;
+}
+
+.nav-item:hover {
+  color: var(--hover-text-color);
+  border: 0px;
+}
+
+.selected {
+  background-color: rgba(217, 217, 217, 0.4);
 }
