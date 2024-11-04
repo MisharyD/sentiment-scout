@@ -18,14 +18,15 @@ export default function ReportItem(props){
     }
 
     return(
-    // This div later will be <Card>
-       <div> 
+   
+       <li> 
+    {/* add a <ReportCard /> here later */}
 
         <div className={`platform ${getPlatformName(props.platform)}`}>{props.platform}</div>
         <div className='title'>{props.title}</div>
         <div className='date'>{props.date}</div>
 
 
-       </div>  
+       </li>  
     );
 }

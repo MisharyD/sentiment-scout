@@ -39,12 +39,15 @@ function HomeLinks({page}) {
             </div>
           )}
         </div>
-      {auth.isLoggedIn && (
-        <>
-          <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/myReport'>
+        
+      {auth.isLoggedIn && ( <div className="generate-report-container">
+          <NavLink className={`nav-item ${page === 'reports' ? 'selected' : ''}`} to={`/myReports/${auth.userId}`} >
             My Reports
           </NavLink>
-        </>
+          </div>
+        
+        
+        
       )}   
     </nav>
   );
