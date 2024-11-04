@@ -1,16 +1,12 @@
-.cardContainer{
+  .cardContainer{
 
     display: flex;
     flex-direction: column;
     flex: 1;
     justify-content: center;
     align-items: center;
-    width: 100%;
 
   }
-
-  
-
   
   .reportCard{
     
@@ -21,13 +17,6 @@
     border-radius: 50px;
     max-width: 1090px;
     width: 100%;
+    position: relative;
     background-color: red;
  } 
-
-/* li {
-    /* list-style: none;
-    text-align: center;
-    color: white;
-    background-color: red ; 
-    
-} 

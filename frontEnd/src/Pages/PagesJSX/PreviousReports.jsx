@@ -54,12 +54,16 @@ export default function PreviousReports(){
    return ( 
     <div className="Previous-Report-Page" >
     <Header page = "reports" />
+    <div className="main">
    <ReportList reports = {myReports} /> 
+   </div>
    <Footer />
 
 
    </div>
+   
 
    )
 }
+
 
