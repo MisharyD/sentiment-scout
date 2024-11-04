@@ -3,6 +3,12 @@ import LoginPage from './Pages/PagesJSX/LoginPage.jsx'
 import HomePage from './Pages/PagesJSX/HomePage.jsx'
 import UserPage from './Pages/PagesJSX/UserPage.jsx'
 import GeneratePage from './Pages/PagesJSX/generatePage.jsx'
+
+import PreviousReports from './Pages/PagesJSX/PreviousReports.jsx'
+//import HomePage1 from './Pages/PagesJSX/HomePage1.jsx'
+
+
+
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import { AuthContext } from "./Components/shared/context/auth-context.jsx";
@@ -19,6 +25,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
+        <Route path="/myReports" element={<PreviousReports />} />
       </Routes>
     
   </Router>)
@@ -27,11 +34,12 @@ function App() {
   }else{
     routes=(<Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/user" element={<LoginPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
+        <Route path="/myReports" element={<PreviousReports />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     
