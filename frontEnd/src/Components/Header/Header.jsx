@@ -1,19 +1,50 @@
-import React ,{useContext} from "react";
+/* eslint-disable no-unused-vars */
+import {useContext, useState} from "react";
 import { AuthContext } from "../shared/context/auth-context.jsx";
-import { NavLink } from "react-router-dom";
-import "./Header.css"
+import "./header.css"
 import HomeLinks from "../homeLinks/HomeLinks.jsx";
-import HomePageButton from "../HomeButton/HomePageButton.jsx";
-function Header(props){
-  const auth = useContext(AuthContext);
-  return (
-    <header >
-      <span  className="sentiment-scout">SENTIMENT SCOUT</span>
-      <HomeLinks/>
-      <HomePageButton Text="Sign in" gradiant={false} style={{marginLeft: "19.91%", width: "6.66%",height: "50%"}}/>
-     <HomePageButton Text="Sign up" gradiant={true} style={{marginLeft: "0.83%", width: "6.66%",height: "50%"}}/>
-     
+import { NavLink } from "react-router-dom";
+import userLogo from "../../assets/images/user.svg"
+import logoutLogo from "../../assets/images/logout.svg"
+import menuIcon from "../../assets/images/menu.svg";
+import closeIcon from "../../assets/images/close.svg";
 
+function Header(){
+  const auth = useContext(AuthContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  return (
+    <header className = "header" >
+      
+      <span className="sentiment-scout">SENTIMENT SCOUT</span>
+
+      {/*Menu toggle button when screen is small*/}
+      <img className="menu-toggle" src={menuOpen ? closeIcon : menuIcon} onClick={toggleMenu} alt="menu toggle" />
+
+      <div className={`menu-content ${menuOpen ? 'open' : 'closed'}`}>
+        <HomeLinks/>
+        <div className="user-buttons-container">
+          {!auth.isLoggedIn ? (
+            <>
+              <NavLink className="login-button" to='/login'>Log In</NavLink>
+              <NavLink className="signup-button" to='/signup'>Sign Up</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink className="user-button" to='/user'>
+                <img src={userLogo} alt="user" />
+              </NavLink>
+              <button className="logout-button" onClick={auth.logout}>
+                <img src={logoutLogo} alt="logout" />
+              </button>
+            </>
+          )}
+        </div>
+      </div>
     </header>
    
   )

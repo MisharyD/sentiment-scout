@@ -1,5 +1,3 @@
-import React  from 'react'
-
 import Header from "../../Components/Header/Header.jsx";
 import '../PagesCSS/homepage.css'
 // import Blocker  from "../../assets/block-1.svg"
@@ -16,6 +14,7 @@ function HomePage() {
                         Whether you are a content creater, buisness owner, or someone curiuos about public opinions.</>}buttonWidth="20%" buttonHeight= "15.01%"
                        marginBottom="20%" marginTop="20.86vh" width="45.16%" height="46.04vh" fontSize="85px" />
    <FeatureCards />
+
    <Panel src={BrainGiver}/>
     
 
