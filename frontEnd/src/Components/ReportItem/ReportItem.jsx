@@ -1,4 +1,5 @@
-import "./ReportItem.css";
+import "../ReportCard/ReportCard.jsx";
+import ReportCard from "../ReportCard/ReportCard.jsx";
 
 export default function ReportItem(props){
 
@@ -18,15 +19,22 @@ export default function ReportItem(props){
     }
 
     return(
-   
+        // <ReportCard platform = props={}>
+            <div className="cardContainer">
        <li> 
     {/* add a <ReportCard /> here later */}
-
+    <div className="reportCard"> 
         <div className={`platform ${getPlatformName(props.platform)}`}>{props.platform}</div>
-        <div className='title'>{props.title}</div>
+        <div className='title'> <h2> {props.title} </h2> </div>
         <div className='date'>{props.date}</div>
-
-
+        </div>
+        
        </li>  
+
+       </div>
+
+    //    {/* </ReportCard> */}
+      
+       
     );
 }
