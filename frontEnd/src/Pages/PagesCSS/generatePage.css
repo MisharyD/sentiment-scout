@@ -24,6 +24,7 @@ because if it is on the whole page, the footer will cover it*/
     align-self: center;
     margin-top: 50px;
     font-size: var(--header-title-font-size);
+    color: white;
 }
 
 .youtube-title .highlight{
