@@ -39,6 +39,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/user" element={<LoginPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
+        <Route path="/myReports" element={<PreviousReports />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     
