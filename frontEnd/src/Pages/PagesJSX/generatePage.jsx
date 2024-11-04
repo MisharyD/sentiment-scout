@@ -10,19 +10,19 @@ export default function GeneratePage(){
         switch (platform) {
             case "youtube":
                 return (
-                    <div className="youtube-title">
-                        Paste the <span className="highlight">Video</span> URL to generate sentiment analysis report Comments
+                    <div className="youtube-title generate-title">
+                        Paste the <span className="highlight">Video</span> URL to generate sentiment analysis report
                     </div>
                 );
-            case "googleMaps":
+            case "maps":
                 return (
-                    <div className="maps-title">
+                    <div className="maps-title generate-title">
                         Paste the <span className="highlight">Location</span> URL to generate sentiment analysis report
                     </div>
                 );
             case "x":
                 return (
-                    <div className="X-title">
+                    <div className="X-title generate-title">
                         Paste the <span className="highlight">Tweet</span> URL to generate sentiment analysis report
                     </div>
                 );

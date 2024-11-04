@@ -2,8 +2,8 @@
     background: linear-gradient(45deg, #7b2ff7, #4bb0ff);
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);;
-    margin-left: 0.83%;
   }
+  
   .white {
     background-color: transparent; /* Makes the background transparent */
     border: 1px solid #ffffff; /* White border with 2px thickness */
