@@ -1,7 +1,10 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
+import { AuthContext } from "../shared/context/auth-context.jsx";
 import PropTypes from 'prop-types';
+import "./generateForm.css"
 
 export default function GenerateForm({platform}){
+    const auth = useContext(AuthContext);
 
     const [url, setUrl] = useState("");
     const [scheduledDate, setScheduledDate] = useState("");
@@ -33,7 +36,15 @@ export default function GenerateForm({platform}){
         console.log("sending request to generate report NOW")
     }
 
+    const toggleDate = () => {
+        setGenerateLater(!generateLater)
+    }
+
     const handleScheduleGenerate = () => {
+        if(!auth.isLoggedIn){
+            alert("You need to be logged in");
+        }
+
         if (!url || !scheduledDate) {
             alert("Please enter both a URL and a scheduled date.");
             return;
@@ -66,49 +77,53 @@ export default function GenerateForm({platform}){
                 required
                 className="url-input"
             />
-            <button
-                type="button"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="generate-report-button"
-            >
-                Generate Report
-            </button>
-            {dropdownOpen && (
-                <div className="dropdown-menu">
+            <div className="generate-buttons-container">
+                <button
+                    type="button"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="generate-report-button gradiant"
+                >
+                    Generate Report
+                </button>
+                {dropdownOpen && (
+                    <>
                     <button
                         type="button"
                         onClick={handleGenerateNow}
-                        className="dropdown-item"
+                        className="generate-now-button"
                     >
                         Generate Now
                     </button>
-                    <button
-                        type="button"
-                        onClick={() => setGenerateLater(true)}
-                        className="dropdown-item"
-                    >
-                        Generate Later
-                    </button>
-                    {generateLater && (
-                        <>
-                            <label>Schedule Date:</label>
-                            <input
-                                type="date"
-                                value={scheduledDate}
-                                onChange={(e) => setScheduledDate(e.target.value)}
-                                className="date-input"
-                            />
-                            <button
-                                type="button"
-                                onClick={handleScheduleGenerate}
-                                className="schedule-button"
-                            >
-                                Confirm Schedule
-                            </button>
-                        </>
-                    )}
-                </div>
-            )}
+                    <div className="schedule-container">
+                        <button
+                            type="button"
+                            onClick={() => toggleDate()}
+                            className="generate-later-button"
+                        >
+                            Generate Later
+                        </button>
+                        {generateLater && (
+                            <>
+                                <label className="date-label">Schedule Date:</label>
+                                <input
+                                    type="date"
+                                    value={scheduledDate}
+                                    onChange={(e) => setScheduledDate(e.target.value)}
+                                    className="date-input"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={handleScheduleGenerate}
+                                    className="confirm-schedule-button"
+                                >
+                                    Confirm Schedule
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </>
+                )}
+            </div>
         </form>
     )
 }
