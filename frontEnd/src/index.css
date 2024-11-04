@@ -19,6 +19,7 @@
   --hover-text-color:#B0B0B0;
   --user-page-button-colors:#4e4e4e;
   --header-title-font-size: calc(20px + 0.5vw);
+  --text-input-background-color: rgba(231, 231, 231, 0.829)
 }
 *{
   box-sizing: border-box;
