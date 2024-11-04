@@ -17,6 +17,9 @@ function HomePage() {
    <Panel src={BrainGiver}/>
     
 
+   <Panel src={BrainGiver}/>
+    
+
   </div>
 
 

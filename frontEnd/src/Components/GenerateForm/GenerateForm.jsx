@@ -106,7 +106,7 @@ export default function GenerateForm({platform}){
                             <>
                                 <label className="date-label">Schedule Date:</label>
                                 <input
-                                    type="date"
+                                    type="datetime-local"
                                     value={scheduledDate}
                                     onChange={(e) => setScheduledDate(e.target.value)}
                                     className="date-input"
