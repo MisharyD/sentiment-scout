@@ -11,7 +11,6 @@ export default function ReportList(props){
         <ul>
     {props.reports.map( report => (<ReportItem 
                                     key = {report.id}
-                                    uId = {report.uId} 
                                     rId = {report.rId}
                                     platform = {report.platform} 
                                     title = {report.title} 

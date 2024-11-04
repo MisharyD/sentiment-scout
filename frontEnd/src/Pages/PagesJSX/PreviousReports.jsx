@@ -15,32 +15,28 @@ import '../PagesCSS/PreviousReports.css';
 
 const reports = [
     {
-        uId: '6727c3322de556217a530aae',
         rId: 'r1',
         platform: 'youtube',
         title: '10 Simple Hacks to Boost Your Productivity in 2024',
         date: '11/3/2024'
     },
     {
-        uId: 'u1',
         rId: 'r2',
-        platform: 'X',
+        platform: 'x',
         title: 'The Ultimate Guide to Mastering AI Tools',
         date: '11/1/2024'
     },
 
     {
-        uId: 'u2',
-        rId: 'r1',
+        rId: 'r3',
         platform: 'youtube',
         title: '5 Game-Changing Tips for Staying Productive in a Busy World',
         date: '11/3/2024'
     },
 
     {
-        uId: 'u2',
-        rId: 'r2',
-        platform: 'google maps',
+        rId: 'r4',
+        platform: 'googleMaps',
         title: 'KSU university',
         date: '10/25/2024'
     },
@@ -48,14 +44,13 @@ const reports = [
 
 export default function PreviousReports(){
 
-    const userId = useParams().uId; 
-    const myReports = reports.filter(report => userId === report.uId);
+    
 
    return ( 
     <div className="Previous-Report-Page" >
     <Header page = "reports" />
     <div className="main">
-   <ReportList reports = {myReports} /> 
+   <ReportList reports = {reports} /> 
    </div>
    <Footer />
 
