@@ -3,6 +3,7 @@ import LoginPage from './Pages/PagesJSX/LoginPage.jsx'
 import HomePage from './Pages/PagesJSX/HomePage.jsx'
 import UserPage from './Pages/PagesJSX/UserPage.jsx'
 import GeneratePage from './Pages/PagesJSX/generatePage.jsx'
+import PreviousReports from './Pages/PagesJSX/PreviousReports.jsx'
 //import HomePage1 from './Pages/PagesJSX/HomePage1.jsx'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
+        <Route path="/myreports/:uId" element={<PreviousReports />} />
       </Routes>
     
   </Router>)
