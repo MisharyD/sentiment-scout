@@ -19,21 +19,21 @@ export default function ReportItem(props){
     }
 
     return(
-        // <ReportCard platform = props={}>
-            <div className="cardContainer">
+         <ReportCard platform = {props.platform}  >
+            {/* <div className="cardContainer"> */}
        <li> 
     {/* add a <ReportCard /> here later */}
-    <div className="reportCard"> 
+    {/* <div className="reportCard">  */}
         <div className={`platform ${getPlatformName(props.platform)}`}>{props.platform}</div>
         <div className='title'> <h2> {props.title} </h2> </div>
         <div className='date'>{props.date}</div>
-        </div>
-        
+        {/* </div> */}
+
        </li>  
 
-       </div>
+       {/* </div> */}
 
-    //    {/* </ReportCard> */}
+       </ReportCard> 
       
        
     );
