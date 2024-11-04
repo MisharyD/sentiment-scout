@@ -9,6 +9,7 @@ return(
     
     <li> 
         <div className= {`platform ${props.platform} `}>{props.platform ===  "googleMaps"? "GOOGLE MAPS" : props.platform.toUpperCase() } </div>
+        
         <div className='title'> <h2> {props.title} </h2> </div>
         
         <div className="lastRow">
