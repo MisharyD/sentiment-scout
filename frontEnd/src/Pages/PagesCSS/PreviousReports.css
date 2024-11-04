@@ -1,0 +1,10 @@
+.Previous-Report-Page {
+
+    height:100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1;
+}
