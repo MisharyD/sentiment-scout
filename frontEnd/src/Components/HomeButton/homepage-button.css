@@ -12,15 +12,15 @@
     
   }
   
+  
   .button {
     /* height: 10.93%; */
-    width: 6.66%;
     font-weight: bold;
     font-size: 16px;
     color: #ffffff;
     text-align: center;
     padding: 10px 0px;
-    height: 50%;
+    /* height: 50%; */
   
    
     border-radius: 10px;

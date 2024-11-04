@@ -1,0 +1,25 @@
+
+
+  .interaction-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .interaction-block.centered > *{
+    text-align: center;
+  }
+  .main-title{
+    margin-top: 0;
+    font-weight: 900;
+    line-height: 130%;
+    margin-bottom: 16px;
+
+  }
+  .description{
+    color: #898CA9;
+    font-size: 16px;
+    margin-bottom: 36px;
+    margin-top: 0;
+  }
+  
