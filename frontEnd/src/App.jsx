@@ -21,7 +21,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
-        <Route path="/myreports/:uId" element={<PreviousReports />} />
+        <Route path="/myReports" element={<PreviousReports />} />
       </Routes>
     
   </Router>)

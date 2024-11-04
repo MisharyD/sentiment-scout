@@ -50,14 +50,11 @@ export default function PreviousReports(){
     <div className="Previous-Report-Page" >
     <Header page = "reports" />
     <div className="main">
-   <ReportList reports = {reports} /> 
+   <ReportList reports = {reports} /> {/* here should put array of reports that is fetched from the DB */}
    </div>
    <Footer />
-
-
-   </div>
    
-
+   </div>
    )
 }
 
