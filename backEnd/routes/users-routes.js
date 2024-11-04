@@ -40,9 +40,24 @@ router.patch(
   usersController.updatePassword
 );
 
-
 // Routes for sending notifications
 
-router.post("/notifications/generateNow", usersController.sendEmailforGenerateNow);
+// Send notification for generate now
+router.post(
+  "/notifications/generateNow",
+  usersController.sendEmailforGenerateNow
+);
+
+// Send scheduled notification
+router.post(
+  "/notifications/generateSchedule",
+  usersController.sendScheduledNotification
+);
+
+// Get notifications for a user
+router.get("/notifications/:uid", usersController.getNotifications);
+
+// mark notification as read
+router.patch("/notifications/markAsRead", usersController.markAsRead);
 
 module.exports = router;
