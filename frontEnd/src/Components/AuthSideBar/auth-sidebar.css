@@ -5,6 +5,10 @@
     justify-content: center;
     align-items: center;
 }
+.auth-sidebar-image{
+  position: absolute;
+  width: 30%;
+}
 @media (max-width: 800px) {
     #auth-sidebar {
       display: none;  /* This will hide the div */
