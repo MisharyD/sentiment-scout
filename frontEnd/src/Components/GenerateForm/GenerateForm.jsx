@@ -47,7 +47,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
-                    "platform":"Youtube"}),
+                    "platform":{platform}}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -93,11 +93,13 @@ export default function GenerateForm({platform, setRequestResponse}){
         const submit = async () => {
         try {
             const responseData = await sendRequest(
-            import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
+            import.meta.env.VITE_BACKEND_URL+`users/notifications/generateSchedule`,
             "POST", 
             JSON.stringify({
                 "userId" :auth.userId,
-                "platform":"Youtube"}),
+                "date":scheduledDate ,
+                "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                "platform":{platform}}),
             {
                 "Content-Type": "application/json",
             }
