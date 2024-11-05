@@ -39,6 +39,12 @@
     border:0px
 }
 
+.generate-now-button,
+.generate-later-button, 
+.confirm-schedule-button{
+   background-color: #1a1a1a;
+}
+
 .generate-report-button {
     text-wrap: nowrap;
     position: relative;

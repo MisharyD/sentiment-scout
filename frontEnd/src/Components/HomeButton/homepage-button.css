@@ -10,16 +10,15 @@
     margin-left: 19.91%;
   }
   
+  
   .button {
     /* height: 10.93%; */
-    width: 6.66%;
     font-weight: bold;
     font-size: 16px;
     color: #ffffff;
     text-align: center;
     padding: 10px 0px;
-    height: 50%;
-    white-space: nowrap; 
+    white-space: nowrap;
     border-radius: 10px;
   }
   

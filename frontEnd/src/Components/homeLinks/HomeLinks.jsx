@@ -3,7 +3,8 @@ import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import "./home-links.css";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 function HomeLinks({page}) {
   const auth = useContext(AuthContext);
   const [reportDropdownOpen, setReportDropdownOpen] = useState(false);
@@ -22,7 +23,7 @@ function HomeLinks({page}) {
             className={`nav-item toggle-report-button ${page === 'generate' ? 'selected' : ''}`}
             onClick={toggleReportDropdown}
           >
-            Generate report  <span className="dropdown-arrow">▼</span>
+            Generate report  <span className="dropdown-arrow"><FontAwesomeIcon icon={faCaretDown} className="caret-icon" style={{ marginLeft: '6px' }} /></span>
           </button>
 
           {reportDropdownOpen && (
@@ -41,7 +42,7 @@ function HomeLinks({page}) {
         </div>
       {auth.isLoggedIn && (
         <>
-          <NavLink className={`nav-item ${page === 'report' ? 'selected' : ''}`} to='/myReport'>
+          <NavLink className={`nav-item ${page === 'reports' ? 'selected' : ''}`} to={'/myReports'} >
             My Reports
           </NavLink>
         </>
