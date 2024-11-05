@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import {useContext, useEffect} from "react";
-import PropTypes from 'prop-types';
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import "./userForm.css"
 export default function UserForm({userInfo}){
     const auth = useContext(AuthContext);
     const { sendRequest } = useHttpClient();
+    
     const [isEditing, setIsEditing] = useState(false);
     const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [formData, setFormData] = useState({
