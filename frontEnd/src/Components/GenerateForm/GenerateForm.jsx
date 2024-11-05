@@ -1,10 +1,12 @@
 import {useState, useContext} from "react";
+import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import PropTypes from 'prop-types';
 import "./generateForm.css"
 
-export default function GenerateForm({platform}){
+export default function GenerateForm({platform, setRequestResponse}){
     const auth = useContext(AuthContext);
+    const { sendRequest } = useHttpClient();
 
     const [url, setUrl] = useState("");
     const [scheduledDate, setScheduledDate] = useState("");
@@ -19,28 +21,52 @@ export default function GenerateForm({platform}){
             return;
         }
 
-        let apiEndpoint;
-        switch (platform) {
-            case "youtube":
-                apiEndpoint = "youtube";
-                break;
-            case "google maps":
-                apiEndpoint = "googleMaps";
-                break;
-            case "x":
-                apiEndpoint = "X";
-                break;
-        }
+        // this when there will be an actual report 
+        // let apiEndpoint;
+        // switch (platform) {
+        //     case "youtube":
+        //         apiEndpoint = "youtube";
+        //         break;
+        //     case "google maps":
+        //         apiEndpoint = "googleMaps";
+        //         break;
+        //     case "x":
+        //         apiEndpoint = "X";
+        //         break;
+        // }
 
         //Send request 
-        console.log("sending request to generate report NOW")
+        const submit = async () => {
+            try {
+              const responseData = await sendRequest(
+                import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
+                "POST", 
+                JSON.stringify({
+                    "userId" :auth.userId,
+                    "platform":"Youtube"}),
+                {
+                  "Content-Type": "application/json",
+                }
+              );
+              setRequestResponse("Report generated succesfully and an email has been sent to you with the report!")
+
+            } catch (err) {
+                setRequestResponse(err.message)
+                
+                // Clear the error message after 10 seconds
+                setTimeout(() => {
+                    
+                }, 10000); 
+            }
+        };
+        submit();
     }
 
     const toggleDate = () => {
         setGenerateLater(!generateLater)
     }
 
-    const handleScheduleGenerate = () => {
+    const handleScheduleGenerate = async () => {
         if(!auth.isLoggedIn){
             alert("You need to be logged in");
         }
@@ -50,21 +76,44 @@ export default function GenerateForm({platform}){
             return;
         }
 
-        let apiEndpoint;
-        switch (platform) {
-            case "youtube":
-                apiEndpoint = "https://api.example.com/youtube/schedule";
-                break;
-            case "google maps":
-                apiEndpoint = "https://api.example.com/googlemaps/schedule";
-                break;
-            case "x":
-                apiEndpoint = "https://api.example.com/x/schedule";
-                break;
-        }
+        // let apiEndpoint;
+        // switch (platform) {
+        //     case "youtube":
+        //         apiEndpoint = "https://api.example.com/youtube/schedule";
+        //         break;
+        //     case "google maps":
+        //         apiEndpoint = "https://api.example.com/googlemaps/schedule";
+        //         break;
+        //     case "x":
+        //         apiEndpoint = "https://api.example.com/x/schedule";
+        //         break;
+        // }
 
         //Send request 
-        console.log("sending request to generate report LATER")
+        const submit = async () => {
+        try {
+            const responseData = await sendRequest(
+            import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
+            "POST", 
+            JSON.stringify({
+                "userId" :auth.userId,
+                "platform":"Youtube"}),
+            {
+                "Content-Type": "application/json",
+            }
+            );
+            setRequestResponse("Report generated succesfully and an email will be sent to you with the report!")
+
+        } catch (err) {
+            setRequestResponse(err.message)
+            
+            // Clear the error message after 10 seconds
+            setTimeout(() => {
+                
+            }, 10000); 
+        }
+    };
+    submit();
     }
 
     return(
