@@ -15,6 +15,10 @@ export default function GenerateForm({platform, setRequestResponse}){
 
     const handleGenerateNow = (e) => {
         e.preventDefault();
+
+        if(!auth.isLoggedIn){
+            alert("You need to be logged in");
+        }
         
         if (!url) {
             alert("Please enter a URL.");
@@ -60,10 +64,6 @@ export default function GenerateForm({platform, setRequestResponse}){
             }
         };
         submit();
-    }
-
-    const toggleDate = () => {
-        setGenerateLater(!generateLater)
     }
 
     const handleScheduleGenerate = async () => {
@@ -116,6 +116,10 @@ export default function GenerateForm({platform, setRequestResponse}){
         }
     };
     submit();
+    }
+
+    const toggleDate = () => {
+        setGenerateLater(!generateLater)
     }
 
     return(
