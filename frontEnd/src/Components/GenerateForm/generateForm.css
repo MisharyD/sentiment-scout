@@ -34,8 +34,9 @@
 .generate-later-button, 
 .confirm-schedule-button{
     padding: 10px 20px;
-    width:150px;
-    text-wrap: nowrap
+    min-width:170px;
+    text-wrap: nowrap;
+    border:0px
 }
 
 .generate-now-button,
@@ -50,8 +51,14 @@
     z-index: 1;
 }
 
-.generate-report-button:hover{
-    color:rgb(188, 188, 188)
+.generate-report-button:hover,
+.generate-now-button:hover,
+.generate-later-button:hover, 
+.confirm-schedule-button:hover
+{
+    color:rgb(188, 188, 188);
+    border:0px;
+    outline:0px;
 }
 
 .generate-report-button:focus{

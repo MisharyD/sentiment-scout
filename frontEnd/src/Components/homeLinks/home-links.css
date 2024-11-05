@@ -27,7 +27,8 @@
 
 .toggle-report-button {
   cursor: pointer;
-  background-color: var(--main-background-color)
+  background-color: var(--main-background-color);
+  border:0px;
 }
 
 .toggle-report-button:focus{
