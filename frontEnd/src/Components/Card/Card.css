@@ -9,9 +9,10 @@
   background-color: #1a1b23;
 }
 .card-image {
-  width: 21.05%;
-  margin-top: 9.24%;
-  margin-bottom: 4.62%;
+  width: 80px;
+  width: 80px;
+  margin-top: 36px;
+  margin-bottom: 16px;
 }
 
 .card-title {
@@ -23,8 +24,8 @@
   color: #898ca9;
   font-size: 16px;
   text-align: center;
-  margin-top: 4.62%;
-  margin-bottom: 4.62%;
+  margin-top: 16px;
+  margin-bottom: 32px;
   padding-left: 6.31%;
   padding-right: 6.31%;
 }

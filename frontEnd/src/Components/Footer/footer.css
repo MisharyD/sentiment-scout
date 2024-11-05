@@ -1,19 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
+
 .footer{
     display: flex;
     justify-content: space-between;
     justify-self: end;
     background-color: var(--footer-background-color);
     padding:10px 20px;
+    width: 100%;
+    
 }
 
 .footer-title{
     font-size: var(--header-title-font-size);
+    font-family: "Orbitron", sans-serif;
+    text-indent: 10px;
+    
 }
 
 .socials-container{
     display: flex;
     align-items: center;
     gap:1rem;
+    margin-right: 20px;
 }
 
 .social-logo{
