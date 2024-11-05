@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {useState, useContext} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
@@ -47,7 +48,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
-                    "platform":{platform}}),
+                    "platform":platform}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -99,7 +100,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "userId" :auth.userId,
                 "date":scheduledDate ,
                 "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                "platform":{platform}}),
+                "platform":platform}),
             {
                 "Content-Type": "application/json",
             }
