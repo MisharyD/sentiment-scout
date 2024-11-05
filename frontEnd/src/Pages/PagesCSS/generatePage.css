@@ -23,7 +23,7 @@ because if it is on the whole page, the footer will cover it*/
 .generate-title{
     align-self: center;
     margin-top: 50px;
-    font-size: var(--header-title-font-size);
+    font-size: calc(20px + 1.5vw);
     color: white;
 }
 
@@ -39,3 +39,7 @@ because if it is on the whole page, the footer will cover it*/
     color:rgb(112, 112, 112)
 }
 
+.request-response{
+    align-self: center;
+    font-size: 32px;
+}
