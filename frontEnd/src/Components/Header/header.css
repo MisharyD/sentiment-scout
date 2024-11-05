@@ -4,7 +4,7 @@
   font-family: "Orbitron", sans-serif;
   font-weight: 500;
   font-size: var(--header-title-font-size); /* Adjust size as needed */
-  color: #ffffff; /* White text color */
+  color: white; /* White text color */
   letter-spacing: 0.15em;
   text-align: center;
   white-space: nowrap; 
@@ -45,7 +45,7 @@
 
 
 .signup-button, .login-button{
-  width: 80px;
+  width: 96px;
   font-weight: bold;
   font-size: var(--header-buttons-font-size);
   color: #ffffff;

@@ -36,6 +36,7 @@
   /* display: flex;
   justify-content: center;
   align-items: center; */
+  margin-bottom: 32px;
 }
  .card-link .card-arrow {
   margin-left: 6px; 
