@@ -47,11 +47,11 @@ mongoose
     `mongodb+srv://Tsugair27:10qpalzmTTDB@cluster0.djdmo.mongodb.net/SentimentScout?retryWrites=true&w=majority&appName=Cluster0`
   )
   .then(async () => {
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB");
 
     // Start Agenda after the database is connected
     await agenda.start();
-    console.log('Agenda started');
+    console.log("Agenda started");
 
     // Start the server
     app.listen(process.env.PORT || 5000, () => {
