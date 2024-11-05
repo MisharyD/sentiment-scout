@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import {useState} from "react";
 import Header from "../../Components/Header/Header.jsx";
 import GenerateForm from "../../Components/GenerateForm/GenerateForm.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
@@ -6,6 +7,8 @@ import "../PagesCSS/generatePage.css"
 
 export default function GeneratePage(){
     const { platform } = useParams();
+    const [requestResponse, setRequestResponse] = useState("")
+
     const renderTitle = () => {
         switch (platform) {
             case "youtube":
@@ -35,9 +38,11 @@ export default function GeneratePage(){
 
             <div className="main">
                 {renderTitle()}
-                <GenerateForm platform={platform} />
+                <GenerateForm platform={platform} setRequestResponse = {setRequestResponse} />
+            <div className="request-response">
+                {requestResponse}
             </div>
-
+            </div>
             <Footer />
         </div>
     )
