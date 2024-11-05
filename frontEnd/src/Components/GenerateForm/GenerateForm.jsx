@@ -102,9 +102,11 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "Content-Type": "application/json",
             }
             );
+            console.log(responseData)
             setRequestResponse("Report generated succesfully and an email will be sent to you with the report!")
 
         } catch (err) {
+            console.log(err)
             setRequestResponse(err.message)
             
             // Clear the error message after 10 seconds
