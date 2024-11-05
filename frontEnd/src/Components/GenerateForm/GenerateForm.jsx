@@ -48,7 +48,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
-                    "platform":platform}),
+                    "platform":""}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -100,7 +100,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "userId" :auth.userId,
                 "date":scheduledDate ,
                 "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                "platform":platform}),
+                "platform":""}),
             {
                 "Content-Type": "application/json",
             }
