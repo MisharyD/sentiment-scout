@@ -1,5 +1,5 @@
 import React from "react";
-import "./Interaction-block.css";
+import "./interaction-block.css";
 import HomePageButton from "../HomeButton/HomePageButton";
 function InteractionBlock(props) {
 
