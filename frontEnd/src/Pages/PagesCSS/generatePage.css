@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;    
     min-height: 100vh;
+    background-image: url("../../assets/images/Landing Page.svg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
 }
 
 /*The background image is on the main section (middle section) for now, 
@@ -11,11 +15,7 @@ because if it is on the whole page, the footer will cover it*/
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-color: var(--main-background-color);
-    background-image: url("../../assets/images/Landing Page.svg");
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
+    background-color: var(--main-background-color) transparent;
     gap: 3rem;
     padding:0px 40px
 }

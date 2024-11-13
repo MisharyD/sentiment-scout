@@ -152,6 +152,7 @@
     color: red;
 }
 
+
 /* media queries */
 @media(max-width:850px) {
     .user-container {
