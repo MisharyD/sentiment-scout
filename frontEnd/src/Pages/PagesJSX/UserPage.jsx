@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import { AuthContext } from "../../Components/shared/context/auth-context.jsx";
 import { useHttpClient } from "../../Components/shared/hooks/http-hook.jsx";
+import { OrbitProgress } from "react-loading-indicators"
 import Header from "../../Components/Header/Header.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
 import UserForm from "../../Components/UserForm/UserForm.jsx"
@@ -33,6 +34,10 @@ export default function UserPage(){
 
     return(
         <div className="user-page">
+          {!userInfo && 
+            <div className="overlay">
+                <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
+            </div>}
             <Header />
             <div className="main">
                 <UserForm userInfo={userInfo} />
