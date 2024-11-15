@@ -9,7 +9,7 @@ import "../PagesCSS/userPage.css"
 
 export default function UserPage(){
     const auth = useContext(AuthContext);
-    const { sendRequest } = useHttpClient();
+    const { sendRequest, isLoading } = useHttpClient();
     const [userInfo, setUserInfo] = useState({name: "", email: ""});
 
     useEffect(() => {
@@ -34,10 +34,11 @@ export default function UserPage(){
 
     return(
         <div className="user-page">
-          {!userInfo && 
+          {isLoading && 
             <div className="overlay">
                 <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
-            </div>}
+            </div>
+          }
             <Header />
             <div className="main">
                 <UserForm userInfo={userInfo} />
