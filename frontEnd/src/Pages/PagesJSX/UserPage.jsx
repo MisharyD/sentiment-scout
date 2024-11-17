@@ -39,11 +39,11 @@ export default function UserPage(){
 <div id='stars2'></div>
 <div id='stars3'></div> */}
 
-{*         {isLoading && 
+{/*         {isLoading && 
              <div className="overlay">
                  <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
              </div>
-           *}
+           */}
 
             <Header />
             <div className="main">
