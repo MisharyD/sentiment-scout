@@ -42,11 +42,11 @@
 
 .user-buttons-container {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 2rem;
   justify-self: right;
   font-family: "Lato", sans-serif;
 }
-
 
 .signup-button, .login-button{
   width: 96px;
@@ -79,9 +79,83 @@
   color: var(--hover-text-color)
 }
 
-.user-button {
-  padding: 8px;
+.notifications-container {
+  position: relative;
+}
+
+.bell-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 60px;
+  fill: white;
+  padding:4px;
   border-radius: 4px;
+}
+
+.bell-button:hover {
+  background-color: var(--hover-background-color);
+}
+
+.notifications-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--dropdown-background-color);
+  border: 0px;
+  border-radius: 4px;
+  margin-top: 4px;
+  padding:8px;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.notification-count {
+  position: absolute;
+  top: 2px;
+  right: -2px;
+  color: red;
+  border-radius: 50%;
+  font-size: 25px;
+  font-weight: bold;
+  z-index: 10;
+} 
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.mark-as-seen-button {
+  background-color: var(--dropdown-background-color);
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.mark-as-seen-button:hover {
+  color:rgb(183, 183, 183)
+}
+
+.user-button {
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .user-button:hover {
@@ -89,12 +163,19 @@
 }
 
 .logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--main-background-color);
-  padding: 8px;
+  padding: 4px;
   border: none;
 }
 
-@media (max-width: 950px) {
+.logout-button:hover {
+  background-color: var(--hover-background-color);
+}
+
+@media (max-width: 1050px) {
   .menu-content{
     display: none;
   }
@@ -103,11 +184,11 @@
     display:flex;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 80px;
     right: 0;
-    background-color: var(--main-background-color);
+    background-color: var(--dropdown-background-color);
     padding: 10px;
-    border: 1px solid var(--user-page-button-colors);
+    border: 0px;
     gap:1rem;
     z-index: 1;
   }
@@ -124,9 +205,24 @@
     justify-content: center;
   }
 
+  .toggle-report-button {
+    background-color: var(--dropdown-background-color) !important;
+}
+
   .menu-toggle{
     display: block;
     justify-self: right;
+  }
+
+  .logout-button {
+    background-color: var(--dropdown-background-color);
+    padding: 8px;
+    border: none;
+  }
+
+  /* this class is in the homelinks file*/
+  .report-dropdown{
+    border:1px solid white !important;
   }
 }
 
