@@ -14,8 +14,6 @@ import bellIcon from "../../assets/images/bell-outline.svg"
 function Header(){
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
-  console.log(auth.userId)
-
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -37,8 +35,10 @@ function Header(){
           import.meta.env.VITE_BACKEND_URL+ `users/notifications/${auth.userId}`, 
           "GET"  
         );
-        console.log(responseData.notifications)
-        setNotifications(responseData.notifications);   
+        const unreadNotifications = responseData.notifications.filter(
+          (notification) => !notification.isRead
+        );
+        setNotifications(unreadNotifications);   
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }

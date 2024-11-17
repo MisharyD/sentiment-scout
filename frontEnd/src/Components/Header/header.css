@@ -29,11 +29,60 @@
   cursor: pointer;
 }
 
+.menu-content{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-self: right;
+  font-family: "Lato", sans-serif;
+}
+
+.signup-button, .login-button{
+  width: 96px;
+  font-weight: bold;
+  font-size: var(--header-buttons-font-size);
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 0px;
+  white-space: nowrap; 
+  border-radius: 10px;
+}
+
+.signup-button {
+  background: linear-gradient(45deg, #7b2ff7, #4bb0ff);
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);;
+}
+
+.signup-button:hover {
+  color:rgb(188, 188, 188);
+  background-color: rgb(207, 205, 205)
+}
+
+.login-button {
+  background-color: var(--main-background-color);
+  border: 1px solid white;
+}
+
+.login-button:hover {
+  color: var(--hover-text-color)
+}
+
 .notifications-container {
   position: relative;
 }
 
 .bell-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   width: 60px;
   fill: white;
@@ -97,55 +146,12 @@
   color:rgb(183, 183, 183)
 }
 
-.menu-content{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.user-buttons-container {
+.user-button {
+  padding: 4px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
-  gap: 2rem;
-  justify-self: right;
-  font-family: "Lato", sans-serif;
-}
-
-.signup-button, .login-button{
-  width: 96px;
-  font-weight: bold;
-  font-size: var(--header-buttons-font-size);
-  color: #ffffff;
-  text-align: center;
-  padding: 10px 0px;
-  white-space: nowrap; 
-  border-radius: 10px;
-}
-
-.signup-button {
-  background: linear-gradient(45deg, #7b2ff7, #4bb0ff);
-  border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);;
-}
-
-.signup-button:hover {
-  color:rgb(188, 188, 188);
-  background-color: rgb(207, 205, 205)
-}
-
-.login-button {
-  background-color: var(--main-background-color);
-  border: 1px solid white;
-}
-
-.login-button:hover {
-  color: var(--hover-text-color)
-}
-
-.user-button {
-  padding: 8px;
-  border-radius: 4px;
+  justify-content: center;
 }
 
 .user-button:hover {
@@ -153,8 +159,11 @@
 }
 
 .logout-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--main-background-color);
-  padding: 8px;
+  padding: 4px;
   border: none;
 }
 
