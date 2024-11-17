@@ -1,11 +1,11 @@
 import React from "react";
 import "./interaction-block.css";
-import HomePageButton from "../HomeButton/HomePageButton";
+import { Link } from "react-router-dom";
 function InteractionBlock(props) {
-
+//{{marginBottom:props.marginBottom,marginTop: props.marginTop, width:props.width, height: props.height}}
   return (
-    <div style={{marginBottom:props.marginBottom,marginTop: props.marginTop, width:props.width, height: props.height}} className={`interaction-block ${props.center ? "centered" : "left-aligned"}`}>
-        <h1 style={{fontSize:props.fontSize}} className="main-title">
+    <div className={`interaction-block ${props.center ? "centered" : "left-aligned"}`}>
+        <h1 className="main-title">
           {props.title}
         
 
@@ -15,7 +15,10 @@ function InteractionBlock(props) {
         
 
         </p>
-        <HomePageButton gradient={props.gradient} path={props.path} Text={props.buttonText} style={{width: props.buttonWidth,height: props.buttonHeight}}/>
+        {/* <HomePageButton gradient={props.gradient} path={props.path} Text={props.buttonText} style={{width: props.buttonWidth,height: props.buttonHeight}}/>
+         */}
+     <Link to={props.path} style={props.style} className={"button "+(props.gradient? "gradient":"white")}>{props.buttonText}</Link>
+  
     </div>
   )
    

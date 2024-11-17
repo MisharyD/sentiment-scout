@@ -1,5 +1,42 @@
-.panel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 300px;
+}
+.panel > .interaction-block {
+ flex-basis: 45%;
+}
+.panel > .panel-img {
+  flex-basis: 30%;
+}
+.panel-img{
+  /* padding: 120px; */
+}
+
+@media (max-width: 1200px) {
+  .panel {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .panel > * {
+    max-width: 380px;
+  }
+  .panel-img {
+    order: -1;
+    /* padding: 0px; */
+  }
+}
+@media (max-width: 400px) {
+  .panel {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .panel > * {
+    max-width: 315px;
+  }
+  .panel-img {
+    order: -1;
+    /* padding: 0px; */
+  }
 }

@@ -9,7 +9,7 @@ import logoutLogo from "../../assets/images/logout.svg"
 import menuIcon from "../../assets/images/menu.svg";
 import closeIcon from "../../assets/images/close.svg";
 
-function Header(){
+function Header(props){
   const auth = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -20,7 +20,7 @@ function Header(){
   return (
     <header className = "header" >
       
-      <span className="sentiment-scout">SENTIMENT SCOUT</span>
+      <NavLink to="/" className="sentiment-scout">SENTIMENT SCOUT</NavLink>
 
       {/*Menu toggle button when screen is small*/}
       <img className="menu-toggle" src={menuOpen ? closeIcon : menuIcon} onClick={toggleMenu} alt="menu toggle" />
