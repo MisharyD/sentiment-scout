@@ -4,7 +4,7 @@ import Header from "../../Components/Header/Header.jsx";
 import GenerateForm from "../../Components/GenerateForm/GenerateForm.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
 import "../PagesCSS/generatePage.css"
-
+import "../PagesCSS/starsBackground.css"
 export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
@@ -34,7 +34,11 @@ export default function GeneratePage(){
 
     return (
         <div className="generate-page">
+<div id='stars'></div>
+<div id='stars2'></div>
+<div id='stars3'></div>
             <Header page = "generate" />
+            
 
             <div className="main">
                 {renderTitle()}

@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     justify-self: end;
-    background-color: var(--footer-background-color);
+    background-color: transparent;
     padding:10px 20px;
     width: 100%;
     
@@ -14,9 +14,12 @@
     font-size: var(--header-title-font-size);
     font-family: "Orbitron", sans-serif;
     text-indent: 10px;
+    color: white;
     
 }
-
+.footer-title:hover{
+    color:white;
+}
 .socials-container{
     display: flex;
     align-items: center;
@@ -26,4 +29,18 @@
 
 .social-logo{
     width: 40px;
+}
+
+@media (max-width:570px) {
+
+    .footer-title{
+    font-size: var(--header-title-font-size);
+    font-family: "Orbitron", sans-serif;
+    text-indent: 0px;
+    }
+    
+    .socials-container{
+        margin-right: 0px;
+    }
+
 }
