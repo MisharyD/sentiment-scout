@@ -14,6 +14,8 @@ import bellIcon from "../../assets/images/bell-outline.svg"
 function Header(){
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
+  console.log(auth.userId)
+
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -48,7 +50,7 @@ function Header(){
   //mark a notification as seen
   const markAsSeen = async (notificationId) => {
     try {
-      const responseData = await sendRequest(
+        const responseData = await sendRequest(
         import.meta.env.VITE_BACKEND_URL+ `users/notifications/markAsRead`, 
         "PATCH",
         JSON.stringify({
@@ -61,14 +63,12 @@ function Header(){
 
       //update state of notifications
       setNotifications((prevNotifications) =>
-      prevNotifications.filter((notif) => notif.id !== notificationId));
+      prevNotifications.filter((notif) => notif.notificationId !== notificationId));
 
     } catch (error) {
       console.error("Error marking notification as seen:", error);
     }
   };
-
-
 
   return (
     <header className = "header" >
@@ -95,17 +95,20 @@ function Header(){
                   onClick={toggleNotifications}
                   alt="notifications"
                 />
+                {notifications.length > 0 && (
+                  <span className="notification-count">{notifications.length}</span>
+                )}
                 {isNotificationsOpen && (
                   <div className="notifications-dropdown">
                     {notifications.length === 0 ? (
                       <div className="notification-item">No new notifications</div>
                     ) : (
                       notifications.map((notification) => (
-                        <div key={notification.id} className="notification-item">
+                        <div key={notification.notificationId} className="notification-item">
                           <span>{notification.message}</span>
                           <button
                             className="mark-as-seen-button"
-                            onClick={() => markAsSeen(notification.id)}
+                            onClick={() => markAsSeen(notification.notificationId)}
                           >
                             Mark as read
                           </button>

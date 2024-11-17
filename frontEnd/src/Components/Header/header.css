@@ -60,6 +60,17 @@
   z-index: 10;
 }
 
+.notification-count {
+  position: absolute;
+  top: 2px;
+  right: -2px;
+  color: red;
+  border-radius: 50%;
+  font-size: 25px;
+  font-weight: bold;
+  z-index: 10;
+} 
+
 .notification-item {
   padding: 10px;
   border-bottom: 1px solid #f0f0f0;
@@ -100,7 +111,6 @@
   justify-self: right;
   font-family: "Lato", sans-serif;
 }
-
 
 .signup-button, .login-button{
   width: 96px;
@@ -152,7 +162,7 @@
   background-color: var(--hover-background-color);
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
   .menu-content{
     display: none;
   }
@@ -196,10 +206,6 @@
     padding: 8px;
     border: none;
   }
-
-  .notifications-dropdown {
-    border:1px solid white;
-   }
 
   /* this class is in the homelinks file*/
   .report-dropdown{
