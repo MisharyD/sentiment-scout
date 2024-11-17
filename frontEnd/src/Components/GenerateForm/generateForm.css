@@ -12,7 +12,7 @@
     width: 70%;
     max-width: 900px;
     padding: 8px 40px;
-    border-radius: 8px;
+    border-radius: 24px;
     border: 0px;
     font-size: 20px;
     color: black;
@@ -36,7 +36,8 @@
     padding: 10px 20px;
     min-width:170px;
     text-wrap: nowrap;
-    border:0px
+    border:0px;
+    border-radius: 24px;
 }
 
 .generate-now-button,
