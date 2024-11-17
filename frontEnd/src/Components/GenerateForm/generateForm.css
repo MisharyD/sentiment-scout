@@ -95,3 +95,10 @@
     align-items: center;
     z-index: 9999;
   }
+
+  @media (max-width:420px) {
+    
+.url-input{
+    min-width: 300px;
+  }
+}
