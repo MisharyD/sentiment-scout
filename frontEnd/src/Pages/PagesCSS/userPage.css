@@ -3,7 +3,11 @@
     flex-direction: column;
     height:100dvh;
     background-color: var(--main-background-color);
-    background-image: none;
+
+    /* overflow: hidden; */
+
+/*     background-image: none; */
+
 }
 
 .main{

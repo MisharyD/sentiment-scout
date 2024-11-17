@@ -11,15 +11,19 @@
   padding: 10px; /* Space around the text */
   /* border-radius: 4px; Soft corners if desired */
 }
+.sentiment-scout:hover{
+  color: white;
+}
 .header{
-  height: 9.87vh;
+  /* height: 9.87vh; */
   width:100dvw;
   padding: 8px 40px 8px 0px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
-  background-color: var(--main-background-color);
+  background-color: transparent;
   --header-buttons-font-size:calc(15px + 10%);
+  padding: 20px ;
 }
 
 .menu-toggle {
