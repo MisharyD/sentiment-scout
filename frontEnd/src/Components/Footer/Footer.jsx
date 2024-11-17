@@ -4,9 +4,9 @@ export default function Footer(){
     return (
         <>
             <div className="footer">
-            <NavLink to="/" className="footer-title">
+            <span className="footer-title">
                     SENTIMENT SCOUT
-                </NavLink>
+                </span>
 
                 <div className="socials-container">
                     <a className="social-link" href="https://github.com/MisharyD/sentiment-scout">

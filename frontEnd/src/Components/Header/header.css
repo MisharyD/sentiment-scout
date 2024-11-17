@@ -71,7 +71,7 @@
 }
 
 .login-button {
-  background-color: var(--main-background-color);
+  background-color: transparent;
   border: 1px solid white;
 }
 
