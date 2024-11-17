@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {useState, useContext} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
@@ -47,7 +48,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
-                    "platform":"Youtube"}),
+                    "platform":""}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -93,11 +94,13 @@ export default function GenerateForm({platform, setRequestResponse}){
         const submit = async () => {
         try {
             const responseData = await sendRequest(
-            import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
+            import.meta.env.VITE_BACKEND_URL+`users/notifications/generateSchedule`,
             "POST", 
             JSON.stringify({
                 "userId" :auth.userId,
-                "platform":"Youtube"}),
+                "date":scheduledDate ,
+                "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                "platform":""}),
             {
                 "Content-Type": "application/json",
             }
