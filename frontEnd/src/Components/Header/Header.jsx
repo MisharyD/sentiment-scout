@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import {useContext, useState} from "react";
+import {useContext, useState, useEffect} from "react";
 import { AuthContext } from "../shared/context/auth-context.jsx";
+import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import "./header.css"
 import HomeLinks from "../homeLinks/HomeLinks.jsx";
 import { NavLink } from "react-router-dom";
@@ -8,14 +9,66 @@ import userLogo from "../../assets/images/user.svg"
 import logoutLogo from "../../assets/images/logout.svg"
 import menuIcon from "../../assets/images/menu.svg";
 import closeIcon from "../../assets/images/close.svg";
+import bellIcon from "../../assets/images/bell-outline.svg"
 
 function Header(){
   const auth = useContext(AuthContext);
+  const { sendRequest } = useHttpClient();
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const toggleNotifications = () => {
+    setIsNotificationsOpen(!isNotificationsOpen)
+  };
+
+  //fetch notifications from the backend
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const responseData = await sendRequest(
+          import.meta.env.VITE_BACKEND_URL+ `users/notifications/${auth.userId}`, 
+          "GET"  
+        );
+        console.log(responseData.notifications)
+        setNotifications(responseData.notifications);   
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    if (auth.isLoggedIn) fetchNotifications();
+  }, [auth.isLoggedIn, auth.userId, sendRequest]);
+
+  //mark a notification as seen
+  const markAsSeen = async (notificationId) => {
+    try {
+      const responseData = await sendRequest(
+        import.meta.env.VITE_BACKEND_URL+ `users/notifications/markAsRead`, 
+        "PATCH",
+        JSON.stringify({
+          "notificationId": notificationId
+        }),
+        {
+        "Content-Type": "application/json",
+        }  
+      );
+
+      //update state of notifications
+      setNotifications((prevNotifications) =>
+      prevNotifications.filter((notif) => notif.id !== notificationId));
+
+    } catch (error) {
+      console.error("Error marking notification as seen:", error);
+    }
+  };
+
+
 
   return (
     <header className = "header" >
@@ -35,6 +88,33 @@ function Header(){
             </>
           ) : (
             <>
+              <div className="notifications-container">
+                <img
+                  className="bell-button"
+                  src={bellIcon}
+                  onClick={toggleNotifications}
+                  alt="notifications"
+                />
+                {isNotificationsOpen && (
+                  <div className="notifications-dropdown">
+                    {notifications.length === 0 ? (
+                      <div className="notification-item">No new notifications</div>
+                    ) : (
+                      notifications.map((notification) => (
+                        <div key={notification.id} className="notification-item">
+                          <span>{notification.message}</span>
+                          <button
+                            className="mark-as-seen-button"
+                            onClick={() => markAsSeen(notification.id)}
+                          >
+                            Mark as read
+                          </button>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
               <NavLink className="user-button" to='/user'>
                 <img src={userLogo} alt="user" />
               </NavLink>

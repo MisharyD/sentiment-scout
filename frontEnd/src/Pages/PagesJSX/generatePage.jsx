@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Header from "../../Components/Header/Header.jsx";
 import GenerateForm from "../../Components/GenerateForm/GenerateForm.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
@@ -8,6 +8,11 @@ import "../PagesCSS/generatePage.css"
 export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
+
+    //resets the request response when navigating between platforms from the header
+    useEffect(() => {
+        setRequestResponse("");
+      }, [platform]);
 
     const renderTitle = () => {
         switch (platform) {

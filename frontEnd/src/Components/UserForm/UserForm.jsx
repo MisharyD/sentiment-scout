@@ -3,7 +3,6 @@ import {useContext, useEffect} from "react";
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { useState } from "react";
-import { OrbitProgress } from "react-loading-indicators"
 import userLogo from "../../assets/images/user.svg"
 import "./userForm.css"
 
@@ -66,9 +65,10 @@ export default function UserForm({userInfo}){
               const responseData = await sendRequest(
                 import.meta.env.VITE_BACKEND_URL+`users/updateUserInfo`,
                 "PATCH",
-                JSON.stringify({name:formData.name,
-                email:formData.email,
-                userId:auth.userId}),
+                JSON.stringify({
+                    name:formData.name,
+                    email:formData.email,
+                    userId:auth.userId}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -121,11 +121,11 @@ export default function UserForm({userInfo}){
                 import.meta.env.VITE_BACKEND_URL+`users/updatePassword`,
                 "PATCH",
                 JSON.stringify({
-                oldPassword:passwordData.oldPassword,   
-                newPassword:passwordData.newPassword,
-                userId:auth.userId}),
+                    oldPassword:passwordData.oldPassword,   
+                    newPassword:passwordData.newPassword,
+                    userId:auth.userId}),
                 {
-                  "Content-Type": "application/json",
+                "Content-Type": "application/json",
                 }
               );
               console.log(responseData);
