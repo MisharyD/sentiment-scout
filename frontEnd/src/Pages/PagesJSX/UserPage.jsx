@@ -6,7 +6,7 @@ import Header from "../../Components/Header/Header.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
 import UserForm from "../../Components/UserForm/UserForm.jsx"
 import "../PagesCSS/userPage.css"
-
+// import "../PagesCSS/starsBackground.css"
 export default function UserPage(){
     const auth = useContext(AuthContext);
     const { sendRequest, isLoading } = useHttpClient();
@@ -34,11 +34,17 @@ export default function UserPage(){
 
     return(
         <div className="user-page">
-          {isLoading && 
-            <div className="overlay">
-                <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
-            </div>
-          }
+
+          {/* <div id='stars'></div>
+<div id='stars2'></div>
+<div id='stars3'></div> */}
+
+{*         {isLoading && 
+             <div className="overlay">
+                 <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
+             </div>
+           *}
+
             <Header />
             <div className="main">
                 <UserForm userInfo={userInfo} />

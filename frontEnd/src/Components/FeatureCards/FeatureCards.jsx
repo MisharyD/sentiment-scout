@@ -29,7 +29,6 @@ if(props.type==="platforms"){
       "Monitor and interpret posts about your brand or topics of interest on X. Stay ahead with real-time sentiment tracking and trend analysis on the X platform.",
     buttonText: "Get Started on X",
     src: XLogo,
-    style:{ margin: "0 20px"} // Ensure you have imported XLogo correctly
   },
   {
     path: "/generate/maps",
@@ -58,7 +57,7 @@ if(props.type==="platforms"){
     cardDescription:"Curious about public opinion on your brand? Get quick insights from YouTube, Twitter, and Google Maps. Use AI sentiment analysis to enhance strategies and drive growth",
     buttonText: "Get Started",
     src: bag, 
-    style:{ margin: "0 20px"}
+
   },
   {
     path: "/generate/youtube",
@@ -77,7 +76,6 @@ if(props.type==="platforms"){
           key={index}
           path={card.path}
           speed={card.speed}
-          style={card.style}
           cardTitle={card.cardTitle}
           cardDescription={card.cardDescription}
           buttonText={card.buttonText}

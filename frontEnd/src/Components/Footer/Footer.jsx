@@ -1,11 +1,12 @@
 import "./footer.css"
+import { NavLink } from "react-router-dom"
 export default function Footer(){
     return (
         <>
             <div className="footer">
-                <div className="footer-title">
+            <NavLink to="/" className="footer-title">
                     SENTIMENT SCOUT
-                </div>
+                </NavLink>
 
                 <div className="socials-container">
                     <a className="social-link" href="https://github.com/MisharyD/sentiment-scout">
