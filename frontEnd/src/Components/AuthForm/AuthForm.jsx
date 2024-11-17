@@ -61,9 +61,7 @@ function Form({formType}) {
   }
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log("here");
-    console.log(import.meta.env.VITE_BACKEND_URL);
-
+    
     if (formType === "signup") {
       try {
         const responseData = await sendRequest(
