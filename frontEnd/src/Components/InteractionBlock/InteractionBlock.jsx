@@ -1,6 +1,8 @@
 import React from "react";
 import "./interaction-block.css";
+
 import { Link } from "react-router-dom";
+
 function InteractionBlock(props) {
 //{{marginBottom:props.marginBottom,marginTop: props.marginTop, width:props.width, height: props.height}}
   return (

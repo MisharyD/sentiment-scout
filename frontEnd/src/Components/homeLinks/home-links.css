@@ -41,9 +41,9 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: var(--dropdown-background-color);
+  border: 0px solid #ddd;
+  border-radius: 4px;
   padding: 10px;
   z-index: 100;
 }
@@ -51,19 +51,15 @@
 .report-dropdown a {
   display: block;
   padding: 5px 10px;
-  color: #333;
+  color: white;
   text-decoration: none;
 }
 
 .report-dropdown a:hover {
-  background-color: #f0f0f0;
+  color: rgb(186, 186, 186);
 }
 
 .nav-item:hover {
   color: var(--hover-text-color);
   border: 0px;
-}
-
-.selected {
-  background-color: rgba(217, 217, 217, 0.4);
 }

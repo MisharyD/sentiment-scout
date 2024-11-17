@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import {useState, useContext} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
+import { OrbitProgress } from "react-loading-indicators"
 import PropTypes from 'prop-types';
 import "./generateForm.css"
 
@@ -12,6 +14,7 @@ export default function GenerateForm({platform, setRequestResponse}){
     const [scheduledDate, setScheduledDate] = useState("");
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [generateLater, setGenerateLater] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleGenerateNow = (e) => {
         e.preventDefault();
@@ -41,13 +44,14 @@ export default function GenerateForm({platform, setRequestResponse}){
 
         //Send request 
         const submit = async () => {
+            setLoading(true);
             try {
               const responseData = await sendRequest(
                 import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
-                    "platform":"Youtube"}),
+                    "platform":platform}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -61,6 +65,9 @@ export default function GenerateForm({platform, setRequestResponse}){
                 setTimeout(() => {
                     
                 }, 10000); 
+            }
+            finally {
+                setLoading(false);
             }
         };
         submit();
@@ -76,45 +83,38 @@ export default function GenerateForm({platform, setRequestResponse}){
             return;
         }
 
-        // let apiEndpoint;
-        // switch (platform) {
-        //     case "youtube":
-        //         apiEndpoint = "https://api.example.com/youtube/schedule";
-        //         break;
-        //     case "google maps":
-        //         apiEndpoint = "https://api.example.com/googlemaps/schedule";
-        //         break;
-        //     case "x":
-        //         apiEndpoint = "https://api.example.com/x/schedule";
-        //         break;
-        // }
-
         //Send request 
         const submit = async () => {
-        try {
-            const responseData = await sendRequest(
-            import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
-            "POST", 
-            JSON.stringify({
-                "userId" :auth.userId,
-                "platform":"Youtube"}),
-            {
-                "Content-Type": "application/json",
-            }
-            );
-            console.log(responseData)
-            setRequestResponse("Report generated succesfully and an email will be sent to you with the report!")
+            setLoading(true);
+            try {
+                const responseData = await sendRequest(
+                import.meta.env.VITE_BACKEND_URL+`users/notifications/generateSchedule`,
+                "POST", 
+                JSON.stringify({
+                    "userId" :auth.userId,
+                    "date":scheduledDate ,
+                    "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    "platform":platform}),
+                {
+                    "Content-Type": "application/json",
+                }
+                );
+                console.log(responseData)
+                setRequestResponse("Report generated succesfully and an email will be sent to you with the report!")
 
-        } catch (err) {
-            console.log(err)
-            setRequestResponse(err.message)
-            
-            // Clear the error message after 10 seconds
-            setTimeout(() => {
+            } catch (err) {
+                console.log(err)
+                setRequestResponse(err.message)
                 
-            }, 10000); 
-        }
-    };
+                // Clear the error message after 10 seconds
+                setTimeout(() => {
+                    
+                }, 10000); 
+            }
+            finally {
+                setLoading(false);
+            }
+        };
     submit();
     }
 
@@ -179,6 +179,11 @@ export default function GenerateForm({platform, setRequestResponse}){
                 </>
                 )}
             </div>
+            {loading && (
+                <div className="overlay">
+                    <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
+                </div>
+            )}
         </form>
     )
 }
