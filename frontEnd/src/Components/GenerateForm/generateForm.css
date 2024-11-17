@@ -1,104 +1,104 @@
-.generate-form{
-    width:100%;
-    display:flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 0 50px;
+.generate-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 0 50px;
 }
 
-.url-input{
-    min-width: 400px;
-    width: 70%;
-    max-width: 900px;
-    padding: 8px 40px;
-    border-radius: 24px;
-    border: 0px;
-    font-size: 20px;
-    color: black;
-    background-color: var(--text-input-background-color);
-    text-align: center;
-    align-self: flex-start;
+.url-input {
+  min-width: 400px;
+  width: 70%;
+  max-width: 900px;
+  padding: 8px 40px;
+  border-radius: 24px;
+  border: 0px;
+  font-size: 20px;
+  color: black;
+  background-color: var(--text-input-background-color);
+  text-align: center;
+  align-self: flex-start;
 }
 
-.generate-buttons-container{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1rem;
+.generate-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.generate-report-button, 
+.generate-report-button,
 .generate-now-button,
-.generate-later-button, 
-.confirm-schedule-button{
-    padding: 10px 20px;
-    min-width:170px;
-    text-wrap: nowrap;
-    border:0px;
-    border-radius: 24px;
+.generate-later-button,
+.confirm-schedule-button {
+  padding: 10px 20px;
+  min-width: 170px;
+  text-wrap: nowrap;
+  border: 0px;
+  border-radius: 24px;
 }
 
 .generate-now-button,
-.generate-later-button, 
-.confirm-schedule-button{
-   background-color: #1a1a1a;
+.generate-later-button,
+.confirm-schedule-button {
+  background-color: #1a1a1a;
 }
 
 .generate-report-button {
-    text-wrap: nowrap;
-    position: relative;
-    z-index: 1;
+  text-wrap: nowrap;
+  position: relative;
+  z-index: 1;
 }
 
 .generate-report-button:hover,
 .generate-now-button:hover,
-.generate-later-button:hover, 
-.confirm-schedule-button:hover
-{
-    color:rgb(188, 188, 188);
-    border:0px;
-    outline:0px;
+.generate-later-button:hover,
+.confirm-schedule-button:hover {
+  color: rgb(188, 188, 188);
+  border: 0px;
+  outline: 0px;
 }
 
-.generate-report-button:focus{
-    outline: 0px;
-    border: 0px;
+.generate-report-button:focus {
+  outline: 0px;
+  border: 0px;
 }
 
-.schedule-container{
-    display:flex;
-    align-items: center;
-    gap:1rem;
+.schedule-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.date-label{
-    text-wrap: nowrap;
+.date-label {
+  text-wrap: nowrap;
 }
 
 .gradiant {
-    background: linear-gradient(45deg, #7b2ff7, #4bb0ff);
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(45deg, #7b2ff7, #4bb0ff);
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
 
-  @media (max-width:420px) {
-    
-.url-input{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+@media (max-width: 420px) {
+  .url-input {
     min-width: 300px;
   }
 }
+
