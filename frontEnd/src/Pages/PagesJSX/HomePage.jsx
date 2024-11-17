@@ -10,7 +10,7 @@ import BrainGiver from "../../assets/images/brain-giver.svg";
 import Footer from "../../Components/Footer/Footer.jsx";
 import HappySadFace from "../../assets/images/happy-sad-face.svg";
 import { OrbitProgress } from "react-loading-indicators"
-import backgroundImage from "../../assets/images/Landing Page.svg"
+import backgroundImage from "../../assets/images/LandingPageV2.svg"
 
 function HomePage() {
   const [loading, setLoading] = useState(true);
