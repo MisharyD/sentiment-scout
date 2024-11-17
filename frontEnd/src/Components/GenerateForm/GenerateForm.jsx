@@ -51,7 +51,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
-                    "platform":""}),
+                    "platform":platform}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -83,19 +83,6 @@ export default function GenerateForm({platform, setRequestResponse}){
             return;
         }
 
-        // let apiEndpoint;
-        // switch (platform) {
-        //     case "youtube":
-        //         apiEndpoint = "https://api.example.com/youtube/schedule";
-        //         break;
-        //     case "google maps":
-        //         apiEndpoint = "https://api.example.com/googlemaps/schedule";
-        //         break;
-        //     case "x":
-        //         apiEndpoint = "https://api.example.com/x/schedule";
-        //         break;
-        // }
-
         //Send request 
         const submit = async () => {
             setLoading(true);
@@ -107,7 +94,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                     "userId" :auth.userId,
                     "date":scheduledDate ,
                     "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                    "platform":""}),
+                    "platform":platform}),
                 {
                     "Content-Type": "application/json",
                 }
