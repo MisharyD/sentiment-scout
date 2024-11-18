@@ -33,6 +33,19 @@ export default function GenerateForm({platform, setRequestResponse}){
             return;
         }
 
+        let formattedPlatform;
+        switch(platform){
+            case "youtube":
+                formattedPlatform = "Youtube"
+                break;
+            case "x":
+                formattedPlatform = "X"
+                break;
+            case "maps":
+                formattedPlatform = "Google Maps"
+                break;
+        }
+
         //Send request 
         const submit = async () => {
             setLoading(true);
@@ -42,7 +55,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                     "POST", 
                     JSON.stringify({
                         "userId" :auth.userId,
-                        "platform":platform}),
+                        "platform":formattedPlatform}),
                     {
                     "Content-Type": "application/json",
                     }
@@ -75,6 +88,19 @@ export default function GenerateForm({platform, setRequestResponse}){
             return;
         }
 
+        let formattedPlatform;
+        switch(platform){
+            case "youtube":
+                formattedPlatform = "Youtube"
+                break;
+            case "x":
+                formattedPlatform = "X"
+                break;
+            case "maps":
+                formattedPlatform = "Google Maps"
+                break;
+        }
+
         //Send request 
         const submit = async () => {
             setLoading(true);
@@ -86,7 +112,7 @@ export default function GenerateForm({platform, setRequestResponse}){
                     "userId" :auth.userId,
                     "date":scheduledDate ,
                     "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                    "platform":platform}),
+                    "platform":formattedPlatform}),
                 {
                     "Content-Type": "application/json",
                 }
