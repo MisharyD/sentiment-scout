@@ -23,7 +23,8 @@ function HomeLinks() {
             className={`nav-item toggle-report-button`}
             onClick={toggleReportDropdown}
           >
-            Generate report  <span className="dropdown-arrow"><FontAwesomeIcon icon={faCaretDown} className="caret-icon" style={{ marginLeft: '6px' }} /></span>
+            Generate report  
+            <span className="dropdown-arrow"><FontAwesomeIcon icon={faCaretDown} className="caret-icon" style={{ marginLeft: '6px' }} /></span>
           </button>
 
           {reportDropdownOpen && (

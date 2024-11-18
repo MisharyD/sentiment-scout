@@ -69,7 +69,6 @@ function Header(props){
       console.error("Error marking notification as seen:", error);
     }
   };
-
   return (
     <header className = "header" >
       
@@ -105,13 +104,18 @@ function Header(props){
                     ) : (
                       notifications.map((notification) => (
                         <div key={notification.notificationId} className="notification-item">
-                          <span>{notification.message}</span>
-                          <button
-                            className="mark-as-seen-button"
-                            onClick={() => markAsSeen(notification.notificationId)}
-                          >
-                            Mark as read
-                          </button>
+                          <div className="notification-message-and-button-container">
+                            <span className="notification-message">{notification.message}</span>
+                            <button
+                              className="mark-as-seen-button"
+                              onClick={() => markAsSeen(notification.notificationId)}
+                            >
+                              Mark as read
+                            </button>
+                          </div>
+                          <div className="notification-date"> Created at: {new Date(notification.createdAt).toLocaleDateString()} {" "}
+                            {new Date(notification.createdAt).toLocaleTimeString()}
+                          </div>
                         </div>
                       ))
                     )}
