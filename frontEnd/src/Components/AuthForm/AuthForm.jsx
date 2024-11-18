@@ -106,6 +106,9 @@ function Form({formType}) {
       } catch (err) {
         console.log(err.message || "Something went wrong");
       }
+      finally{
+        setLoading(false)
+      }
     }
   };
 
