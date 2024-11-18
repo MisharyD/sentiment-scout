@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {useState, useContext} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import { OrbitProgress } from "react-loading-indicators"
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import "./generateForm.css"
 
 export default function GenerateForm({platform, setRequestResponse}){
@@ -27,20 +30,6 @@ export default function GenerateForm({platform, setRequestResponse}){
             alert("Please enter a URL.");
             return;
         }
-
-        // this when there will be an actual report 
-        // let apiEndpoint;
-        // switch (platform) {
-        //     case "youtube":
-        //         apiEndpoint = "youtube";
-        //         break;
-        //     case "google maps":
-        //         apiEndpoint = "googleMaps";
-        //         break;
-        //     case "x":
-        //         apiEndpoint = "X";
-        //         break;
-        // }
 
         //Send request 
         const submit = async () => {
@@ -100,7 +89,8 @@ export default function GenerateForm({platform, setRequestResponse}){
                 }
                 );
                 console.log(responseData)
-                setRequestResponse("Report generated succesfully and an email will be sent to you with the report!")
+                setRequestResponse(`Report generated succesfully and an email will be sent to you with the report at the 
+                    specified time!`)
 
             } catch (err) {
                 console.log(err)
@@ -156,23 +146,26 @@ export default function GenerateForm({platform, setRequestResponse}){
                             className="generate-later-button"
                         >
                             Generate Later
+                            <span className="dropdown-arrow">
+                                <FontAwesomeIcon icon={faCaretDown} className="caret-icon" style={{ marginLeft: '6px' }} />
+                            </span>
                         </button>
                         {generateLater && (
                             <>
-                                <label className="date-label">Schedule Date:</label>
-                                <input
-                                    type="datetime-local"
-                                    value={scheduledDate}
-                                    onChange={(e) => setScheduledDate(e.target.value)}
-                                    className="date-input"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={handleScheduleGenerate}
-                                    className="confirm-schedule-button"
-                                >
-                                    Confirm Schedule
-                                </button>
+                            <label className="date-label">Schedule Date:</label>
+                            <input
+                                type="datetime-local"
+                                value={scheduledDate}
+                                onChange={(e) => setScheduledDate(e.target.value)}
+                                className="date-input"
+                            />
+                            <button
+                                type="button"
+                                onClick={handleScheduleGenerate}
+                                className="confirm-schedule-button"
+                            >
+                                Confirm Schedule
+                            </button>
                             </>
                         )}
                     </div>

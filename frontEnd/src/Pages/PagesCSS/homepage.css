@@ -1,6 +1,6 @@
 #homepage {
   background-color: #0b0b0f;
-  background-image: url("../../assets/images/LandingPage4.svg"); /* Adjust path as needed */
+  background-image: url("../../assets/images/LandingPage.svg"); /* Adjust path as needed */
   background-size: cover; /* Ensures the image covers the full width */
   background-position: center top; /* Aligns the image from the top center */
   background-repeat: no-repeat; /* Prevents repeating */
@@ -30,8 +30,6 @@
 @media (min-width: 200px) and (max-width: 700px) {
   #homepage{
     background-position: center 10px;
-
-    
   }
 
 }

@@ -68,8 +68,14 @@
 
 .schedule-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
+}
+
+.date-input{
+  width:170px;
 }
 
 .date-label {
@@ -83,7 +89,6 @@
 }
 
 .overlay {
-
   position: fixed;
   top: 0;
   left: 0;

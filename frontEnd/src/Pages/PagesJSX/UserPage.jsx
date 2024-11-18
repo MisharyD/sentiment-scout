@@ -9,9 +9,10 @@ import "../PagesCSS/userPage.css"
 // import "../PagesCSS/starsBackground.css"
 export default function UserPage(){
     const auth = useContext(AuthContext);
-    const { sendRequest, isLoading } = useHttpClient();
+    const { sendRequest } = useHttpClient();
     const [userInfo, setUserInfo] = useState({name: "", email: ""});
 
+    //fetch user info
     useEffect(() => {
         const fetchUserData = async () => {
             try { 
@@ -35,22 +36,19 @@ export default function UserPage(){
     return(
         <div className="user-page">
 
-          {/* <div id='stars'></div>
-<div id='stars2'></div>
-<div id='stars3'></div> */}
-
-{/*         {isLoading && 
-             <div className="overlay">
-                 <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
-             </div>
-           */}
-
-            <Header />
-            <div className="main">
-                <UserForm userInfo={userInfo} />
+          {/* display loading indicator if user info not loaded. 
+          note: userInfo && did not work */ }
+          {(userInfo.name == "" || userInfo.email == "") && 
+            <div className="overlay">
+                <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
             </div>
-            
-            <Footer /> 
+          }
+          <Header />
+          <div className="main">
+              <UserForm userInfo={userInfo} />
+          </div>
+          
+          <Footer /> 
         </div>
     )
 }
