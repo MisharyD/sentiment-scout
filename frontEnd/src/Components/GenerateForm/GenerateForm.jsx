@@ -15,7 +15,9 @@ export default function GenerateForm({platform, setRequestResponse}){
 
     const [url, setUrl] = useState("");
     const [scheduledDate, setScheduledDate] = useState("");
+    //state for triggering generate buttons 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    //state for triggering date input
     const [generateLater, setGenerateLater] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -35,19 +37,20 @@ export default function GenerateForm({platform, setRequestResponse}){
         const submit = async () => {
             setLoading(true);
             try {
-              const responseData = await sendRequest(
-                import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
-                "POST", 
-                JSON.stringify({
-                    "userId" :auth.userId,
-                    "platform":platform}),
-                {
-                  "Content-Type": "application/json",
-                }
-              );
-              setRequestResponse("Report generated succesfully and an email has been sent to you with the report!")
+                const responseData = await sendRequest(
+                    import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
+                    "POST", 
+                    JSON.stringify({
+                        "userId" :auth.userId,
+                        "platform":platform}),
+                    {
+                    "Content-Type": "application/json",
+                    }
+                );
+                setRequestResponse("Report generated succesfully and an email has been sent to you with the report!")
 
-            } catch (err) {
+            } 
+            catch (err) {
                 setRequestResponse(err.message)
                 
                 // Clear the error message after 10 seconds
@@ -88,12 +91,10 @@ export default function GenerateForm({platform, setRequestResponse}){
                     "Content-Type": "application/json",
                 }
                 );
-                console.log(responseData)
                 setRequestResponse(`Report generated succesfully and an email will be sent to you with the report at the 
                     specified time!`)
 
             } catch (err) {
-                console.log(err)
                 setRequestResponse(err.message)
                 
                 // Clear the error message after 10 seconds
@@ -172,6 +173,8 @@ export default function GenerateForm({platform, setRequestResponse}){
                 </>
                 )}
             </div>
+
+            {/* trigger loading indicator if loading is true */}
             {loading && (
                 <div className="overlay">
                     <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />

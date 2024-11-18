@@ -36,8 +36,8 @@ export default function UserPage(){
     return(
         <div className="user-page">
 
-          {/* display loading indicator if user info not loaded. 
-          note: userInfo && did not work */ }
+          {/* display loading indicator if user info is not loaded. 
+          note: "userInfo &&" did not work */ }
           {(userInfo.name == "" || userInfo.email == "") && 
             <div className="overlay">
                 <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
