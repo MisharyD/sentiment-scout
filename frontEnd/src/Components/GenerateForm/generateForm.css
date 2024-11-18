@@ -27,6 +27,7 @@
   align-items: flex-start;
   justify-content: center;
   gap: 1rem;
+  color:white;
 }
 
 .generate-report-button,
