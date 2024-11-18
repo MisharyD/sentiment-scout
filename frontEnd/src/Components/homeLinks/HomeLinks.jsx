@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 function HomeLinks() {
   const auth = useContext(AuthContext);
+
+  //state for trigering generate links (youtube, x...etc)
   const [reportDropdownOpen, setReportDropdownOpen] = useState(false);
 
   const toggleReportDropdown = () => {
@@ -18,13 +20,15 @@ function HomeLinks() {
       <NavLink className={`nav-item`} to='/'>
         Home page
       </NavLink>
-      <div className="generate-report-container">
+      <div className="generate-report-button-container">
           <button 
             className={`nav-item toggle-report-button`}
             onClick={toggleReportDropdown}
           >
             Generate report  
-            <span className="dropdown-arrow"><FontAwesomeIcon icon={faCaretDown} className="caret-icon" style={{ marginLeft: '6px' }} /></span>
+            <span className="dropdown-arrow">
+              <FontAwesomeIcon icon={faCaretDown} className="caret-icon" style={{ marginLeft: '6px' }} />
+            </span>
           </button>
 
           {reportDropdownOpen && (
@@ -41,6 +45,7 @@ function HomeLinks() {
             </div>
           )}
         </div>
+        
       {auth.isLoggedIn && (
         <>
           <NavLink className={`nav-item`} to={'/myReports'} >
