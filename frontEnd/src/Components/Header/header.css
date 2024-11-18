@@ -200,7 +200,7 @@
     padding: 10px;
     border: 0px;
     gap:1rem;
-    z-index: 1;
+    z-index: 10;
   }
 
   .nav-bar{
@@ -216,7 +216,12 @@
   }
 
   .notifications-dropdown{
-    border:1px solid white
+    width:200px;
+    border:1px solid white;
+  }
+  
+  .notification-message-and-button-container{
+    flex-direction: column;
   }
 
   .toggle-report-button {
