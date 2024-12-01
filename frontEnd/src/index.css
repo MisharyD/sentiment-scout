@@ -19,7 +19,7 @@
   --hover-text-color:#B0B0B0;
   --user-page-button-colors:#4e4e4e;
   --dropdown-background-color:#212121;
-  --header-title-font-size: calc(20px + 0.5vw);
+  --header-title-font-size: calc(15px + 0.8vw);
   --text-input-background-color: rgba(231, 231, 231, 0.829)
 }
 *{
@@ -42,6 +42,7 @@ a:hover {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: var(--main-background-color);
 }
 
 h1 {

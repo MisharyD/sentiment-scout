@@ -3,16 +3,13 @@
     flex-direction: column;
     height:100dvh;
     background-color: var(--main-background-color);
-
-    /* overflow: hidden; */
-
-/*     background-image: none; */
-
 }
 
 .main{
     flex:1;
+    background-color: var(--main-background-color);
     background-image: none;
+    margin-bottom: 12px;
 }
 
 .overlay {

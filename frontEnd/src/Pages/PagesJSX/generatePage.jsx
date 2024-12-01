@@ -9,7 +9,7 @@ export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
 
-    //resets the request response when navigating between platforms from the header
+    //reset the request response when navigating between platforms from the header
     useEffect(() => {
         setRequestResponse("");
       }, [platform]);
@@ -39,18 +39,18 @@ export default function GeneratePage(){
 
     return (
         <div className="generate-page">
-<div id='stars'></div>
-<div id='stars2'></div>
-<div id='stars3'></div>
+            <div id='stars'></div>
+            <div id='stars2'></div>
+            <div id='stars3'></div>
             <Header page = "generate" />
             
 
             <div className="main">
                 {renderTitle()}
                 <GenerateForm platform={platform} setRequestResponse = {setRequestResponse} />
-            <div className="request-response">
-                {requestResponse}
-            </div>
+                <div className="request-response">
+                    {requestResponse}
+                </div>
             </div>
             <Footer />
         </div>

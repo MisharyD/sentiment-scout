@@ -53,6 +53,9 @@ const signup = async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
+    isVerified: { type: Boolean, default: false },
+    otp: String,
+    otpExpires: Date,
   });
 
   try {
