@@ -107,7 +107,7 @@
   border-radius: 4px;
   margin-top: 4px;
   padding:8px;
-  width: 300px;
+  width: 500px;
   max-height: 400px;
   overflow-y: auto;
   z-index: 10;
@@ -127,13 +127,22 @@
 .notification-item {
   padding: 10px;
   border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 12px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  gap:0.3rem
 }
 
 .notification-item:last-child {
   border-bottom: none;
+  margin-bottom: 0px;
+}
+
+.notification-message-and-button-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .mark-as-seen-button {
@@ -144,6 +153,7 @@
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
+  text-wrap: nowrap;
 }
 
 .mark-as-seen-button:hover {
@@ -190,7 +200,7 @@
     padding: 10px;
     border: 0px;
     gap:1rem;
-    z-index: 1;
+    z-index: 10;
   }
 
   .nav-bar{
@@ -203,6 +213,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .notifications-dropdown{
+    width:200px;
+    border:1px solid white;
+  }
+  
+  .notification-message-and-button-container{
+    flex-direction: column;
   }
 
   .toggle-report-button {

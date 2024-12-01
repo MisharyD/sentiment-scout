@@ -33,7 +33,7 @@ function App() {
   }else{
     routes=(<Router>
       <Routes>
-        <Route path="/" element={<PreviousReports/>} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/user" element={<LoginPage />} />
