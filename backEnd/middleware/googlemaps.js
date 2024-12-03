@@ -73,7 +73,8 @@ const saveGoogleMapsReportToDB = async ({
       generalOpinion: sentimentSummary.general_opinion,
     });
 
-    await report.save();
+    const savedReport = await report.save(); // Save to the database
+    return savedReport._id; // Return the ID of the saved report
   } catch (err) {
     console.error("Error saving Google Maps report to database:", err.message);
     throw new HttpError("Failed to save Google Maps report to database.", 500);

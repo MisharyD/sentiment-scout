@@ -7,14 +7,33 @@ const usersController = require("../controllers/users-controllers");
 const router = express.Router();
 
 // Routes to the signup controller
+// router.post(
+//   "/signup",
+//   [
+//     check("name").not().isEmpty(),
+//     check("email").normalizeEmail().isEmail(),
+//     check("password").isLength({ min: 6 }),
+//   ],
+//   usersController.signup
+// );
+
+// Generate OTP for signup
 router.post(
-  "/signup",
+  "/signupGenerateOTP",
+  [check("email").normalizeEmail().isEmail(), check("name").not().isEmpty()],
+  usersController.signupGenerateOTP
+);
+
+// Verify OTP and Signup
+router.post(
+  "/verifyOTPAndSignup",
   [
-    check("name").not().isEmpty(),
     check("email").normalizeEmail().isEmail(),
+    check("name").not().isEmpty(),
     check("password").isLength({ min: 6 }),
+    check("otp").not().isEmpty(),
   ],
-  usersController.signup
+  usersController.verifyOTPAndSignup
 );
 
 // Routes to the login controller
@@ -40,8 +59,8 @@ router.patch(
   usersController.updatePassword
 );
 
-// //Routes related to user's reports
-// router.
+//Routes related to user's reports
+router.get("/reports/:uid", usersController.getAllReports);
 
 // Routes related to user's notifications
 
