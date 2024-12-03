@@ -3,6 +3,7 @@ import LoginPage from './Pages/PagesJSX/LoginPage.jsx'
 import HomePage from './Pages/PagesJSX/HomePage.jsx'
 import UserPage from './Pages/PagesJSX/UserPage.jsx'
 import GeneratePage from './Pages/PagesJSX/generatePage.jsx'
+import ReportPage from './Pages/PagesJSX/ReportPage.jsx'
 
 import PreviousReports from './Pages/PagesJSX/PreviousReports.jsx'
 //import HomePage1 from './Pages/PagesJSX/HomePage1.jsx'
@@ -26,7 +27,7 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
         <Route path="/myReports" element={<PreviousReports />} />
-        <Route path="/report/:rId" element={<PreviousReports />} />
+        <Route path="/reports/:rId" element={<ReportPage />} />
       </Routes>
   </Router>)
 
