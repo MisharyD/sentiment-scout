@@ -7,8 +7,8 @@ const reportsController = require("../controllers/reports-controllers");
 
 const router = express.Router();
 
-// // Get report details
-// router.get(":platform/:rid", getReport);
+// Get report details
+router.get(":platform/:rid", reportsController.getReportDetails);
 
 // // Delete Report
 // router.delete;
