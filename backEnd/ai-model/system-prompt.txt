@@ -1,0 +1,53 @@
+Analyze the sentiment of a list of comments and provide a summary of the sentiment distribution.
+
+You will receive a list of comments, with each comment separated by quotation marks (" "). Determine the sentiment of each comment as positive, negative, or neutral. Then provide statistics on the percentage of each sentiment type and summarize the overall opinion of the group of comments about the topic (without mentioning any percentages) and why people liked it and why people disliked it .
+
+# Steps
+1. **Identify Sentiments:**
+   - Analyze each comment.
+   - Classify it as 'positive', 'negative', or 'neutral' based on its content.
+2. **Calculate Percentages:**
+   - Determine the percentage of positive, negative, and neutral comments.
+3. **Summarize Consensus:**
+   - Based on the proportion of positive, negative, and neutral comments, provide a brief summary of the general opinion of the comments overall.
+
+# Output Format
+Provide the answer in the following structured format:
+
+```json
+{
+  "percentages": {
+    "positive": "[percentage_of_positive_comments]%",
+    "negative": "[percentage_of_negative_comments]%",
+    "neutral": "[percentage_of_neutral_comments]%"
+  },
+  "general_opinion": "[summary_of_general_opinion]"
+}
+```
+
+- Replace `[percentage_of_positive_comments]`, `[percentage_of_negative_comments]`, and `[percentage_of_neutral_comments]` with the corresponding numerical percentages, rounded to one decimal place.
+- Replace `[summary_of_general_opinion]` with a sentence summarizing what people thought overall (e.g., "Most comments were positive, showing general satisfaction because of reason" or "There was a mixed response with no clear consensus").
+
+# Examples
+
+**Input:**
+```
+"Great product!" "Not impressed." "It's okay, does the job." "Amazing quality." "Pretty average."
+```
+
+**Output:**
+```json
+{
+  "percentages": {
+    "positive": "40.0%",
+    "negative": "20.0%",
+    "neutral": "40.0%"
+  },
+  "general_opinion": "The comments show people liked the content because of its great quality bot some still didn't like it without mentioning the reason"
+}
+```
+
+# Notes
+- Ensure that the analysis of each comment is done individually.
+- Be mindful of comments that may express mixed sentiment and classify them based on the dominant tone.
+- Comments with explicitly strong language should be clearly categorized as either positive or negative, while less emphatic wording may be considered neutral.

@@ -1,12 +1,14 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const moment = require("moment-timezone");
 
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
+const Notification = require("../models/notification");
 
-const sendMail = require('../middleware/mailer');
-
+const sendMail = require("../middleware/mailer");
+const agenda = require("../middleware/agenda");
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -51,10 +53,22 @@ const signup = async (req, res, next) => {
     name,
     email,
     password: hashedPassword,
+    isVerified: { type: Boolean, default: false },
+    otp: String,
+    otpExpires: Date,
   });
 
   try {
     await createdUser.save();
+
+    // Send welcome email to the user
+    await sendMail(
+      email,
+      name,
+      "Welcome to Sentiment Scout!",
+      `Hi ${name}, welcome to our platform!. We're excited to have you on board. We are waiting for your first report !!`,
+      `<h2>Hi ${name},</h2><p>Welcome to our platform! We're excited to have you on board. We are waiting for your first report !!</p>`
+    );
   } catch (err) {
     const error = new HttpError(
       "Signing up failed, please try again later.",
@@ -294,47 +308,68 @@ const updatePassword = async (req, res, next) => {
   });
 };
 
+const getNotifications = async (req, res, next) => {
+  const userId = req.params.uid;
 
-const sendEmailforGenerateNow = async (req, res, next) => {
-  const userId = req.body.userId 
-  let user;
+  let notifications;
   try {
-    user = await User.findById(userId);
+    // Find all notifications for the specified userId
+    notifications = await Notification.find({ userId: userId }).sort({
+      createdAt: -1,
+    }); // Sorting by date, newest first
   } catch (err) {
-    const error = new HttpError('User lookup failed', 500);
+    const error = new HttpError(
+      "Fetching notifications failed, please try again later",
+      500
+    );
     return next(error);
   }
 
-  if (!user) {
-    const error = new HttpError('User not found', 404);
-    return next(error);
+  // Check if notifications exist
+  if (!notifications || notifications.length === 0) {
+    return res.status(404).json({ message: "There is no notifications." });
   }
 
+  // Transform each notification to include only specific fields
+  notifications = notifications.map((notification) => {
+    return {
+      notificationId: notification._id,
+      userId: notification.userId, // Map _id to id
+      message: notification.message, // Include message
+      isRead: notification.isRead, // Include createdAt
+      createdAt: notification.createdAt,
+    };
+  });
 
-// Send email to the user
-try {
-  await sendMail(
-    user.email,
-    user.name,
-    'Your Report is Ready',
-    `Hello ${user.name}, your report has been generated. Thanks for using Sentiment Scout. Waiting for your next report !!`,
-    `<h2>Hello ${user.name}!</h2>
-      <h3>Your report has been generated.</h3>
-      <p>Thanks for using Sentiment Scout. Waiting for your next report !!</p>
-      `
-  );
-  res.status(200).json({ message: 'Email sent successfully!' });
-} catch (err) {
-  const error = new HttpError('Failed to send email', 500);
-  return next(error);
-}
+  // Return notifications
+  res.status(200).json({ notifications });
 };
 
+const markAsRead = async (req, res, next) => {
+  const { notificationId } = req.body;
 
+  try {
+    // Find the notification by ID and update its isRead field to true
+    const notification = await Notification.findByIdAndUpdate(notificationId, {
+      isRead: true,
+    });
+
+    // If the notification is not found, return a 404 error
+    if (!notification) {
+      return res.status(404).json({ message: "Notification not found." });
+    }
+
+    // Return a success message
+    res.status(200).json({ message: "Notification marked as read." });
+  } catch (err) {
+    next(new HttpError("Failed to update notification status.", 500));
+  }
+};
 
 exports.signup = signup;
 exports.login = login;
 exports.userInfo = userInfo;
 exports.updateUserInfo = updateUserInfo;
 exports.updatePassword = updatePassword;
-exports.sendEmailforGenerateNow = sendEmailforGenerateNow;
+exports.getNotifications = getNotifications;
+exports.markAsRead = markAsRead;

@@ -33,7 +33,7 @@
   color:rgba(0, 0, 0, 0.5);
   padding: 12px;
   border: none;
-  
+  font-size: 18px;
 
   margin: 0;
 }
@@ -44,7 +44,7 @@
   text-indent: 9px;
 
   color: red;
-  font-size: 9px;
+  font-size: 18px;
   margin-top: 1%;
   margin-bottom: 1%;
 

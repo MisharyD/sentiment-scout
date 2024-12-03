@@ -2,20 +2,29 @@
     display: flex;
     flex-direction: column;    
     min-height: 100vh;
+
+    /* background-image: radial-gradient(ellipse at bottom, #3B1B1B 0%, #0B0B0F 100%); */
+    background-color: var(--main-background-color);
+    overflow: hidden;
+
 }
 
 /*The background image is on the main section (middle section) for now, 
-because if it is on the whole page, the footer will cover it*/
+because if it is on the whole page, the footer will cover it #4bb0ff,#7b2ff7 purple
+
+*/
 
 .main{
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-color: var(--main-background-color);
-    background-image: url("../../assets/images/Landing Page.svg");
+
+    /* background-color: var(--main-background-color); */
+    /* background-image: url("../../assets/images/Landing Page.svg"); */
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
+
     gap: 3rem;
     padding:0px 40px
 }
@@ -23,7 +32,8 @@ because if it is on the whole page, the footer will cover it*/
 .generate-title{
     align-self: center;
     margin-top: 50px;
-    font-size: var(--header-title-font-size);
+    font-size: calc(20px + 1.5vw);
+    color: white;
 }
 
 .youtube-title .highlight{
@@ -36,5 +46,10 @@ because if it is on the whole page, the footer will cover it*/
 
 .X-title .highlight{
     color:rgb(112, 112, 112)
+}
+
+.request-response{
+    align-self: center;
+    font-size: 32px;
 }
 

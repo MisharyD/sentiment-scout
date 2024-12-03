@@ -27,7 +27,6 @@ function App() {
         <Route path="/generate/:platform" element={<GeneratePage />} />
         <Route path="/myReports" element={<PreviousReports />} />
       </Routes>
-    
   </Router>)
 
 

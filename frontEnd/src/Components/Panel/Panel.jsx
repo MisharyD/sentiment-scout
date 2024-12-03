@@ -2,16 +2,16 @@ import React, { useContext } from "react";
 
 import "./panel.css";
 import InteractionBlock from "../InteractionBlock/InteractionBlock";
-function HomePageButton(props) {
+function Panel(props) {
  
   return (
     <div className="panel">
-      <img src={props.src}></img>
-<InteractionBlock center={false} title="See what people think in a glance" description={<>Sentiment Scout delivers real-time insights from youtube, twitter and Google maps. <br />
-                        Whether you are a content creater, buisness owner, or someone curiuos about public opinions.</>}buttonWidth="20%" buttonHeight= "15.01%"
-                       marginBottom="20%" marginTop="20.86vh" width="45.16%" height="46.04vh" fontSize="50px" />
-   
 
+      {props.flipped && <img className="panel-img" src={props.src}></img>}
+<InteractionBlock path="/generate/youtube" /*buttonWidth="20%" buttonHeight= "15.01%" */ gradient={props.gradient} center={false} title={props.title} description={props.description} 
+                     buttonText={props.buttonText}  /*width="45.16%" height="46.04vh"*/ />
+
+   {!props.flipped && <img  className="panel-img" src={props.src}></img>}
     </div>
 
     
@@ -21,4 +21,4 @@ function HomePageButton(props) {
   );
 }
 
-export default HomePageButton;
+export default Panel;

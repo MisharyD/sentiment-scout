@@ -1,8 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const agenda = require("./middleware/agenda");
 
 const usersRoutes = require("./routes/users-routes");
+const reportsRoutes = require("./routes/reports-routes");
 const HttpError = require("./models/http-error");
 
 const app = express();
@@ -24,6 +27,7 @@ app.use((req, res, next) => {
 
 // Handling Routes
 app.use("/api/users", usersRoutes);
+app.use("/api/reports", reportsRoutes);
 
 // for undefined endpoiont(routes)
 app.use((req, res, next) => {
@@ -43,11 +47,19 @@ app.use((error, req, res, next) => {
 // DB Connection
 mongoose
   .connect(
-    // Note: Here you should use your username in the Atlas MongoDB after joining the cluster by providing to me your email, but using mine will work i think.
     `mongodb+srv://Tsugair27:10qpalzmTTDB@cluster0.djdmo.mongodb.net/SentimentScout?retryWrites=true&w=majority&appName=Cluster0`
   )
-  .then(() => {
-    app.listen( process.env.PORT || 5000);
+  .then(async () => {
+    console.log("Connected to MongoDB");
+
+    // Start Agenda after the database is connected
+    await agenda.start();
+    console.log("Agenda started");
+
+    // Start the server
+    app.listen(process.env.PORT || 5000, () => {
+      console.log(`Server running on port ${process.env.PORT || 5000}`);
+    });
   })
   .catch((err) => {
     console.log(err);

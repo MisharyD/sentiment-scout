@@ -1,46 +1,84 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import {useState, useContext} from "react";
+import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
+import { OrbitProgress } from "react-loading-indicators"
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import "./generateForm.css"
 
-export default function GenerateForm({platform}){
+export default function GenerateForm({platform, setRequestResponse}){
     const auth = useContext(AuthContext);
+    const { sendRequest } = useHttpClient();
 
     const [url, setUrl] = useState("");
     const [scheduledDate, setScheduledDate] = useState("");
+    //state for triggering generate buttons 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    //state for triggering date input
     const [generateLater, setGenerateLater] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleGenerateNow = (e) => {
         e.preventDefault();
+
+        if(!auth.isLoggedIn){
+            alert("You need to be logged in");
+        }
         
         if (!url) {
             alert("Please enter a URL.");
             return;
         }
 
-        let apiEndpoint;
-        switch (platform) {
+        let formattedPlatform;
+        switch(platform){
             case "youtube":
-                apiEndpoint = "youtube";
-                break;
-            case "google maps":
-                apiEndpoint = "googleMaps";
+                formattedPlatform = "Youtube"
                 break;
             case "x":
-                apiEndpoint = "X";
+                formattedPlatform = "X"
+                break;
+            case "maps":
+                formattedPlatform = "Google Maps"
                 break;
         }
 
         //Send request 
-        console.log("sending request to generate report NOW")
+        const submit = async () => {
+            setLoading(true);
+            try {
+                const responseData = await sendRequest(
+                    import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
+                    "POST", 
+                    JSON.stringify({
+                        "userId" :auth.userId,
+                        "platform":formattedPlatform}),
+                    {
+                    "Content-Type": "application/json",
+                    }
+                );
+                setRequestResponse("Report generated succesfully and an email has been sent to you with the report!")
+
+            } 
+            catch (err) {
+                setRequestResponse(err.message)
+                
+                // Clear the error message after 10 seconds
+                setTimeout(() => {
+                    
+                }, 10000); 
+            }
+            finally {
+                setLoading(false);
+            }
+        };
+        submit();
     }
 
-    const toggleDate = () => {
-        setGenerateLater(!generateLater)
-    }
-
-    const handleScheduleGenerate = () => {
+    const handleScheduleGenerate = async () => {
         if(!auth.isLoggedIn){
             alert("You need to be logged in");
         }
@@ -50,21 +88,55 @@ export default function GenerateForm({platform}){
             return;
         }
 
-        let apiEndpoint;
-        switch (platform) {
+        let formattedPlatform;
+        switch(platform){
             case "youtube":
-                apiEndpoint = "https://api.example.com/youtube/schedule";
-                break;
-            case "google maps":
-                apiEndpoint = "https://api.example.com/googlemaps/schedule";
+                formattedPlatform = "Youtube"
                 break;
             case "x":
-                apiEndpoint = "https://api.example.com/x/schedule";
+                formattedPlatform = "X"
+                break;
+            case "maps":
+                formattedPlatform = "Google Maps"
                 break;
         }
 
         //Send request 
-        console.log("sending request to generate report LATER")
+        const submit = async () => {
+            setLoading(true);
+            try {
+                const responseData = await sendRequest(
+                import.meta.env.VITE_BACKEND_URL+`users/notifications/generateSchedule`,
+                "POST", 
+                JSON.stringify({
+                    "userId" :auth.userId,
+                    "date":scheduledDate ,
+                    "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    "platform":formattedPlatform}),
+                {
+                    "Content-Type": "application/json",
+                }
+                );
+                setRequestResponse(`Report generated succesfully and an email will be sent to you with the report at the 
+                    specified time!`)
+
+            } catch (err) {
+                setRequestResponse(err.message)
+                
+                // Clear the error message after 10 seconds
+                setTimeout(() => {
+                    
+                }, 10000); 
+            }
+            finally {
+                setLoading(false);
+            }
+        };
+    submit();
+    }
+
+    const toggleDate = () => {
+        setGenerateLater(!generateLater)
     }
 
     return(
@@ -101,29 +173,39 @@ export default function GenerateForm({platform}){
                             className="generate-later-button"
                         >
                             Generate Later
+                            <span className="dropdown-arrow">
+                                <FontAwesomeIcon icon={faCaretDown} className="caret-icon" style={{ marginLeft: '6px' }} />
+                            </span>
                         </button>
                         {generateLater && (
                             <>
-                                <label className="date-label">Schedule Date:</label>
-                                <input
-                                    type="date"
-                                    value={scheduledDate}
-                                    onChange={(e) => setScheduledDate(e.target.value)}
-                                    className="date-input"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={handleScheduleGenerate}
-                                    className="confirm-schedule-button"
-                                >
-                                    Confirm Schedule
-                                </button>
+                            <label className="date-label">Schedule Date:</label>
+                            <input
+                                type="datetime-local"
+                                value={scheduledDate}
+                                onChange={(e) => setScheduledDate(e.target.value)}
+                                className="date-input"
+                            />
+                            <button
+                                type="button"
+                                onClick={handleScheduleGenerate}
+                                className="confirm-schedule-button"
+                            >
+                                Confirm Schedule
+                            </button>
                             </>
                         )}
                     </div>
                 </>
                 )}
             </div>
+
+            {/* trigger loading indicator if loading is true */}
+            {loading && (
+                <div className="overlay">
+                    <OrbitProgress color="#ffffff" size="medium" text="" textColor="" />
+                </div>
+            )}
         </form>
     )
 }
