@@ -6,6 +6,9 @@ const moment = require("moment-timezone");
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 const Notification = require("../models/notification");
+const YouTubeReport = require("../models/youtubeReport");
+const GoogleMapsReport = require("../models/googlemapsReport");
+const TikTokReport = require("../models/tiktokReport");
 
 const sendMail = require("../middleware/mailer");
 const agenda = require("../middleware/agenda");
@@ -30,6 +33,7 @@ const {
 
 const { getSentiment } = require("../ai-model/model");
 
+// find report
 const getReportDetails = async (req, res, next) => {
   const { rid, platform } = req.params;
 
@@ -59,6 +63,37 @@ const getReportDetails = async (req, res, next) => {
   }
 
   res.status(200).json({ report });
+};
+
+// Delete Report
+const deleteReport = async (req, res, next) => {
+  const { rid, platform } = req.params;
+
+  let ReportModel;
+  switch (platform) {
+    case "YouTube":
+      ReportModel = YouTubeReport;
+      break;
+    case "Google Maps":
+      ReportModel = GoogleMapsReport;
+      break;
+    case "TikTok":
+      ReportModel = TikTokReport;
+      break;
+    default:
+      return next(new HttpError("Invalid platform specified", 400));
+  }
+
+  try {
+    const report = await ReportModel.findByIdAndDelete(rid);
+    if (!report) {
+      return next(new HttpError("Report not found or already deleted", 404));
+    }
+  } catch (err) {
+    return next(new HttpError("Failed to delete the report", 500));
+  }
+
+  res.status(200).json({ message: "Report deleted successfully" });
 };
 
 // Sleep function to introduce delays ( for SSE )
@@ -111,7 +146,7 @@ const generateNowYoutube = async (req, res, next) => {
     // Step 2.5: Save report to the database
     res.sendProgress(90, "Saving report to database...");
     await sleep(1000); // Wait for 1 second
-    await saveReportToDB({
+    const reportId = await saveReportToDB({
       userId,
       videoDetails,
       sentimentSummary,
@@ -119,7 +154,7 @@ const generateNowYoutube = async (req, res, next) => {
     });
 
     // Finalize progress
-    res.sendProgress(100, "Report generation completed!");
+    res.sendProgress(100, "Report generation completed!", reportId);
   } catch (err) {
     console.error("Error generating YouTube report:", err.message);
     res.sendError("Failed to generate YouTube report.");
@@ -179,13 +214,13 @@ const generateNowGoogleMaps = async (req, res, next) => {
 
     res.sendProgress(90, "Saving report to database...");
     await sleep(1000); // Simulate delay
-    await saveGoogleMapsReportToDB({
+    const reportId = await saveGoogleMapsReportToDB({
       userId,
       placeDetails,
       sentimentSummary,
     });
 
-    res.sendProgress(100, "Report generation completed!");
+    res.sendProgress(100, "Report generation completed!", reportId);
   } catch (err) {
     console.error("Error generating Google Maps report:", err.message);
     res.sendError("Failed to generate Google Maps report.");
@@ -247,14 +282,14 @@ const generateNowTikTok = async (req, res, next) => {
     const sentimentSummary = await getSentiment(comments);
 
     res.sendProgress(90, "Saving report to database...");
-    await saveTikTokReportToDB({
+    const reportId = await saveTikTokReportToDB({
       userId,
       videoDetails,
       sentimentSummary,
       url,
     });
 
-    res.sendProgress(100, "Report generation completed!");
+    res.sendProgress(100, "Report generation completed!", reportId);
   } catch (err) {
     console.error("Error generating TikTok report:", err.message);
     res.sendError("Failed to generate TikTok report.");
@@ -371,3 +406,4 @@ exports.generateScheduledYoutube = generateScheduledYoutube;
 exports.generateScheduledGoogleMaps = generateScheduledGoogleMaps;
 exports.generateScheduledTikTok = generateScheduledTikTok;
 exports.getReportDetails = getReportDetails;
+exports.deleteReport = deleteReport;
