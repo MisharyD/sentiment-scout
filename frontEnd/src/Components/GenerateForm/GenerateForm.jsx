@@ -105,11 +105,24 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
             case "youtube":
                 formattedPlatform = "Youtube"
                 break;
-            case "x":
-                formattedPlatform = "X"
+            case "tiktok":
+                formattedPlatform = "TikTok"
                 break;
-            case "maps":
+            case "googlemaps":
                 formattedPlatform = "Google Maps"
+                break;
+        }
+
+        let endpoint;
+        switch(platform){
+            case "youtube":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/youtube`
+                break;
+            case "tiktok":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/tiktok`
+                break;
+            case "googlemaps":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/googlemaps`
                 break;
         }
 
@@ -118,19 +131,19 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
             setLoading(true);
             try {
                 const responseData = await sendRequest(
-                import.meta.env.VITE_BACKEND_URL+`users/notifications/generateSchedule`,
+                import.meta.env.VITE_BACKEND_URL+endpoint,
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
                     "date":scheduledDate ,
                     "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                    "platform":formattedPlatform}),
+                    "platform":formattedPlatform,
+                    "url": url}),
                 {
                     "Content-Type": "application/json",
                 }
                 );
-                setRequestResponse(`Report generated succesfully and an email will be sent to you with the report at the 
-                    specified time!`)
+                setRequestResponse(`An email will be sent you at the specified time with the report`)
 
             } catch (err) {
                 setRequestResponse(err.message)
