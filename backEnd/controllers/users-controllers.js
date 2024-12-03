@@ -6,6 +6,9 @@ const moment = require("moment-timezone");
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 const Notification = require("../models/notification");
+const YouTubeReport = require("../models/youtubeReport");
+const GoogleMapsReport = require("../models/googlemapsReport");
+const TikTokReport = require("../models/tiktokReport");
 
 const sendMail = require("../middleware/mailer");
 const agenda = require("../middleware/agenda");
@@ -164,8 +167,8 @@ const userInfo = async (req, res, next) => {
   const uid = req.params.uid;
 
   let user;
-
   try {
+    // Fetch user details
     user = await User.findById(uid);
   } catch (err) {
     const error = new HttpError(
@@ -177,13 +180,47 @@ const userInfo = async (req, res, next) => {
 
   if (!user) {
     const error = new HttpError(
-      "Could not find place for the provided id.",
+      "Could not find a user for the provided ID.",
       404
     );
     return next(error);
   }
 
-  res.json({ name: user.name, email: user.email });
+  let reportCount = 0;
+  let scheduledReportsCount = 0;
+
+  try {
+    // Count reports across all platforms
+    const youtubeReportsCount = await YouTubeReport.countDocuments({
+      userId: uid,
+    });
+    const googleMapsReportsCount = await GoogleMapsReport.countDocuments({
+      userId: uid,
+    });
+    const tiktokReportsCount = await TikTokReport.countDocuments({
+      userId: uid,
+    });
+
+    reportCount =
+      youtubeReportsCount + googleMapsReportsCount + tiktokReportsCount;
+
+    // Count scheduled jobs in Agenda
+    const jobs = await agenda.jobs({ "data.userId": uid });
+    scheduledReportsCount = jobs.length;
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not fetch report data.",
+      500
+    );
+    return next(error);
+  }
+
+  res.json({
+    name: user.name,
+    email: user.email,
+    reportCount,
+    scheduledReportsCount,
+  });
 };
 
 const updateUserInfo = async (req, res, next) => {
@@ -308,64 +345,6 @@ const updatePassword = async (req, res, next) => {
   });
 };
 
-const sendEmailforGenerateNow = async (req, res, next) => {
-  const { userId, platform } = req.body;
-  let user;
-  try {
-    user = await User.findById(userId);
-  } catch (err) {
-    const error = new HttpError("User lookup failed", 500);
-    return next(error);
-  }
-
-  if (!user) {
-    const error = new HttpError("User not found", 404);
-    return next(error);
-  }
-
-  // Send email to the user
-  try {
-    await sendMail(
-      user.email,
-      user.name,
-      `Your ${platform} Report is Ready !!`,
-      `Hello ${user.name}, your report has been generated. Thanks for using Sentiment Scout. Waiting for your next report !!`,
-      `<h2>Hello ${user.name}!</h2>
-      <h3>Your report has been generated.</h3>
-      <p>Thanks for using Sentiment Scout. Waiting for your next report !!</p>
-      `
-    );
-    res.status(200).json({ message: "Email sent successfully!" });
-  } catch (err) {
-    const error = new HttpError("Failed to send email", 500);
-    return next(error);
-  }
-};
-
-const sendScheduledNotification = async (req, res, next) => {
-  const { userId, platform, date, timezone } = req.body;
-
-  // Convert the user's local date-time to UTC
-  const scheduledTime = moment.tz(date, timezone).toDate();
-
-  // Check if the provided date is valid and in the future
-  if (isNaN(scheduledTime.getTime())) {
-    return next(new HttpError("Invalid date format provided", 400));
-  }
-
-  if (scheduledTime <= new Date()) {
-    return next(new HttpError("Please provide a future date", 400));
-  }
-
-  // Schedule the notification job with Agenda
-  await agenda.schedule(scheduledTime, "send scheduled notification", {
-    userId: userId,
-    platform: platform,
-  });
-
-  res.status(200).json({ message: "Notification scheduled successfully" });
-};
-
 const getNotifications = async (req, res, next) => {
   const userId = req.params.uid;
 
@@ -424,12 +403,34 @@ const markAsRead = async (req, res, next) => {
   }
 };
 
+const getAllReports = async (req, res, next) => {
+  const { uid } = req.params;
+
+  try {
+    // Fetch reports for each platform
+    const youtubeReports = await YouTubeReport.find({ userId: uid });
+    const googleMapsReports = await GoogleMapsReport.find({ userId: uid });
+    const tiktokReports = await TikTokReport.find({ userId: uid });
+
+    // Combine all reports into one array and sort by `dateOfReport` (latest first)
+    const allReports = [
+      ...youtubeReports,
+      ...googleMapsReports,
+      ...tiktokReports,
+    ].sort((a, b) => new Date(b.dateOfReport) - new Date(a.dateOfReport));
+
+    res.status(200).json({ reports: allReports });
+  } catch (err) {
+    console.error("Error fetching reports:", err.message);
+    return next(new HttpError("Failed to retrieve reports", 500));
+  }
+};
+
 exports.signup = signup;
 exports.login = login;
 exports.userInfo = userInfo;
 exports.updateUserInfo = updateUserInfo;
 exports.updatePassword = updatePassword;
-exports.sendEmailforGenerateNow = sendEmailforGenerateNow;
-exports.sendScheduledNotification = sendScheduledNotification;
 exports.getNotifications = getNotifications;
 exports.markAsRead = markAsRead;
+exports.getAllReports = getAllReports;
