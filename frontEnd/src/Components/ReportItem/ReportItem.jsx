@@ -1,20 +1,28 @@
 import { useState } from "react";
 import Modal from "../Modal/Modal.jsx";
+import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 
 import "./ReportItem.css";
 
 export default function ReportItem(props){
 
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const { sendRequest } = useHttpClient();
 
    const openConfirmationHandler = () => setShowConfirmation(true);
    const closeConfirmationHandler = () => setShowConfirmation(false);
 
-   const deleteHandler = () => {
-    console.log("deleted")
+   const deleteHandler = async () => {
     closeConfirmationHandler();
-   }
+    try{
+    const responseData = await sendRequest( import.meta.env.VITE_BACKEND_URL+ `reports/${props.platform}/${props.rId}`, 
+        "DELETE");
+        props.onDelete(props.rId);
+    } catch(err){
 
+    }
+
+   }
 
 return(
 
@@ -35,7 +43,7 @@ return(
 <div className="reportCard"> 
     
     <li> 
-        <div className= {`platform ${props.platform} `}>{props.platform ===  "Google Maps"? "GOOGLE MAPS" : props.platform.toUpperCase() } </div>
+        <div className= {`platform ${props.platform === "Google Maps" ? "GoogleMaps" : props.platform } `}>{props.platform } </div>
         
         <div className='title'> <h2> {props.title} </h2> </div>
         
