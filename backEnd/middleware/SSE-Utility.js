@@ -5,8 +5,8 @@ const sseUtility = (req, res, next) => {
   res.setHeader("Connection", "keep-alive");
 
   // Function to send progress updates
-  res.sendProgress = (progress, message = null) => {
-    res.write(`data: ${JSON.stringify({ progress, message })}\n\n`);
+  res.sendProgress = (progress, message = null, reportId = null) => {
+    res.write(`data: ${JSON.stringify({ progress, message, reportId })}\n\n`);
   };
 
   // Function to handle errors
