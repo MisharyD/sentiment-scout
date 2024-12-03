@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import {useState, useEffect} from "react";
+import { NavLink } from "react-router-dom";
 import Header from "../../Components/Header/Header.jsx";
 import GenerateForm from "../../Components/GenerateForm/GenerateForm.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
@@ -9,15 +10,13 @@ import ProgressBar from '../../Components/ProgressBar/ProgressBar.jsx';
 export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
-    // const [progress, setProgress] = useState(1); //create a state in the parent compoenent taking number as argument
 
-    // const handleStart = () => { 
-    //   setProgress(99);                  // this function for when the model is working so u activate it
-    // };
-  
-    // const handleComplete = () => {
-    //   setProgress(100);        // this is for when the model finish and the report is ready
-    // };
+    const [progressBarValue, setProgressBarValue] = useState(0); //create a state in the parent compoenent taking number as argument
+    const [progressBarMessage, setProgressBarMessage] = useState("");
+    
+    const [reportGenerated, setReportGenerated] = useState(false);
+    const [rId, setRId] = useState(false);
+
 
     //reset the request response when navigating between platforms from the header
     useEffect(() => {
@@ -32,21 +31,34 @@ export default function GeneratePage(){
                         Paste the <span className="highlight">Video</span> URL to generate sentiment analysis report
                     </div>
                 );
-            case "maps":
+            case "googlemaps":
                 return (
                     <div className="maps-title generate-title">
                         Paste the <span className="highlight">Location</span> URL to generate sentiment analysis report
                     </div>
                 );
-            case "x":
+            case "tiktok":
                 return (
-                    <div className="X-title generate-title">
-                        Paste the <span className="highlight">Tweet</span> URL to generate sentiment analysis report
+                    <div className="tiktok-title generate-title">
+                        Paste the <span className="highlight">Post</span> URL to generate sentiment analysis report
                     </div>
                     
                 );
         }
     }
+
+    let formattedPlatform;
+        switch(platform){
+            case "youtube":
+                formattedPlatform = "YouTube"
+                break;
+            case "tiktok":
+                formattedPlatform = "TikTok"
+                break;
+            case "googlemaps":
+                formattedPlatform = "Google Maps"
+                break;
+        }
 
     return (
         <div className="generate-page">
@@ -58,12 +70,26 @@ export default function GeneratePage(){
 
             <div className="main">
                 {renderTitle()}
-                <GenerateForm platform={platform} setRequestResponse = {setRequestResponse} />
+                {/*if report is generated, display link to report page */}
+                {reportGenerated && 
+                (
+                    <div className='report-message'>Report generated Successfully!&nbsp; 
+                        <NavLink to = {`/reports/${formattedPlatform}/${rId}`} target='_blank'
+                        rel="noopener noreferrer"> click here to view report</NavLink> 
+                    </div>    
+                )}
+                {/*else display progress bar*/}
+                {(progressBarValue > 0 && progressBarValue <100 && !reportGenerated) && 
+                (
+                    <ProgressBar progress={progressBarValue} message={progressBarMessage}/>
+                )} 
+                <GenerateForm platform={platform} setRequestResponse = {setRequestResponse} setProgressBarValue ={setProgressBarValue}
+                 setReportGenerated={setReportGenerated} setRId={setRId} setProgressBarMessage = {setProgressBarMessage}/>
+                
+                {/*This is used for displaying errors */}
                 <div className="request-response">
                     {requestResponse}
-                </div>
-                {/* <ProgressBar progress={progress}/>
-                <button style={{width:"40%"}} onClick={handleStart}></button> */}
+                </div>          
             </div>
             <Footer/>
         </div>

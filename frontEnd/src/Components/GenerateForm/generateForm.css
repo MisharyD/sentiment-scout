@@ -39,6 +39,8 @@
   text-wrap: nowrap;
   border: 0px;
   border-radius: 24px;
+  cursor: default;
+
 }
 
 .generate-now-button,
@@ -54,10 +56,26 @@
 }
 
 .generate-report-button:hover,
-.generate-now-button:hover,
-.generate-later-button:hover,
-.confirm-schedule-button:hover {
+.generate-later-button:hover
+{
+  cursor: pointer;
   color: rgb(188, 188, 188);
+  border: 0px;
+  outline: 0px;
+}
+
+.generate-now-button.enabled:hover,
+.confirm-schedule-button.enabled:hover{
+  cursor: pointer;
+  color: rgb(188, 188, 188);
+  border: 0px;
+  outline: 0px;
+}
+
+.generate-now-button .disabled, 
+.confirm-schedule-button .disbaled{
+  cursor: default;
+  color: white;
   border: 0px;
   outline: 0px;
 }

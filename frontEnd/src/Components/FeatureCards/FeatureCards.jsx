@@ -2,7 +2,7 @@ import React from "react";
 import "./feature-cards.css";
 import Card from "../Card/Card";
 import youtupeLogo from "../../assets/images/youtube.svg"
-import XLogo from "../../assets/images/XLogo.svg"
+import tikTokLogo from "../../assets/images/tiktok-logo.png"
 import googleMapsLogo from "../../assets/images/google-maps.svg"
 import user from "../../assets/images/user.png"
 import camera from "../../assets/images/camera.png"
@@ -21,14 +21,14 @@ if(props.type==="platforms"){
     src: youtupeLogo, // Ensure you have imported youtupeLogo correctly
   },
   {
-    path: "/generate/x",
+    path: "/generate/tiktok",
     speed: "1.2",
     style: { margin: "0 20px" },
-    cardTitle: "X Posts",
+    cardTitle: "TikTok Posts",
     cardDescription:
-      "Monitor and interpret posts about your brand or topics of interest on X. Stay ahead with real-time sentiment tracking and trend analysis on the X platform.",
-    buttonText: "Get Started on X",
-    src: XLogo,
+      "Monitor and interpret videos about your brand. Stay ahead with real-time sentiment tracking, engagement analysis, and trending hashtags to understand your audience.",
+    buttonText: "Get Started on TikTok",
+    src: tikTokLogo,
   },
   {
     path: "/generate/maps",

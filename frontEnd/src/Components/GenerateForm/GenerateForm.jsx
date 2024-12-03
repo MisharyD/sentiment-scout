@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import {useState, useContext} from "react";
+/* eslint-disable react/prop-types */
+import {useState, useContext, useEffect} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import { OrbitProgress } from "react-loading-indicators"
@@ -9,7 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import "./generateForm.css"
 
-export default function GenerateForm({platform, setRequestResponse}){
+
+export default function GenerateForm({platform, setRequestResponse, setProgressBarValue, setProgressBarMessage, setReportGenerated, setRId}){
+
     const auth = useContext(AuthContext);
     const { sendRequest } = useHttpClient();
 
@@ -21,61 +24,96 @@ export default function GenerateForm({platform, setRequestResponse}){
     const [generateLater, setGenerateLater] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    //state for disabling generate button when clicked
+    const [generateButtonDisabled, setGenerateButtonDisabled] = useState(false)
+
+    //reset everything when changing generate page
+    useEffect(() =>{
+        setReportGenerated(false)
+        setRId("");
+        setProgressBarMessage("")
+        setProgressBarValue(0)
+        setUrl("");
+        setDropdownOpen(false)
+        setGenerateLater(false)
+        setScheduledDate("")
+    },[platform, setProgressBarMessage, setProgressBarValue, setRId, setReportGenerated])
+
+
     const handleGenerateNow = (e) => {
         e.preventDefault();
 
         if(!auth.isLoggedIn){
             alert("You need to be logged in");
+            return;
+
         }
         
         if (!url) {
             alert("Please enter a URL.");
             return;
         }
+        
+        //reset
+        setReportGenerated(false);
+        setProgressBarValue(0);
+        setRequestResponse("");
 
-        let formattedPlatform;
+        //disable button to prevent multiple requests
+        setGenerateButtonDisabled(true)
+
+        //get endpoint based on platform name
+        let endpoint;
         switch(platform){
             case "youtube":
-                formattedPlatform = "Youtube"
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/youtube/${auth.userId}/YouTube?url=${url}`
                 break;
-            case "x":
-                formattedPlatform = "X"
+            case "tiktok":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/tiktok/${auth.userId}/GoogleMaps?url=${url}`
                 break;
-            case "maps":
-                formattedPlatform = "Google Maps"
+            case "googlemaps":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/googlemaps/${auth.userId}/Tiktok?url=${url}`
                 break;
         }
 
-        //Send request 
-        const submit = async () => {
-            setLoading(true);
-            try {
-                const responseData = await sendRequest(
-                    import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
-                    "POST", 
-                    JSON.stringify({
-                        "userId" :auth.userId,
-                        "platform":formattedPlatform}),
-                    {
-                    "Content-Type": "application/json",
-                    }
-                );
-                setRequestResponse("Report generated succesfully and an email has been sent to you with the report!")
+        //start sse connection, returns progress, message incrementally. returns report id when progress reaches 100
+        const eventSource = new EventSource(endpoint);
 
-            } 
-            catch (err) {
-                setRequestResponse(err.message)
-                
-                // Clear the error message after 10 seconds
-                setTimeout(() => {
-                    
-                }, 10000); 
-            }
-            finally {
-                setLoading(false);
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const progressBarValue = data.progress;
+            const progressBarMessage = data.message
+
+            //update progress bar
+            setProgressBarValue(progressBarValue);
+            setProgressBarMessage(progressBarMessage);
+        
+            if (progressBarValue >= 100) {
+                //close connection when done
+                eventSource.close();
+                console.log(data.reportId)
+
+                //update values
+                setRId(data.reportId)
+                setReportGenerated(true)
+                setProgressBarValue(progressBarValue)
+
+                //reset generate button to allow for another generation
+                setGenerateButtonDisabled(false)
             }
         };
-        submit();
+    
+        eventSource.onerror = () => {
+            //display error under the form
+            setRequestResponse("Error with ess connection");
+
+            //reset
+            setProgressBarValue(0)
+            setReportGenerated(false)
+            setGenerateButtonDisabled(false)
+
+        eventSource.close();
+        };
     }
 
     const handleScheduleGenerate = async () => {
@@ -88,41 +126,58 @@ export default function GenerateForm({platform, setRequestResponse}){
             return;
         }
 
+        //reset
+        setRequestResponse("");
+
         let formattedPlatform;
         switch(platform){
             case "youtube":
-                formattedPlatform = "Youtube"
+                formattedPlatform = "YouTube"
                 break;
-            case "x":
-                formattedPlatform = "X"
+            case "tiktok":
+                formattedPlatform = "TikTok"
                 break;
-            case "maps":
+            case "googlemaps":
+
                 formattedPlatform = "Google Maps"
                 break;
         }
 
-        //Send request 
+
+        let endpoint;
+        switch(platform){
+            case "youtube":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/youTube`
+                break;
+            case "tiktok":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/tiktok`
+                break;
+            case "googlemaps":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/googlemaps`
+                break;
+        }
+
+        //send request 
         const submit = async () => {
             setLoading(true);
             try {
-                const responseData = await sendRequest(
-                import.meta.env.VITE_BACKEND_URL+`users/notifications/generateSchedule`,
+                await sendRequest(
+                endpoint,
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
                     "date":scheduledDate ,
                     "timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
-                    "platform":formattedPlatform}),
+                    "platform":formattedPlatform,
+                    "url": url}),
                 {
                     "Content-Type": "application/json",
                 }
                 );
-                setRequestResponse(`Report generated succesfully and an email will be sent to you with the report at the 
-                    specified time!`)
+                setRequestResponse(`An email will be sent you at the specified time with the report`)
 
             } catch (err) {
                 setRequestResponse(err.message)
-                
                 // Clear the error message after 10 seconds
                 setTimeout(() => {
                     
@@ -132,7 +187,8 @@ export default function GenerateForm({platform, setRequestResponse}){
                 setLoading(false);
             }
         };
-    submit();
+        submit();
+
     }
 
     const toggleDate = () => {
@@ -162,7 +218,8 @@ export default function GenerateForm({platform, setRequestResponse}){
                     <button
                         type="button"
                         onClick={handleGenerateNow}
-                        className="generate-now-button"
+                        className={`generate-now-button ${generateButtonDisabled ? "disabled" : "enabled"}`}
+                        disabled = {generateButtonDisabled}
                     >
                         Generate Now
                     </button>
@@ -189,7 +246,9 @@ export default function GenerateForm({platform, setRequestResponse}){
                             <button
                                 type="button"
                                 onClick={handleScheduleGenerate}
-                                className="confirm-schedule-button"
+                                className= {`confirm-schedule-button ${generateButtonDisabled ? "disabled" : "enabled"}`}
+                                disabled = {generateButtonDisabled}
+
                             >
                                 Confirm Schedule
                             </button>

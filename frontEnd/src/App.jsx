@@ -4,6 +4,9 @@ import HomePage from './Pages/PagesJSX/HomePage.jsx'
 import UserPage from './Pages/PagesJSX/UserPage.jsx'
 import GeneratePage from './Pages/PagesJSX/generatePage.jsx'
 
+import ReportPage from './Pages/PagesJSX/ReportPage.jsx'
+
+import OTPPage from "./Pages/PagesJSX/OTPPage.jsx"
 import PreviousReports from './Pages/PagesJSX/PreviousReports.jsx'
 //import HomePage1 from './Pages/PagesJSX/HomePage1.jsx'
 
@@ -37,7 +40,11 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/user" element={<LoginPage />} />
+        <Route path="/OTPPage" element={<OTPPage/>} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
+
+        <Route path="/reports/:platform/:rId" element={<ReportPage />} />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     
@@ -57,7 +64,7 @@ function App() {
    
        <main>{routes}</main> 
     </AuthContext.Provider>
-)
+  )
 }
 
 export default App

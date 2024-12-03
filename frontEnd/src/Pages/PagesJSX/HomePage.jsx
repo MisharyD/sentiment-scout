@@ -11,7 +11,7 @@ import Footer from "../../Components/Footer/Footer.jsx";
 import HappySadFace from "../../assets/images/happy-sad-face.svg";
 import { OrbitProgress } from "react-loading-indicators"
 import backgroundImage from "../../assets/images/LandingPage.svg"
-
+import {Link} from "react-router-dom"
 function HomePage() {
   const [loading, setLoading] = useState(true);
 
@@ -36,6 +36,8 @@ function HomePage() {
         </div>
       )}
       <Header />
+    
+  
       <InteractionBlock
         gradient={true}
         path="/generate/youtube"
