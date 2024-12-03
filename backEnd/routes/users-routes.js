@@ -40,8 +40,8 @@ router.patch(
   usersController.updatePassword
 );
 
-// //Routes related to user's reports
-// router.
+//Routes related to user's reports
+router.get("/reports/:uid", usersController.getAllReports);
 
 // Routes related to user's notifications
 
