@@ -14,15 +14,34 @@ export default function ReportList(props){
         );
 
     }
+
+    const getTitleBasedOnPlatform = (report) => {
+        switch(report.platform){
+            case "YouTube":
+                return report.videoTitle
+
+            case "Google Maps":
+                return report.placeTitle
+
+            case "TikTok":
+            return report.caption
+        }
+
+    }
+
+    const formatDate = (dateString) => {
+        return dateString.split("T")[0];
+      };
     
     return (
         <ul>
     {props.reports.map( report => (<ReportItem 
                                     key = {report.id}
-                                    rId = {report.rId}
+                                    rId = {report._id}
                                     platform = {report.platform} 
-                                    title = {report.title} 
-                                    date = {report.date}
+                                    title = {getTitleBasedOnPlatform(report)} 
+                                    date = {formatDate(report.dateOfReport)}
+                                    onDelete = {props.onDeleteReport}
                                     />    
                     )
                      )
