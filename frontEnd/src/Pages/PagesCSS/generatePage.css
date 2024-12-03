@@ -3,7 +3,6 @@
     flex-direction: column;    
     min-height: 100vh;
 
-    
     background-color: var(--main-background-color);
     overflow: hidden;
 
@@ -18,7 +17,6 @@ because if it is on the whole page, the footer will cover it #4bb0ff,#7b2ff7 pur
     display: flex;
     flex-direction: column;
     flex: 1;
-
 
     background-size: cover;
     background-position: center top;
@@ -35,6 +33,7 @@ because if it is on the whole page, the footer will cover it #4bb0ff,#7b2ff7 pur
     color: white;
 }
 
+
 .report-message{
     align-self: center;
     font-size: calc(20px + 0.5vw);
@@ -48,7 +47,9 @@ because if it is on the whole page, the footer will cover it #4bb0ff,#7b2ff7 pur
     color:rgb(16, 165, 16)
 }
 
+
 .tiktok-title .highlight{
+
     color:rgb(112, 112, 112)
 }
 

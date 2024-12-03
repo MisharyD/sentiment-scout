@@ -1,3 +1,4 @@
+
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
 import "./progress-bar.css"
@@ -30,6 +31,7 @@ function ProgressBar({ progress, message }) {
 
   const progressContainerStyle = {
     width: '70%',
+
     backgroundColor: '#ddd',
     borderRadius: '5px',
     display: width >= 100 ? 'none' : 'block',
