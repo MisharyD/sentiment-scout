@@ -43,8 +43,6 @@ const reports = [
 
 export default function PreviousReports(){
 
-    
-
    return ( 
     <div className="Previous-Report-Page" >
     <Header page = "reports" />
