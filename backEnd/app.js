@@ -1,9 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const agenda = require("./middleware/agenda");
 
 const usersRoutes = require("./routes/users-routes");
+const reportsRoutes = require("./routes/reports-routes");
 const HttpError = require("./models/http-error");
 
 const app = express();
@@ -25,6 +27,7 @@ app.use((req, res, next) => {
 
 // Handling Routes
 app.use("/api/users", usersRoutes);
+app.use("/api/reports", reportsRoutes);
 
 // for undefined endpoiont(routes)
 app.use((req, res, next) => {
