@@ -8,7 +8,7 @@ return(
 <div className="reportCard"> 
     
     <li> 
-        <div className= {`platform ${props.platform} `}>{props.platform ===  "googleMaps"? "GOOGLE MAPS" : props.platform.toUpperCase() } </div>
+        <div className= {`platform ${props.platform} `}>{props.platform ===  "Google Maps"? "GOOGLE MAPS" : props.platform.toUpperCase() } </div>
         
         <div className='title'> <h2> {props.title} </h2> </div>
         
