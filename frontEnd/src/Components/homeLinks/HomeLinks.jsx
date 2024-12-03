@@ -39,7 +39,8 @@ function HomeLinks() {
               <NavLink to="/generate/tiktok" onClick={() => setReportDropdownOpen(false)}>
                 TikTok
               </NavLink>
-              <NavLink to="/generate/maps" onClick={() => setReportDropdownOpen(false)}>
+              <NavLink to="/generate/googlemaps" onClick={() => setReportDropdownOpen(false)}>
+
                 Google Maps
               </NavLink>
             </div>
