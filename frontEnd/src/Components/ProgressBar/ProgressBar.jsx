@@ -42,7 +42,7 @@ function ProgressBar({ progress }) {
 
   return (
     <div>
-      <h1>Progress Bar</h1>
+      <h1>Please Wait..</h1>
       <div style={progressContainerStyle}>
         <div style={progressBarStyle}></div>
       </div>

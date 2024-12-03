@@ -9,15 +9,15 @@ import ProgressBar from '../../Components/ProgressBar/ProgressBar.jsx';
 export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
-    // const [progress, setProgress] = useState(1); //create a state in the parent compoenent taking number as argument
+    const [progress, setProgress] = useState(1); //create a state in the parent compoenent taking number as argument
 
-    // const handleStart = () => { 
-    //   setProgress(99);                  // this function for when the model is working so u activate it
-    // };
+    const handleStart = () => { 
+      setProgress(99);                  // this function for when the model is working so u activate it
+    };
   
-    // const handleComplete = () => {
-    //   setProgress(100);        // this is for when the model finish and the report is ready
-    // };
+    const handleComplete = () => {
+      setProgress(100);        // this is for when the model finish and the report is ready
+    };
 
     //reset the request response when navigating between platforms from the header
     useEffect(() => {
@@ -38,10 +38,10 @@ export default function GeneratePage(){
                         Paste the <span className="highlight">Location</span> URL to generate sentiment analysis report
                     </div>
                 );
-            case "x":
+            case "tiktok":
                 return (
                     <div className="X-title generate-title">
-                        Paste the <span className="highlight">Tweet</span> URL to generate sentiment analysis report
+                        Paste the <span className="highlight">TikTok</span> URL to generate sentiment analysis report
                     </div>
                     
                 );
@@ -59,11 +59,12 @@ export default function GeneratePage(){
             <div className="main">
                 {renderTitle()}
                 <GenerateForm platform={platform} setRequestResponse = {setRequestResponse} />
+                <ProgressBar progress={progress}/>
                 <div className="request-response">
                     {requestResponse}
                 </div>
-                {/* <ProgressBar progress={progress}/>
-                <button style={{width:"40%"}} onClick={handleStart}></button> */}
+               
+
             </div>
             <Footer/>
         </div>
