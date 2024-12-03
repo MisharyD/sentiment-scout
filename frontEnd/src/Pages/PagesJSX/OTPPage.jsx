@@ -90,7 +90,7 @@ export default function OTPPage(){
                 Submit
 
             </button>
-            <FeedbackMessage visibility={true} type={messageType} text={error}/>
+            <FeedbackMessage visibility={messageVisibility} type={messageType} text={error}/>
             </div>
 
 

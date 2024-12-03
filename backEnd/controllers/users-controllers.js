@@ -5,11 +5,18 @@ const moment = require("moment-timezone");
 
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
+
+
 const OTP = require("../models/otp");
+
 const Notification = require("../models/notification");
 const YouTubeReport = require("../models/youtubeReport");
 const GoogleMapsReport = require("../models/googlemapsReport");
 const TikTokReport = require("../models/tiktokReport");
+
+
+const sendMail = require("../middleware/mailer");
+const agenda = require("../middleware/agenda");
 
 const sendMail = require("../middleware/mailer");
 const agenda = require("../middleware/agenda");
@@ -152,6 +159,7 @@ const verifyOTPAndSignup = async (req, res, next) => {
       email,
       name,
       "Welcome to Sentiment Scout!",
+
       `Hi ${name}, welcome to our platform! We're excited to have you on board. We are waiting for your first report !!`,
       `<h2>Hi ${name},</h2><p>Welcome to our platform! We're excited to have you on board. We are waiting for your first report !!</p>`
     );

@@ -1,0 +1,8 @@
+.progress-bar-container{
+    align-self: center;
+    width: calc(250px + 30vw);
+    margin-left: 10vw;
+}
+.progress-bar-message{
+    font-size: calc(20px + 0.5vw);
+}
