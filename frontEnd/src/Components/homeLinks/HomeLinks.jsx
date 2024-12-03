@@ -40,6 +40,7 @@ function HomeLinks() {
                 tiktok
               </NavLink>
               <NavLink to="/generate/googlemaps" onClick={() => setReportDropdownOpen(false)}>
+
                 Google Maps
               </NavLink>
             </div>
