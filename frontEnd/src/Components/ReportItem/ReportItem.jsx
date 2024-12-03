@@ -1,10 +1,37 @@
+import { useState } from "react";
+import Modal from "../Modal/Modal.jsx";
+
 import "./ReportItem.css";
 
 export default function ReportItem(props){
 
+    const [showConfirmation, setShowConfirmation] = useState(false);
+
+   const openConfirmationHandler = () => setShowConfirmation(true);
+   const closeConfirmationHandler = () => setShowConfirmation(false);
+
+   const deleteHandler = () => {
+    console.log("deleted")
+    closeConfirmationHandler();
+   }
+
+
 return(
 
     <div className="cardContainer"> 
+
+    <Modal
+
+    show = {showConfirmation} 
+    onCancel = {closeConfirmationHandler}
+    // header= "Delete"
+     headerStyle = { { backgroundColor: "red" } }
+     footer = { <div className="footer_buttons">
+                <button className="cancel" onClick={closeConfirmationHandler}>Cancel</button>
+                 <button className="submit_delete" onClick={deleteHandler}> delete</button> </div>} >
+                <div className="content"> Are you sure you want to permanently delete this report? </div> 
+                </Modal>
+
 <div className="reportCard"> 
     
     <li> 
@@ -16,7 +43,7 @@ return(
         <div className='date'> {props.date} </div>
         <div className="buttons">
         <button className="view"> View </button>
-        <button className="delete"> Delete </button>
+        <button className="delete" onClick={openConfirmationHandler}> Delete </button>
         </div>
             </div>
     </li>  

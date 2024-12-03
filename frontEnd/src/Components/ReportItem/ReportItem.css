@@ -72,14 +72,21 @@
   
  }
 
-.delete:hover {
+ .submit_delete{
+  color: white;
+  background: red;
+  padding: 10px 23px;
+  margin: 0 2%;
+ }
+
+.delete:hover, .submit_delete:hover {
   border-color: red;
 }
 
-.delete:focus,
-.delete:focus-visible {
+/* .delete:focus,
+.delete:focus-visible, .submit_delete:focus, .submit_delete:focus {
   outline: 4px auto red;
-}
+} */
 
 .view{
   background-color: transparent;
@@ -91,7 +98,7 @@
 
  
 
-.view:hover {
+.view:hover, .cancel:hover {
   border-color: white;
 }
 
@@ -99,6 +106,15 @@
 .view:focus-visible {
   outline: 4px auto white;
 }
+
+.content{
+  text-align: center;
+  padding-top: 6px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
 
 
  

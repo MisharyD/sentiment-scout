@@ -5,8 +5,12 @@ import { AuthContext } from "../shared/context/auth-context.jsx";
 import "./home-links.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from "../shared/hooks/auth-hook.jsx";
+// import { useAuth } from "./Components/shared/hooks/auth-hook.jsx";
+
 function HomeLinks() {
   const auth = useContext(AuthContext);
+  const { token, login, logout, userId } = useAuth();
 
   //state for trigering generate links (youtube, x...etc)
   const [reportDropdownOpen, setReportDropdownOpen] = useState(false);
@@ -48,7 +52,7 @@ function HomeLinks() {
         
       {auth.isLoggedIn && (
         <>
-          <NavLink className={`nav-item`} to={'/myReports'} >
+          <NavLink className={`nav-item`} to={`/myReports/${userId}`} >
             My Reports
           </NavLink>
         </>
