@@ -1,4 +1,5 @@
-
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/prop-types */
 import {useState, useContext, useEffect} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
@@ -9,7 +10,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import "./generateForm.css"
 
+
 export default function GenerateForm({platform, setRequestResponse, setProgressBarValue, setProgressBarMessage, setReportGenerated, setRId}){
+
     const auth = useContext(AuthContext);
     const { sendRequest } = useHttpClient();
 
@@ -36,12 +39,14 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
         setScheduledDate("")
     },[platform, setProgressBarMessage, setProgressBarValue, setRId, setReportGenerated])
 
+
     const handleGenerateNow = (e) => {
         e.preventDefault();
 
         if(!auth.isLoggedIn){
             alert("You need to be logged in");
             return;
+
         }
         
         if (!url) {
@@ -133,9 +138,11 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
                 formattedPlatform = "TikTok"
                 break;
             case "googlemaps":
+
                 formattedPlatform = "Google Maps"
                 break;
         }
+
 
         let endpoint;
         switch(platform){
@@ -181,6 +188,7 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
             }
         };
         submit();
+
     }
 
     const toggleDate = () => {
@@ -240,6 +248,7 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
                                 onClick={handleScheduleGenerate}
                                 className= {`confirm-schedule-button ${generateButtonDisabled ? "disabled" : "enabled"}`}
                                 disabled = {generateButtonDisabled}
+
                             >
                                 Confirm Schedule
                             </button>
