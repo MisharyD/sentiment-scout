@@ -16,7 +16,7 @@ return(
         <div className='date'> {props.date} </div>
         <div className="buttons">
         <button className="view"> View </button>
-        <button className="delete"> Delet </button>
+        <button className="delete"> Delete </button>
         </div>
             </div>
     </li>  

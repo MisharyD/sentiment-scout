@@ -1,11 +1,15 @@
 import React from "react";
-import "./Interaction-block.css";
-import HomePageButton from "../HomeButton/HomePageButton";
-function InteractionBlock(props) {
+import "./interaction-block.css";
 
+import { Link } from "react-router-dom";
+
+
+
+function InteractionBlock(props) {
+//{{marginBottom:props.marginBottom,marginTop: props.marginTop, width:props.width, height: props.height}}
   return (
-    <div style={{marginBottom:props.marginBottom,marginTop: props.marginTop, width:props.width, height: props.height}} className={`interaction-block ${props.center ? "centered" : ""}`}>
-        <h1 style={{fontSize:props.fontSize}} className="main-title">
+    <div className={`interaction-block ${props.center ? "centered" : "left-aligned"}`}>
+        <h1 className="main-title">
           {props.title}
         
 
@@ -15,14 +19,13 @@ function InteractionBlock(props) {
         
 
         </p>
-        <HomePageButton Text="Get Started" gradiant={true} style={{width: props.buttonWidth,height: props.buttonHeight}}/>
+        {/* <HomePageButton gradient={props.gradient} path={props.path} Text={props.buttonText} style={{width: props.buttonWidth,height: props.buttonHeight}}/>
+         */}
+     <Link to={props.path} style={props.style} className={"button "+(props.gradient? "gradient":"white")}>{props.buttonText}</Link>
+  
     </div>
   )
    
 }
 
 export default InteractionBlock;
-// margin-top: 20.86vh;
-// margin-bottom: 0%;
-// width:45.16% ;
-// height: 46.04vh;

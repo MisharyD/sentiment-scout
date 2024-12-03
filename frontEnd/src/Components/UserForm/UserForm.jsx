@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import {useContext, useEffect} from "react";
-import PropTypes from 'prop-types';
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { useState } from "react";
@@ -9,8 +9,13 @@ import "./userForm.css"
 export default function UserForm({userInfo}){
     const auth = useContext(AuthContext);
     const { sendRequest } = useHttpClient();
+    
+    //state to trigger editing name and email form
     const [isEditing, setIsEditing] = useState(false);
+
+    //state to trigger editing password form
     const [isChangingPassword, setIsChangingPassword] = useState(false);
+
     const [formData, setFormData] = useState({
         name: userInfo.name,
         email: userInfo.email,
@@ -20,7 +25,11 @@ export default function UserForm({userInfo}){
         newPassword: "",
         confirmPassword: "",
     });
+
+    //state to store error messages coming from the backend
     const [errorMessages, setErrorMessages] = useState([]);
+
+    //state to store error messages detected in the front for passwords
     const [passwordErr, setpasswordErr] = useState([]);
     
     // update formData when userInfo is updated (when parent finishes fetching the data)
@@ -33,6 +42,7 @@ export default function UserForm({userInfo}){
         }
     },[userInfo]);
     
+    //update input fields of email and username form 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevState) => ({
@@ -49,6 +59,7 @@ export default function UserForm({userInfo}){
         });
       };
 
+    //handle submit of username and email form
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -64,9 +75,10 @@ export default function UserForm({userInfo}){
               const responseData = await sendRequest(
                 import.meta.env.VITE_BACKEND_URL+`users/updateUserInfo`,
                 "PATCH",
-                JSON.stringify({name:formData.name,
-                email:formData.email,
-                userId:auth.userId}),
+                JSON.stringify({
+                    name:formData.name,
+                    email:formData.email,
+                    userId:auth.userId}),
                 {
                   "Content-Type": "application/json",
                 }
@@ -119,11 +131,11 @@ export default function UserForm({userInfo}){
                 import.meta.env.VITE_BACKEND_URL+`users/updatePassword`,
                 "PATCH",
                 JSON.stringify({
-                oldPassword:passwordData.oldPassword,   
-                newPassword:passwordData.newPassword,
-                userId:auth.userId}),
+                    oldPassword:passwordData.oldPassword,   
+                    newPassword:passwordData.newPassword,
+                    userId:auth.userId}),
                 {
-                  "Content-Type": "application/json",
+                "Content-Type": "application/json",
                 }
               );
               console.log(responseData);
@@ -141,6 +153,7 @@ export default function UserForm({userInfo}){
         submitUserData();
       };
 
+    //close username and email form, revert to original username and email, clear error messages
     const handleCancel = () => {
         setIsEditing(false);
         // Optionally reset form data to original user info
@@ -151,6 +164,7 @@ export default function UserForm({userInfo}){
         setErrorMessages([]);
     };
 
+    //close password form, revert to original password and clear error meassages
     const handlePasswordCancel = () => {
         setIsChangingPassword(false);
         setPasswordData({
@@ -179,10 +193,9 @@ export default function UserForm({userInfo}){
             </div>
         </div>
 
-        {
-        //contains form for email and username and another form for password
-        }
+        {/*contains form for email and username and another form for password*/}
         <div className="forms-container">
+            {/*display errors */}
             {errorMessages.length > 0 && (
                 <div className="err-message-container">
                     {errorMessages.map((error, index) => (
@@ -192,7 +205,6 @@ export default function UserForm({userInfo}){
             )}
             <div className="forms-title">User Information</div>
             {/*form for email and username */}
-
             {
             /* if edit button is true then display form*/
             isEditing ? 
@@ -249,7 +261,6 @@ export default function UserForm({userInfo}){
             )}
             
             {/*form for password */}
-
             <div className="password-form">
                 {/* if user change password is false the display button*/}
                 {!isChangingPassword ?

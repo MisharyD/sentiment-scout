@@ -40,9 +40,15 @@ router.patch(
   usersController.updatePassword
 );
 
+// //Routes related to user's reports
+// router.
 
-// Routes for sending notifications
+// Routes related to user's notifications
 
-router.post("/notifications/generateNow", usersController.sendEmailforGenerateNow);
+// Get notifications for a user
+router.get("/notifications/:uid", usersController.getNotifications);
+
+// mark notification as read
+router.patch("/notifications/markAsRead", usersController.markAsRead);
 
 module.exports = router;

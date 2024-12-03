@@ -2,7 +2,6 @@ import ReportList from "../../Components/ReportList/ReportList.jsx";
 import Header from "../../Components/Header/Header.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
 
-import { useParams } from "react-router-dom";
 // import { format } from 'date-fns';
 
 import '../PagesCSS/PreviousReports.css';
