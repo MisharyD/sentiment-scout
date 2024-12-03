@@ -110,7 +110,7 @@ const generateNowYoutube = async (req, res, next) => {
 
     // Step 2.5: Save report to the database
     res.sendProgress(90, "Saving report to database...");
-    await sleep(10000); // Wait for 1 second
+    await sleep(1000); // Wait for 1 second
     await saveReportToDB({
       userId,
       videoDetails,
