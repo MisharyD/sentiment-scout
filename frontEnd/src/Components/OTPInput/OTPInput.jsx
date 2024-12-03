@@ -43,12 +43,12 @@ const OTPInput = ({ values,setValues }) => {
   };
 
   // Effect to check if all OTP fields are filled
-  useEffect(() => {
-    if (values.every(val => val !== '')) {
-      const otp = values.join('');
-      onOTPComplete(otp);
-    }
-  }, [values, onOTPComplete]);
+//   useEffect(() => {
+//     if (values.every(val => val !== '')) {
+//       const otp = values.join('');
+//       onOTPComplete(otp);
+//     }
+//   }, [values, onOTPComplete]);
 
   return (
     <div id="inputs" className="inputs">
