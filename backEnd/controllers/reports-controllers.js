@@ -30,6 +30,37 @@ const {
 
 const { getSentiment } = require("../ai-model/model");
 
+const getReportDetails = async (req, res, next) => {
+  const { rid, platform } = req.params;
+
+  let ReportModel;
+  switch (platform) {
+    case "YouTube":
+      ReportModel = YouTubeReport;
+      break;
+    case "Google Maps":
+      ReportModel = GoogleMapsReport;
+      break;
+    case "TikTok":
+      ReportModel = TikTokReport;
+      break;
+    default:
+      return next(new HttpError("Invalid platform specified", 400));
+  }
+
+  let report;
+  try {
+    report = await ReportModel.findById(rid);
+    if (!report) {
+      return next(new HttpError("Report not found", 404));
+    }
+  } catch (err) {
+    return next(new HttpError("Failed to retrieve the report", 500));
+  }
+
+  res.status(200).json({ report });
+};
+
 // Sleep function to introduce delays ( for SSE )
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -339,3 +370,4 @@ exports.generateNowTikTok = generateNowTikTok;
 exports.generateScheduledYoutube = generateScheduledYoutube;
 exports.generateScheduledGoogleMaps = generateScheduledGoogleMaps;
 exports.generateScheduledTikTok = generateScheduledTikTok;
+exports.getReportDetails = getReportDetails;
