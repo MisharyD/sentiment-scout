@@ -9,7 +9,7 @@ import AuthOption from "../AuthOptions/AuthOptions.jsx";
 import { OrbitProgress } from "react-loading-indicators"
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
-
+// import { SignUpContext } from "../shared/context/signup-context.jsx";
 function Form({formType}) {
   const auth = useContext(AuthContext);
   const {error, sendRequest} = useHttpClient();
@@ -71,18 +71,20 @@ function Form({formType}) {
     if (formType === "signup") {
       try {
         const responseData = await sendRequest(
-          import.meta.env.VITE_BACKEND_URL+"users/signup",
+          import.meta.env.VITE_BACKEND_URL+"users/signupGenerateOTP",//changed the path
           "POST",
           JSON.stringify({
             name: formState.username,
             email: formState.email,
-            password: formState.password,
+            // password: formState.password,
           }),
           {
             "Content-Type": "application/json",
           }
         );
-        auth.login(responseData.userId, responseData.token);
+        // auth.login(responseData.userId, responseData.token);
+        // SignUpContext.setSignupData(formState.username, formState.email,formState.password);
+        navigate("/OTPPage", { state: { email: formState.email,username: formState.username,password: formState.password } });
       } catch (err) {
         console.log(err.message || "Something went wrong");
       }

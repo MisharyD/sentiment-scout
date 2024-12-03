@@ -1,0 +1,32 @@
+.OTP-page{
+    min-height: 100vh;
+    overflow: hidden;
+   
+    justify-content: center;
+
+}
+.container-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 99vh;
+    min-width: 100vw;
+    background-color: transparent;
+    gap:50px;
+   
+  }
+  .button {
+    /* height: 10.93%; */
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 33px;
+    white-space: nowrap;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+  }
