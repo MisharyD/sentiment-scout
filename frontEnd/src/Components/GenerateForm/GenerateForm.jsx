@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 /* eslint-disable react/prop-types */
 import {useState, useContext} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import "./generateForm.css"
 
-export default function GenerateForm({platform, setRequestResponse}){
+export default function GenerateForm({platform, setRequestResponse, setProgressBarValue, setProgressBarMessage, setReportGenerated, setRId}){
     const auth = useContext(AuthContext);
     const { sendRequest } = useHttpClient();
 
@@ -20,6 +20,9 @@ export default function GenerateForm({platform, setRequestResponse}){
     //state for triggering date input
     const [generateLater, setGenerateLater] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    //state for disabling generate button when clicked
+    const [generateButtonDisabled, setGenerateButtonDisabled] = useState(false)
 
     const handleGenerateNow = (e) => {
         e.preventDefault();
@@ -32,50 +35,59 @@ export default function GenerateForm({platform, setRequestResponse}){
             alert("Please enter a URL.");
             return;
         }
+        
+        //reset
+        setReportGenerated(false)
+        setProgressBarValue(0)
 
-        let formattedPlatform;
+        //disable button to prevent multiple requests
+        setGenerateButtonDisabled(true)
+
+        //get endpoint based on platform name
+        let endpoint;
         switch(platform){
             case "youtube":
-                formattedPlatform = "Youtube"
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/youtube/${auth.userId}/Youtube?url=${url}`
                 break;
-            case "x":
-                formattedPlatform = "X"
+            case "tiktok":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/tiktok/${auth.userId}/GoogleMaps?url=${url}`
                 break;
-            case "maps":
-                formattedPlatform = "Google Maps"
+            case "googlemaps":
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/googlemaps/${auth.userId}/Tiktok?url=${url}`
                 break;
         }
 
-        //Send request 
-        const submit = async () => {
-            setLoading(true);
-            try {
-                const responseData = await sendRequest(
-                    import.meta.env.VITE_BACKEND_URL+`users/notifications/generateNow`,
-                    "POST", 
-                    JSON.stringify({
-                        "userId" :auth.userId,
-                        "platform":formattedPlatform}),
-                    {
-                    "Content-Type": "application/json",
-                    }
-                );
-                setRequestResponse("Report generated succesfully and an email has been sent to you with the report!")
+        //start sse connection, returns progress, message and report id when progress reaches 100
+        const eventSource = new EventSource(endpoint);
 
-            } 
-            catch (err) {
-                setRequestResponse(err.message)
-                
-                // Clear the error message after 10 seconds
-                setTimeout(() => {
-                    
-                }, 10000); 
-            }
-            finally {
-                setLoading(false);
+    
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const progressBarValue = data.progress;
+            const progressBarMessage = data.message
+
+            //update progress bar
+            setProgressBarValue(progressBarValue);
+            setProgressBarMessage(progressBarMessage);
+        
+            if (progressBarValue >= 100) {
+                //close connection when done
+                eventSource.close();
+
+                //update values
+                setRId("id")
+                setReportGenerated(true)
+                setProgressBarValue(progressBarValue)
+
+                //reset generate button to allow for another generation
+                setGenerateButtonDisabled(false)
             }
         };
-        submit();
+    
+        eventSource.onerror = (event) => {
+            console.log("error" + event);
+        eventSource.close();
+        };
     }
 
     const handleScheduleGenerate = async () => {
@@ -162,7 +174,8 @@ export default function GenerateForm({platform, setRequestResponse}){
                     <button
                         type="button"
                         onClick={handleGenerateNow}
-                        className="generate-now-button"
+                        className={`generate-now-button ${generateButtonDisabled ? "disabled" : "enabled"}`}
+                        disabled = {generateButtonDisabled}
                     >
                         Generate Now
                     </button>
@@ -189,7 +202,8 @@ export default function GenerateForm({platform, setRequestResponse}){
                             <button
                                 type="button"
                                 onClick={handleScheduleGenerate}
-                                className="confirm-schedule-button"
+                                className= {`confirm-schedule-button ${generateButtonDisabled ? "disabled" : "enabled"}`}
+                                disabled = {generateButtonDisabled}
                             >
                                 Confirm Schedule
                             </button>

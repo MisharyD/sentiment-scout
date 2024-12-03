@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from 'react';
+import "./progress-bar.css"
 
-function ProgressBar({ progress }) {
+function ProgressBar({ progress, message }) {
   const [width, setWidth] = useState(1);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ function ProgressBar({ progress }) {
   }, [progress, width]);
 
   const progressContainerStyle = {
-    width: '100%',
+    width: '70%',
     backgroundColor: '#ddd',
     borderRadius: '5px',
     display: width >= 100 ? 'none' : 'block',
@@ -41,8 +43,8 @@ function ProgressBar({ progress }) {
   };
 
   return (
-    <div>
-      <h1>Progress Bar</h1>
+    <div className='progress-bar-container'>
+      <div className='progress-bar-message'>{message} {progress}%</div>
       <div style={progressContainerStyle}>
         <div style={progressBarStyle}></div>
       </div>

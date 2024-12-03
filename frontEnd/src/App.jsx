@@ -26,6 +26,7 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
         <Route path="/myReports" element={<PreviousReports />} />
+        <Route path="/report/:rId" element={<PreviousReports />} />
       </Routes>
   </Router>)
 
@@ -57,7 +58,7 @@ function App() {
    
        <main>{routes}</main> 
     </AuthContext.Provider>
-)
+  )
 }
 
 export default App
