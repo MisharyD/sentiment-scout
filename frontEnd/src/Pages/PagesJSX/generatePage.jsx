@@ -7,7 +7,6 @@ import Footer from "../../Components/Footer/Footer.jsx";
 import "../PagesCSS/generatePage.css"
 import "../PagesCSS/starsBackground.css"
 import ProgressBar from '../../Components/ProgressBar/ProgressBar.jsx';
-
 export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
@@ -16,6 +15,7 @@ export default function GeneratePage(){
     
     const [reportGenerated, setReportGenerated] = useState(false);
     const [rId, setRId] = useState(false);
+
 
     //reset the request response when navigating between platforms from the header
     useEffect(() => {
