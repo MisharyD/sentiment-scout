@@ -59,7 +59,7 @@ export default function GeneratePage(){
                 {/*if report is generated, display link to report page */}
                 {reportGenerated && 
                 (
-                    <div className='report-message'>Report generated Successfully! <NavLink to = {`./report/${rId}`}>click here to view report</NavLink> </div>    
+                    <div className='report-message'>Report generated Successfully! <NavLink to = {`/reports/${rId}`}>click here to view report</NavLink> </div>    
                 )}
                 {/*else display progress bar*/}
                 {(progressBarValue > 0 && progressBarValue <100 && !reportGenerated) && 
@@ -68,6 +68,8 @@ export default function GeneratePage(){
                 )} 
                 <GenerateForm platform={platform} setRequestResponse = {setRequestResponse} setProgressBarValue ={setProgressBarValue}
                  setReportGenerated={setReportGenerated} setRId={setRId} setProgressBarMessage = {setProgressBarMessage}/>
+                
+                {/*This is used for displaying errors */}
                 <div className="request-response">
                     {requestResponse}
                 </div>          

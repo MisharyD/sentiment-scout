@@ -29,6 +29,7 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
 
         if(!auth.isLoggedIn){
             alert("You need to be logged in");
+            return;
         }
         
         if (!url) {
@@ -37,8 +38,9 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
         }
         
         //reset
-        setReportGenerated(false)
-        setProgressBarValue(0)
+        setReportGenerated(false);
+        setProgressBarValue(0);
+        setRequestResponse("");
 
         //disable button to prevent multiple requests
         setGenerateButtonDisabled(true)
@@ -47,7 +49,7 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
         let endpoint;
         switch(platform){
             case "youtube":
-                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/youtube/${auth.userId}/Youtube?url=${url}`
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/youtube/${auth.userId}/YouTube?url=${url}`
                 break;
             case "tiktok":
                 endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateNow/tiktok/${auth.userId}/GoogleMaps?url=${url}`
@@ -57,10 +59,9 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
                 break;
         }
 
-        //start sse connection, returns progress, message and report id when progress reaches 100
+        //start sse connection, returns progress, message incrementally. returns report id when progress reaches 100
         const eventSource = new EventSource(endpoint);
 
-    
         eventSource.onmessage = (event) => {
             const data = JSON.parse(event.data);
             const progressBarValue = data.progress;
@@ -73,9 +74,10 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
             if (progressBarValue >= 100) {
                 //close connection when done
                 eventSource.close();
+                console.log(data.reportId)
 
                 //update values
-                setRId("id")
+                setRId(data.reportId)
                 setReportGenerated(true)
                 setProgressBarValue(progressBarValue)
 
@@ -84,8 +86,15 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
             }
         };
     
-        eventSource.onerror = (event) => {
-            console.log("error" + event);
+        eventSource.onerror = () => {
+            //display error under the form
+            setRequestResponse("Error with ess connection");
+
+            //reset
+            setProgressBarValue(0)
+            setReportGenerated(false)
+            setGenerateButtonDisabled(false)
+
         eventSource.close();
         };
     }
@@ -100,10 +109,13 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
             return;
         }
 
+        //reset
+        setRequestResponse("");
+
         let formattedPlatform;
         switch(platform){
             case "youtube":
-                formattedPlatform = "Youtube"
+                formattedPlatform = "YouTube"
                 break;
             case "tiktok":
                 formattedPlatform = "TikTok"
@@ -116,7 +128,7 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
         let endpoint;
         switch(platform){
             case "youtube":
-                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/youtube`
+                endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/youTube`
                 break;
             case "tiktok":
                 endpoint = import.meta.env.VITE_BACKEND_URL+`reports/generateScheduled/tiktok`
@@ -126,11 +138,11 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
                 break;
         }
 
-        //Send request 
+        //send request 
         const submit = async () => {
             setLoading(true);
             try {
-                const responseData = await sendRequest(
+                await sendRequest(
                 import.meta.env.VITE_BACKEND_URL+endpoint,
                 "POST", 
                 JSON.stringify({
@@ -147,7 +159,6 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
 
             } catch (err) {
                 setRequestResponse(err.message)
-                
                 // Clear the error message after 10 seconds
                 setTimeout(() => {
                     
@@ -157,7 +168,7 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
                 setLoading(false);
             }
         };
-    submit();
+        submit();
     }
 
     const toggleDate = () => {
