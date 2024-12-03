@@ -30,21 +30,34 @@ export default function GeneratePage(){
                         Paste the <span className="highlight">Video</span> URL to generate sentiment analysis report
                     </div>
                 );
-            case "maps":
+            case "googlemaps":
                 return (
                     <div className="maps-title generate-title">
                         Paste the <span className="highlight">Location</span> URL to generate sentiment analysis report
                     </div>
                 );
-            case "x":
+            case "tiktok":
                 return (
-                    <div className="tik-title generate-title">
+                    <div className="tiktok-title generate-title">
                         Paste the <span className="highlight">Post</span> URL to generate sentiment analysis report
                     </div>
                     
                 );
         }
     }
+
+    let formattedPlatform;
+        switch(platform){
+            case "youtube":
+                formattedPlatform = "YouTube"
+                break;
+            case "tiktok":
+                formattedPlatform = "TikTok"
+                break;
+            case "googlemaps":
+                formattedPlatform = "Google Maps"
+                break;
+        }
 
     return (
         <div className="generate-page">
@@ -59,7 +72,10 @@ export default function GeneratePage(){
                 {/*if report is generated, display link to report page */}
                 {reportGenerated && 
                 (
-                    <div className='report-message'>Report generated Successfully! <NavLink to = {`/reports/${rId}`}>click here to view report</NavLink> </div>    
+                    <div className='report-message'>Report generated Successfully!&nbsp; 
+                        <NavLink to = {`/reports/${formattedPlatform}/${rId}`} target='_blank'
+                        rel="noopener noreferrer"> click here to view report</NavLink> 
+                    </div>    
                 )}
                 {/*else display progress bar*/}
                 {(progressBarValue > 0 && progressBarValue <100 && !reportGenerated) && 

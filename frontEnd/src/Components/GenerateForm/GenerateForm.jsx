@@ -1,6 +1,6 @@
 
 /* eslint-disable react/prop-types */
-import {useState, useContext} from "react";
+import {useState, useContext, useEffect} from "react";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
 import { AuthContext } from "../shared/context/auth-context.jsx";
 import { OrbitProgress } from "react-loading-indicators"
@@ -23,6 +23,18 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
 
     //state for disabling generate button when clicked
     const [generateButtonDisabled, setGenerateButtonDisabled] = useState(false)
+
+    //reset everything when changing generate page
+    useEffect(() =>{
+        setReportGenerated(false)
+        setRId("");
+        setProgressBarMessage("")
+        setProgressBarValue(0)
+        setUrl("");
+        setDropdownOpen(false)
+        setGenerateLater(false)
+        setScheduledDate("")
+    },[platform, setProgressBarMessage, setProgressBarValue, setRId, setReportGenerated])
 
     const handleGenerateNow = (e) => {
         e.preventDefault();
@@ -140,11 +152,6 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
 
         //send request 
         const submit = async () => {
-            console.log(auth.userId)
-            console.log(scheduledDate)
-            console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
-            console.log(formattedPlatform)
-            console.log(url)
             setLoading(true);
             try {
                 await sendRequest(

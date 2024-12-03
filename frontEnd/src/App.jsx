@@ -27,7 +27,7 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
         <Route path="/myReports" element={<PreviousReports />} />
-        <Route path="/reports/:rId" element={<ReportPage />} />
+        <Route path="/reports/:platform/:rId" element={<ReportPage />} />
       </Routes>
   </Router>)
 
@@ -40,6 +40,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/user" element={<LoginPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
+        <Route path="/reports/:platform/:rId" element={<ReportPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     
