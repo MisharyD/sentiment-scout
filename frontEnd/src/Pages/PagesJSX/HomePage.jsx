@@ -36,7 +36,7 @@ function HomePage() {
         </div>
       )}
       <Header />
-      <Link to={"/OTPPage"} >{"OTBPage"}</Link>
+    
   
       <InteractionBlock
         gradient={true}

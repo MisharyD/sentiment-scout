@@ -13,6 +13,7 @@ import Close from '@mui/icons-material/Close';
 import Warning from '@mui/icons-material/Warning';
 
 export default function FeedbackMessage(props) {
+  if (!props.visibility) return null;
   return (
     props.type === 'success' ? (
       <Alert
@@ -79,18 +80,18 @@ export default function FeedbackMessage(props) {
         sx={{ alignItems: 'flex-start', gap: '1rem' }}
       >
         <Box sx={{ flex: 1 }}>
-          <Typography level="title-md">Lost connection</Typography>
+          <Typography level="title-md">OTP Verification Failed!</Typography>
           <Typography level="body-md">
-            Please verify your network connection and try again.
+           {props.text}
           </Typography>
-          <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+          {/* <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
             <Button variant="outlined" size="sm">
               Open network settings
             </Button>
             <Button variant="solid" size="sm">
               Try again
             </Button>
-          </Box>
+          </Box> */}
         </Box>
       </Alert>)
    
