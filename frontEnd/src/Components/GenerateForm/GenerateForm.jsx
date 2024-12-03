@@ -140,10 +140,15 @@ export default function GenerateForm({platform, setRequestResponse, setProgressB
 
         //send request 
         const submit = async () => {
+            console.log(auth.userId)
+            console.log(scheduledDate)
+            console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+            console.log(formattedPlatform)
+            console.log(url)
             setLoading(true);
             try {
                 await sendRequest(
-                import.meta.env.VITE_BACKEND_URL+endpoint,
+                endpoint,
                 "POST", 
                 JSON.stringify({
                     "userId" :auth.userId,
