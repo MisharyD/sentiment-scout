@@ -308,64 +308,6 @@ const updatePassword = async (req, res, next) => {
   });
 };
 
-const sendEmailforGenerateNow = async (req, res, next) => {
-  const { userId, platform } = req.body;
-  let user;
-  try {
-    user = await User.findById(userId);
-  } catch (err) {
-    const error = new HttpError("User lookup failed", 500);
-    return next(error);
-  }
-
-  if (!user) {
-    const error = new HttpError("User not found", 404);
-    return next(error);
-  }
-
-  // Send email to the user
-  try {
-    await sendMail(
-      user.email,
-      user.name,
-      `Your ${platform} Report is Ready !!`,
-      `Hello ${user.name}, your report has been generated. Thanks for using Sentiment Scout. Waiting for your next report !!`,
-      `<h2>Hello ${user.name}!</h2>
-      <h3>Your report has been generated.</h3>
-      <p>Thanks for using Sentiment Scout. Waiting for your next report !!</p>
-      `
-    );
-    res.status(200).json({ message: "Email sent successfully!" });
-  } catch (err) {
-    const error = new HttpError("Failed to send email", 500);
-    return next(error);
-  }
-};
-
-const sendScheduledNotification = async (req, res, next) => {
-  const { userId, platform, date, timezone } = req.body;
-
-  // Convert the user's local date-time to UTC
-  const scheduledTime = moment.tz(date, timezone).toDate();
-
-  // Check if the provided date is valid and in the future
-  if (isNaN(scheduledTime.getTime())) {
-    return next(new HttpError("Invalid date format provided", 400));
-  }
-
-  if (scheduledTime <= new Date()) {
-    return next(new HttpError("Please provide a future date", 400));
-  }
-
-  // Schedule the notification job with Agenda
-  await agenda.schedule(scheduledTime, "send scheduled notification", {
-    userId: userId,
-    platform: platform,
-  });
-
-  res.status(200).json({ message: "Notification scheduled successfully" });
-};
-
 const getNotifications = async (req, res, next) => {
   const userId = req.params.uid;
 
@@ -429,7 +371,5 @@ exports.login = login;
 exports.userInfo = userInfo;
 exports.updateUserInfo = updateUserInfo;
 exports.updatePassword = updatePassword;
-exports.sendEmailforGenerateNow = sendEmailforGenerateNow;
-exports.sendScheduledNotification = sendScheduledNotification;
 exports.getNotifications = getNotifications;
 exports.markAsRead = markAsRead;
