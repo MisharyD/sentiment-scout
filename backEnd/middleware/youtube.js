@@ -70,7 +70,6 @@ const getChannelSubscribers = async (channelId) => {
   }
 };
 
-// Save the report to the database
 const saveReportToDB = async ({
   userId,
   videoDetails,
@@ -97,10 +96,11 @@ const saveReportToDB = async ({
       generalOpinion: sentimentSummary.general_opinion,
     });
 
-    await report.save();
+    const savedReport = await report.save(); // Save to the database
+    return savedReport._id; // Return the ID of the saved report
   } catch (err) {
-    const error = new HttpError("Failed to save report to database.", 500);
-    return next(error);
+    console.error("Error saving report to DB:", err.message);
+    throw new HttpError("Failed to save report to database.", 500);
   }
 };
 
