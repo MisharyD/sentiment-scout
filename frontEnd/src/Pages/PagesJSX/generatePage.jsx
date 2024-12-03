@@ -10,24 +10,13 @@ import ProgressBar from '../../Components/ProgressBar/ProgressBar.jsx';
 export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
-<<<<<<< HEAD
-    const [progress, setProgress] = useState(1); //create a state in the parent compoenent taking number as argument
 
-    const handleStart = () => { 
-      setProgress(99);                  // this function for when the model is working so u activate it
-    };
-  
-    const handleComplete = () => {
-      setProgress(100);        // this is for when the model finish and the report is ready
-    };
-=======
     const [progressBarValue, setProgressBarValue] = useState(0); //create a state in the parent compoenent taking number as argument
     const [progressBarMessage, setProgressBarMessage] = useState("");
     
     const [reportGenerated, setReportGenerated] = useState(false);
     const [rId, setRId] = useState(false);
 
->>>>>>> b2d75d73667d7fec5422a0d86652876f25c6d6ce
 
     //reset the request response when navigating between platforms from the header
     useEffect(() => {
@@ -50,13 +39,8 @@ export default function GeneratePage(){
                 );
             case "tiktok":
                 return (
-<<<<<<< HEAD
-                    <div className="X-title generate-title">
-                        Paste the <span className="highlight">TikTok</span> URL to generate sentiment analysis report
-=======
                     <div className="tiktok-title generate-title">
                         Paste the <span className="highlight">Post</span> URL to generate sentiment analysis report
->>>>>>> b2d75d73667d7fec5422a0d86652876f25c6d6ce
                     </div>
                     
                 );
@@ -86,15 +70,6 @@ export default function GeneratePage(){
 
             <div className="main">
                 {renderTitle()}
-<<<<<<< HEAD
-                <GenerateForm platform={platform} setRequestResponse = {setRequestResponse} />
-                <ProgressBar progress={progress}/>
-                <div className="request-response">
-                    {requestResponse}
-                </div>
-               
-
-=======
                 {/*if report is generated, display link to report page */}
                 {reportGenerated && 
                 (
@@ -115,7 +90,6 @@ export default function GeneratePage(){
                 <div className="request-response">
                     {requestResponse}
                 </div>          
->>>>>>> b2d75d73667d7fec5422a0d86652876f25c6d6ce
             </div>
             <Footer/>
         </div>
