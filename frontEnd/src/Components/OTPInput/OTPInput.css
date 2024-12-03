@@ -1,0 +1,35 @@
+/* style.css */
+
+  /* .inputs{
+    display: flex;
+
+    justify-content: center;
+    gap: 20px;
+  } */
+  .input {
+    width: 40px;
+    border: none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+    margin: 0 10px;
+    text-align: center;
+    font-size: 36px;
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color:rgba(231, 231, 231, 0.829);
+    color: black
+  }
+  
+  .input:focus {
+    /* border-bottom: 3px solid orange; */
+   
+    /* border-bottom: 5px solid transparent;  */
+    border-image: linear-gradient(45deg, #7b2ff7, #4bb0ff) ;
+    border-image-slice: 1;
+
+    outline: none;
+  }
+  
+  .input:nth-child(1) {
+    cursor: pointer;
+    pointer-events: all;
+  }
