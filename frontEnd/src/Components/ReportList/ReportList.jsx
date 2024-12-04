@@ -1,8 +1,12 @@
+// import { useState } from "react";
+
 import "./ReportList.css";
 import ReportItem from "../../Components/ReportItem/ReportItem.jsx";
 import { Link } from "react-router-dom";
 
 export default function ReportList(props){
+
+    // const [requestResponse, setRequestResponse] = useState("");
 
     if (props.reports.length === 0){
         return (
@@ -32,6 +36,8 @@ export default function ReportList(props){
     const formatDate = (dateString) => {
         return dateString.split("T")[0];
       };
+
+      
     
     return (
         <ul>
@@ -42,6 +48,10 @@ export default function ReportList(props){
                                     title = {getTitleBasedOnPlatform(report)} 
                                     date = {formatDate(report.dateOfReport)}
                                     onDelete = {props.onDeleteReport}
+                                    setRequestResponse={props.setRequestResponse}
+
+                                    
+ 
                                     />    
                     )
                      )

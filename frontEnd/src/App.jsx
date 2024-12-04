@@ -29,6 +29,7 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
         <Route path={`/myReports/:uid`} element={<PreviousReports />} />
+        <Route path="/reports/:platform/:rId" element={<ReportPage />} />
       </Routes>
   </Router>)
 
