@@ -47,7 +47,7 @@ const getTikTokComments = async (url) => {
   const apiEndpoint = `https://api.apify.com/v2/acts/clockworks~tiktok-comments-scraper/run-sync-get-dataset-items?token=${process.env.APIFY_API_KEY}`;
 
   const requestBody = {
-    commentsPerPost: 10,
+    commentsPerPost: 100,
     maxRepliesPerComment: 0,
     postURLs: [url],
   };
