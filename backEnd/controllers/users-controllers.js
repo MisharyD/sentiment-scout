@@ -18,9 +18,6 @@ const TikTokReport = require("../models/tiktokReport");
 const sendMail = require("../middleware/mailer");
 const agenda = require("../middleware/agenda");
 
-const sendMail = require("../middleware/mailer");
-const agenda = require("../middleware/agenda");
-
 const normalizeEmail = (email) => {
   const [localPart, domain] = email.split("@");
   if (

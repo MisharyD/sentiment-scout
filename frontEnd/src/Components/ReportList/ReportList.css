@@ -1,0 +1,26 @@
+p{
+    color: white;
+text-align: center;
+font-size: 2em;
+
+}
+
+.center-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+.gradient1 {
+    background: linear-gradient(45deg, #7b2ff7, #4bb0ff);
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 20px 33px;
+    border-radius: 10px;
+    margin-top: 16px;    
+  }
+
