@@ -10,6 +10,7 @@ import ProgressBar from '../../Components/ProgressBar/ProgressBar.jsx';
 export default function GeneratePage(){
     const { platform } = useParams();
     const [requestResponse, setRequestResponse] = useState("")
+
     const [progressBarValue, setProgressBarValue] = useState(0); //create a state in the parent compoenent taking number as argument
     const [progressBarMessage, setProgressBarMessage] = useState("");
     

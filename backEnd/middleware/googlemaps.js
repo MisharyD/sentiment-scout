@@ -9,7 +9,7 @@ const getPlaceDetailsAndReviews = async (url) => {
 
   const requestBody = {
     language: "en",
-    maxReviews: 5,
+    maxReviews: 100,
     personalData: false,
     startUrls: [
       {
