@@ -28,10 +28,8 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/generate/:platform" element={<GeneratePage />} />
-        <Route path="/myReports" element={<PreviousReports />} />
-
+        <Route path={`/myReports/:uid`} element={<PreviousReports />} />
         <Route path="/reports/:platform/:rId" element={<ReportPage />} />
-
       </Routes>
   </Router>)
 
