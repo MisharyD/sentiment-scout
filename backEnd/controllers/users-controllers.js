@@ -6,17 +6,12 @@ const moment = require("moment-timezone");
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 
-
 const OTP = require("../models/otp");
 
 const Notification = require("../models/notification");
 const YouTubeReport = require("../models/youtubeReport");
 const GoogleMapsReport = require("../models/googlemapsReport");
 const TikTokReport = require("../models/tiktokReport");
-
-
-const sendMail = require("../middleware/mailer");
-const agenda = require("../middleware/agenda");
 
 const sendMail = require("../middleware/mailer");
 const agenda = require("../middleware/agenda");
