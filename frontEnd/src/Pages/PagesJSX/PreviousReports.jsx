@@ -1,60 +1,91 @@
+import { useState, useEffect } from "react";
+import { useHttpClient } from "../../Components/shared/hooks/http-hook.jsx";
+import { useParams } from "react-router-dom";
+
 import ReportList from "../../Components/ReportList/ReportList.jsx";
 import Header from "../../Components/Header/Header.jsx";
 import Footer from "../../Components/Footer/Footer.jsx";
-
-// import { format } from 'date-fns';
-
+import { OrbitProgress } from "react-loading-indicators";
 import '../PagesCSS/PreviousReports.css';
-
-//this will be used later when fetching data from DB
-//  function formatDate (date){
-//     return format(date, 'M/d/yyyy'); // to be withou zero in the left like 3/23/2003 or 3/1/2003
-
-// }
-
-const reports = [
-    {
-        rId: 'r1',
-        platform: 'youtube',
-        title: '10 Simple Hacks to Boost Your Productivity in 2024',
-        date: '11/3/2024'
-    },
-    {
-        rId: 'r2',
-        platform: 'x',
-        title: 'The Ultimate Guide to Mastering AI Tools',
-        date: '11/1/2024'
-    },
-
-    {
-        rId: 'r3',
-        platform: 'youtube',
-        title: '5 Game-Changing Tips for Staying Productive in a Busy World',
-        date: '11/3/2024'
-    },
-
-    {
-        rId: 'r4',
-        platform: 'googleMaps',
-        title: 'KSU university',
-        date: '10/25/2024'
-    },
-   ];
 
 export default function PreviousReports(){
 
-    
-
-   return ( 
-    <div className="Previous-Report-Page" >
-    <Header page = "reports" />
-    <div className="main">
-   <ReportList reports = {reports} /> {/* here should put array of reports that is fetched from the DB */}
-   </div>
-   <Footer />
    
-   </div>
-   )
+
+   const { uid } = useParams();
+   const { sendRequest } = useHttpClient();
+   const [requestResponse, setRequestResponse] = useState("");
+   const [loading, setLoading] = useState(true);
+   const [reports, setReports] = useState();
+
+   const reportDeleteHandler = (rid) => {
+
+      setReports( prevReport => prevReport.filter( report => report._id !== rid ))
+
+   }
+
+   useEffect ( () => {
+      
+      const submit = async () => {
+      setLoading(true);
+      try{
+
+      const responseData = await sendRequest( import.meta.env.VITE_BACKEND_URL+`users/reports/${uid}` )
+      
+      setReports(responseData.reports)
+      setRequestResponse("");
+
+     
+      } catch(err){
+
+         setRequestResponse("Failed to fetch reports. Please try again.");
+
+      }
+
+      finally {
+         setLoading(false);
+       }
+   };
+   submit();
+   }, [sendRequest]); 
+   
+   
+   
+   
+   return (
+      <div>
+        {/* Show loading spinner when loading */}
+        {loading && (
+          <div className="overlay">
+            <OrbitProgress color="#ffffff" size="medium" />
+          </div>
+        )}
+    
+        {/* Main content */}
+        <div className="Previous-Report-Page">
+          <Header page="reports" />
+          <div className="main">
+            {/* Render error message if requestResponse is set */}
+            {!loading && requestResponse && (
+              <div className="request-response">
+                <p>{requestResponse}</p>
+              </div>
+            )}
+    
+            {/* Render report list if there are reports and no errors */}
+            {!loading && reports && (
+              <ReportList
+                reports={reports}
+                onDeleteReport={reportDeleteHandler}
+                setRequestResponse={setRequestResponse}
+              />
+            )}
+          </div>
+          <Footer />
+        </div>
+      </div>
+    );
+    
 }
 
 

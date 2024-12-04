@@ -1,6 +1,6 @@
 .Previous-Report-Page {
 
-    /* height:100dvh; */
+    min-height: 100vh;;
     display: flex;
     flex-direction: column;
     background-color: transparent;
@@ -8,4 +8,17 @@
 
 .main {
     flex: 1;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure overlay is on top */
 }
