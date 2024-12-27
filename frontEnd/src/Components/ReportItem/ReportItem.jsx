@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useHttpClient } from "../shared/hooks/http-hook.jsx";
