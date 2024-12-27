@@ -6,6 +6,7 @@ const moment = require("moment-timezone");
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 
+
 const OTP = require("../models/otp");
 
 const Notification = require("../models/notification");
@@ -13,6 +14,13 @@ const YouTubeReport = require("../models/youtubeReport");
 const GoogleMapsReport = require("../models/googlemapsReport");
 const TikTokReport = require("../models/tiktokReport");
 
+
+const OTP = require("../models/otp");
+
+const Notification = require("../models/notification");
+const YouTubeReport = require("../models/youtubeReport");
+const GoogleMapsReport = require("../models/googlemapsReport");
+const TikTokReport = require("../models/tiktokReport");
 const sendMail = require("../middleware/mailer");
 const agenda = require("../middleware/agenda");
 
@@ -39,6 +47,7 @@ const signupGenerateOTP = async (req, res, next) => {
   }
 
   const { name, email } = req.body;
+  const normalizedEmail = normalizeEmail(email); // Normalize email
 
   const normalizedEmail = normalizeEmail(email); // Normalize email
 
@@ -55,6 +64,7 @@ const signupGenerateOTP = async (req, res, next) => {
   if (existingUser) {
     return next(new HttpError("User already exists.", 422));
   }
+
 
   // Generate a random 6-digit OTP
   const otp = Math.floor(100000 + Math.random() * 900000);
@@ -106,7 +116,6 @@ const verifyOTPAndSignup = async (req, res, next) => {
 
   if (existingUser) {
     return next(new HttpError("User already exists.", 422));
-  }
 
   // Check if OTP exists and is valid
   let validOTP;
